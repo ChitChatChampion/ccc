@@ -3,9 +3,13 @@
 ChitChatChampion is a...
 Visit us at ...
 
+## Developer Instructions
+
+Fork from the repository, then PR all the way.
+
 ## Set-Up Instructions
 
-Clone the repository into your local: `git clone ...`
+...
 
 ## Contributions
 
