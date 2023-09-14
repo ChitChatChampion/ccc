@@ -1,26 +1,24 @@
-# ChitChatChampion
+# chit-chat-champion
 
-ChitChatChampion is a...
-Visit us at ...
+## Project setup
+```
+npm install
+```
 
-## Developer Instructions
+### Compiles and hot-reloads for development
+```
+npm run serve
+```
 
-Fork from the repository, then PR all the way.
+### Compiles and minifies for production
+```
+npm run build
+```
 
-## Set-Up Instructions
+### Lints and fixes files
+```
+npm run lint
+```
 
-...
-
-## Contributions
-
-Izz Hafeez Bin Zek Hazley (A0234693X)
-- ...
-
-Jason Christopher ()
-- ...
-
-Kevin Chua Kian Chun ()
-- ...
-
-Neo Jing Xuan ()
-- ...
+### Customize configuration
+See [Configuration Reference](https://cli.vuejs.org/config/).
