@@ -1,9 +1,9 @@
 <template>
-  Dashboard
+  404: Page Not Found
 </template>
 
 <script>
 export default {
-  name: 'Dashboard',
+  name: 'NotFoundView',
 }
 </script>

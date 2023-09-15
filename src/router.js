@@ -1,15 +1,15 @@
 import { createRouter, createWebHistory } from "vue-router";
-import Dashboard from './views/Dashboard';
-import Landing from './views/Landing';
+import LandingView from './views/Landing';
+import NotFoundView from './views/NotFound';
 
 const routes = [
-  { path: '/', component: Dashboard },
-  // { path: '/', component: Landing },
+  { path: '/', component: LandingView },
+  { path: '/:pathMatch(.*)*', component: NotFoundView }
 ];
 
 const router = createRouter({
-  history: createWebHistory(''),
   routes,
+  history: createWebHistory('')
 });
 
 export default router;
