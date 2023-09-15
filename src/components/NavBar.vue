@@ -18,7 +18,6 @@ export default {
     };
   },
   created() {
-    console.log(process.env);
     if (localStorage.getItem('expiry') > Date.now()) {
       this.isAuthenticated = true;
       return;
