@@ -8,6 +8,7 @@
 
 <script>
 import { googleLogout, googleTokenLogin } from 'vue3-google-login';
+import { callPost } from '@/services';
 
 export default {
   name: 'NavBar',
@@ -30,6 +31,8 @@ export default {
     login() {
       googleTokenLogin().then(response => {
         localStorage.setItem('token', response.access_token);
+        callPost('');
+        
         this.isAuthenticated = true;
         fetch(`https://www.googleapis.com/oauth2/v3/userinfo?access_token=${response.access_token}`)
           .then(userResponse => userResponse.json())
