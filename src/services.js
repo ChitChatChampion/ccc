@@ -1,3 +1,3 @@
 export const getHeader = token => ({
-  Authorization: `Bearer ${token}`
+  'AccessToken': token
 })

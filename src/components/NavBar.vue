@@ -19,6 +19,7 @@ export default {
     };
   },
   created() {
+    console.log(process.env);
     if (localStorage.getItem('expiry') > Date.now()) {
       this.isAuthenticated = true;
       return;
@@ -32,7 +33,15 @@ export default {
     login() {
       googleTokenLogin().then(response => {
         localStorage.setItem('token', response.access_token);
-        axios.post(process.env.API_ENDPOINT, {}, getHeader(response.access_token));
+        const headers = getHeader(response.access_token);
+        axios.post(process.env.VUE_APP_BASE_URL, {}, { headers: headers })
+          .then((res) => {
+            console.log('Response:', res.data);
+          })
+          .catch((error) => {
+            console.error('Network Error:', error);
+          });
+        
         this.isAuthenticated = true;
         fetch(`https://www.googleapis.com/oauth2/v3/userinfo?access_token=${response.access_token}`)
           .then(userResponse => userResponse.json())
