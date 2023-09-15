@@ -8,14 +8,13 @@
 
 <script>
 import GameModePreview from '@/components/GameModePreview';
+import { gameModeList } from './gameModes/gameModes';
 
 export default {
   name: 'LandingView',
   data() {
     return {
-      gameModes: [
-        { name: 'Conversation Starter Cards', abbreviation: 'csc' },
-      ]
+      gameModes: gameModeList
     }
   },
   components: {
