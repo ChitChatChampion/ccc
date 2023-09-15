@@ -8,8 +8,7 @@
 
 <script>
 import { googleLogout, googleTokenLogin } from 'vue3-google-login';
-import { getHeader } from '@/services';
-import axios from 'axios';
+import { callPost } from '@/services';
 
 export default {
   name: 'NavBar',
@@ -33,14 +32,7 @@ export default {
     login() {
       googleTokenLogin().then(response => {
         localStorage.setItem('token', response.access_token);
-        const headers = getHeader(response.access_token);
-        axios.post(process.env.VUE_APP_BASE_URL, {}, { headers: headers })
-          .then((res) => {
-            console.log('Response:', res.data);
-          })
-          .catch((error) => {
-            console.error('Network Error:', error);
-          });
+        callPost('');
         
         this.isAuthenticated = true;
         fetch(`https://www.googleapis.com/oauth2/v3/userinfo?access_token=${response.access_token}`)
