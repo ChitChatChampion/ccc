@@ -11,10 +11,17 @@ import { googleLogout, googleTokenLogin } from 'vue3-google-login';
 
 export default {
   name: 'NavBar',
+  data() {
+    return {
+      isAuthenticated: false
+    };
+  },
   created() {
     if (localStorage.getItem('expiry') > Date.now()) {
+      this.isAuthenticated = true;
       return;
     }
+    this.isAuthenticated = false;
     localStorage.setItem('token', null);
     localStorage.setItem('name', null);
     localStorage.setItem('expiry', null);
@@ -23,6 +30,7 @@ export default {
     login() {
       googleTokenLogin().then(response => {
         localStorage.setItem('token', response.access_token);
+        this.isAuthenticated = true;
         fetch(`https://www.googleapis.com/oauth2/v3/userinfo?access_token=${response.access_token}`)
           .then(userResponse => userResponse.json())
           .then(data => {
@@ -33,6 +41,7 @@ export default {
     },
     logout() {
       googleLogout();
+      this.isAuthenticated = false;
       localStorage.setItem('token', null);
       localStorage.setItem('name', null);
       localStorage.setItem('expiry', null);
