@@ -1,5 +1,5 @@
 <template>
-  Landing
+  <h1>Landing</h1>
   Game Modes:
   <li v-for="gameMode in gameModes" :key="gameMode.abbreviation">
     <GameModePreview :name="gameMode.name" :abbreviation="gameMode.abbreviation"/>

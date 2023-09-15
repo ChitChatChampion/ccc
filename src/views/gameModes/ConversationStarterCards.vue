@@ -1,9 +1,20 @@
 <template>
-  <h1>Conversation Starter Cards</h1>
+  <h1>{{ name }}</h1>
+  <description>{{ description }}</description>
+  <!-- <img :src="imgPath"/> -->
 </template>
 
 <script>
+import { gameModeDict } from './gameModes';
+
 export default {
-  name: 'ConversationStarterCards'
+  name: 'ConversationStarterCards',
+  data() {
+    return {
+      name: gameModeDict.csc.name,
+      description: gameModeDict.csc.description,
+      imgPath: `./${gameModeDict.csc.imgPath}`
+    };
+  }
 }
 </script>

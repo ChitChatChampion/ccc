@@ -4,6 +4,7 @@ export const gameModeDict = {
   csc: {
     name: 'Conversation Starter Cards',
     description: 'Lorem ipsum',
+    imgPath: 'csc.jpg',
     view: ConversationStarterCards
   }
 };
