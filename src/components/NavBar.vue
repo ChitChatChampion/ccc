@@ -39,6 +39,7 @@ export default {
           .then(data => {
             localStorage.setItem('name', data.name);
             localStorage.setItem('expiry', Date.now() + 3600000);
+            this.$router.go();
           });
 
         // try to log in the user
@@ -47,17 +48,15 @@ export default {
           .then(backendResponse => {
             switch (backendResponse.status) {
               case 200:
-                this.$swal.fire({ icon: 'success', title: `Welcome back!` });
-                this.isAuthenticated = true; // authenticate when login is successful.
-                break;
               case 201:
                 this.$swal.fire({ icon: 'success', title: `Welcome to ChitChatChampion!` });
-                this.isAuthenticated = true; // authenticate when user registration is successful.
+                this.isAuthenticated = true; // authenticate when login is successful.
                 break;
               default:
                 this.isAuthenticated = false;
             }
           })
+          // .then(() => {this.$router.go();})
           .catch(error => {
             console.log(error);
             this.isAuthenticated = false;
@@ -70,6 +69,7 @@ export default {
       localStorage.setItem('token', null);
       localStorage.setItem('name', null);
       localStorage.setItem('expiry', null);
+      this.$router.go();
     }
   },
 }

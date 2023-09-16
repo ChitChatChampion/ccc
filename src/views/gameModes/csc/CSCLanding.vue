@@ -2,12 +2,13 @@
 
 <template>
   <h1>{{ name }}</h1>
-  <description>{{ description }}</description>
+  <em>{{ description }}</em>
   <!-- <img :src="imgPath"/> -->
-  <FormKit type="form" @submit="createRoom">
+  <FormKit v-if="isAuthenticated" type="form" @submit="createRoom">
     <ContextForm/>
     <CSCForm/>
   </FormKit>
+  <PINInput v-else/>
 </template>
 
 <script>
@@ -16,17 +17,22 @@ import ContextForm from '@/components/ContextForm.vue';
 import CSCForm from '@/components/CSCForm.vue';
 import { gameModeDict } from '../gameModes';
 import { getHeader, getUrl } from '@/services';
+import PINInput from '@/components/PINInput.vue';
 
 export default {
   name: 'CSCLanding',
   data() {
     return {
+      isAuthenticated: false,
       name: gameModeDict.csc.name,
       description: gameModeDict.csc.description,
       imgPath: `./${gameModeDict.csc.imgPath}`
     };
   },
-  components: { ContextForm, CSCForm },
+  created() {
+    this.isAuthenticated = localStorage.getItem('expiry') > Date.now();
+  },
+  components: { ContextForm, CSCForm, PINInput },
   methods: {
     async createRoom(fields) {
       const url = getUrl('csc');
