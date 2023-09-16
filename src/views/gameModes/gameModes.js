@@ -1,11 +1,14 @@
-import CSCLanding from './CSCLanding';
+import CSCLanding from './csc/CSCLanding';
+import CSCRoom from './csc/CSCRoom';
 
 export const gameModeDict = {
   csc: {
     name: 'Conversation Starter Cards',
-    description: 'Lorem ipsum',
+    description: 'CSC Description here',
+    instructions: 'Haiya why need instructions why so weak?',
     imgPath: 'csc.jpg',
-    view: CSCLanding
+    view: CSCLanding,
+    room: CSCRoom
   }
 };
 

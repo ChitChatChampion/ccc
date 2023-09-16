@@ -13,7 +13,7 @@
 <script>
 import ContextForm from '@/components/ContextForm.vue';
 import CSCForm from '@/components/CSCForm.vue';
-import { gameModeDict } from './gameModes';
+import { gameModeDict } from '../gameModes';
 import { callPost } from '@/services';
 
 export default {
