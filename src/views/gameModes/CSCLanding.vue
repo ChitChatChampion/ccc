@@ -1,3 +1,5 @@
+<!-- /csc -->
+
 <template>
   <h1>{{ name }}</h1>
   <description>{{ description }}</description>

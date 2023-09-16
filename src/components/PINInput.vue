@@ -15,6 +15,8 @@ export default {
 </script>
 
 <script setup>
+import { callGet } from '@/services';
+
 const submitPIN = async fields => {
   const roomId = fields.roomId;
   const url = `/csc/${roomId}`;
