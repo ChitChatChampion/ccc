@@ -15,7 +15,7 @@ import { gameModeDict } from './gameModes';
 import { callPost } from '@/services';
 
 export default {
-  name: 'ConversationStarterCards',
+  name: 'CSCLanding',
   data() {
     return {
       name: gameModeDict.csc.name,
@@ -29,6 +29,9 @@ export default {
 
 <script setup>
 const createRoom = async fields => {
-  const response = callPost('/csc', fields);
+  console.log(fields);
+  const url = '/csc';
+  const response = callPost(url, fields);
+  console.log(response);
 }
 </script>

@@ -1,11 +1,11 @@
-import ConversationStarterCards from './ConversationStarterCards';
+import CSCLanding from './CSCLanding';
 
 export const gameModeDict = {
   csc: {
     name: 'Conversation Starter Cards',
     description: 'Lorem ipsum',
     imgPath: 'csc.jpg',
-    view: ConversationStarterCards
+    view: CSCLanding
   }
 };
 

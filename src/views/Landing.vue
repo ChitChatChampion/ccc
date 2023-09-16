@@ -1,5 +1,6 @@
 <template>
   <h1>Landing</h1>
+  <PINInput/>
   Game Modes:
   <li v-for="gameMode in gameModes" :key="gameMode.abbreviation">
     <GameModePreview :name="gameMode.name" :abbreviation="gameMode.abbreviation"/>
@@ -9,6 +10,7 @@
 <script>
 import GameModePreview from '@/components/GameModePreview';
 import { gameModeList } from './gameModes/gameModes';
+import PINInput from '@/components/PINInput.vue';
 
 export default {
   name: 'LandingView',
@@ -18,7 +20,8 @@ export default {
     }
   },
   components: {
-    GameModePreview
-  }
+    GameModePreview,
+    PINInput
+}
 }
 </script>
