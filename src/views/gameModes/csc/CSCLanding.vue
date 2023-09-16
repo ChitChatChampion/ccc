@@ -35,7 +35,7 @@ export default {
   components: { ContextForm, CSCForm, PINInput },
   methods: {
     async createRoom(fields) {
-      const url = getUrl('csc');
+      const url = getUrl('room/csc');
       const header = getHeader();
       axios.post(url, fields, { header })
         .then(response => {
