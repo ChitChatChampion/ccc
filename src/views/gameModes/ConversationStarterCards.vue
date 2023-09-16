@@ -12,6 +12,7 @@
 import ContextForm from '@/components/ContextForm.vue';
 import CSCForm from '@/components/CSCForm.vue';
 import { gameModeDict } from './gameModes';
+import { callPost } from '@/services';
 
 export default {
   name: 'ConversationStarterCards',
@@ -28,6 +29,6 @@ export default {
 
 <script setup>
 const createRoom = async fields => {
-  console.log(fields);
+  const response = callPost('/csc', fields);
 }
 </script>
