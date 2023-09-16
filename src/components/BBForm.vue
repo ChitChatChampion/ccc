@@ -2,8 +2,8 @@
   <FormKit type="group" name="cscContext">
     <FormKit
       type="number"
-      name="number_of_players"
-      label="Number of Players"
+      name="number_of_rounds"
+      label="Number of Rounds"
       value="10"
       validation="min:1"
     />
