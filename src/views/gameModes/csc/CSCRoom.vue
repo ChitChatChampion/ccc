@@ -25,12 +25,12 @@ export default {
           case 200:
             return response.json()
           default:
-          this.$router.push('.');
-          this.$swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: 'Room ID is not found!'
-          });
+            this.$router.push('.');
+            this.$swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Room ID is not found!'
+            });
         }
       })
       .then(data => {
