@@ -7,14 +7,15 @@
 </template>
 
 <script>
+import axios from 'axios';
 import { googleLogout, googleTokenLogin } from 'vue3-google-login';
-import { callPost } from '@/services';
+import { getHeader, getUrl } from '@/services';
 
 export default {
   name: 'NavBar',
   data() {
     return {
-      isAuthenticated: false
+      isAuthenticated: false,
     };
   },
   created() {
@@ -29,17 +30,22 @@ export default {
   },
   methods: {
     login() {
-      googleTokenLogin().then(response => {
-        localStorage.setItem('token', response.access_token);
-        callPost('');
-        
-        this.isAuthenticated = true;
-        fetch(`https://www.googleapis.com/oauth2/v3/userinfo?access_token=${response.access_token}`)
-          .then(userResponse => userResponse.json())
+      googleTokenLogin().then(tokenResponse => {
+        localStorage.setItem('token', tokenResponse.access_token);
+
+        // get user data from Google
+        fetch(`https://www.googleapis.com/oauth2/v3/userinfo?access_token=${tokenResponse.access_token}`)
+          .then(userDataResponse => userDataResponse.json())
           .then(data => {
             localStorage.setItem('name', data.name);
             localStorage.setItem('expiry', Date.now() + 3600000);
+            this.$router.go();
+            this.isAuthenticated = true;
           });
+
+        // try to log in the user
+        const url = getUrl('');
+        axios.post(url, {}, getHeader());
       })
     },
     logout() {
@@ -48,6 +54,7 @@ export default {
       localStorage.setItem('token', null);
       localStorage.setItem('name', null);
       localStorage.setItem('expiry', null);
+      this.$router.go();
     }
   },
 }

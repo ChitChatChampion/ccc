@@ -5,7 +5,8 @@ import { gameModeList } from "./views/gameModes/gameModes";
 
 const routes = [
   { path: '/', component: LandingView },
-  ...gameModeList.map(gm => ({ path: '/' + gm.abbreviation, component: gm.view })),
+  ...gameModeList.map(gm => ({ path: `/${gm.abbreviation}`, component: gm.view })),
+  ...gameModeList.map(gm => ({ path: `/${gm.abbreviation}/:id`, component: gm.room })),
   { path: '/:pathMatch(.*)*', component: NotFoundView }
 ];
 
