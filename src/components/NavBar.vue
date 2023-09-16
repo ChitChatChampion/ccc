@@ -40,27 +40,12 @@ export default {
             localStorage.setItem('name', data.name);
             localStorage.setItem('expiry', Date.now() + 3600000);
             this.$router.go();
+            this.isAuthenticated = true;
           });
 
         // try to log in the user
         const url = getUrl('');
-        axios.post(url, {}, getHeader())
-          .then(backendResponse => {
-            switch (backendResponse.status) {
-              case 200:
-              case 201:
-                this.$swal.fire({ icon: 'success', title: `Welcome to ChitChatChampion!` });
-                this.isAuthenticated = true; // authenticate when login is successful.
-                break;
-              default:
-                this.isAuthenticated = false;
-            }
-          })
-          // .then(() => {this.$router.go();})
-          .catch(error => {
-            console.log(error);
-            this.isAuthenticated = false;
-          })
+        axios.post(url, {}, getHeader());
       })
     },
     logout() {

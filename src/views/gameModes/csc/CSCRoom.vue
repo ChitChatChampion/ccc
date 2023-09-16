@@ -4,7 +4,7 @@
   <button v-if="cardIndex > 0" @click="cardIndex--">Previous</button>
   <button v-if="cardIndex < cards.length - 1" @click="cardIndex++">Next</button>
   <button @click="shuffle">Shuffle</button>
-  Card {{ cardIndex }}: {{ cards[cardIndex]['text'] }}
+  Card {{ cardIndex+1 }}: <div v-if="cards[cardIndex]">{{ cards[cardIndex]['text'] }}</div>
 </template>
 
 <script>
