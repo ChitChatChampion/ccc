@@ -1,9 +1,10 @@
 <!-- /csc/:id -->
 
 <template>
-  <li v-for="card in cards" :key="card">
-    {{ card }}
-  </li>
+  <button v-if="cardIndex > 0" @click="cardIndex--">Previous</button>
+  <button v-if="cardIndex < cards.length - 1" @click="cardIndex++">Next</button>
+  <button @click="shuffle">Shuffle</button>
+  Card {{ cardIndex }}: {{ cards[cardIndex]['text'] }}
 </template>
 
 <script>
@@ -13,6 +14,7 @@ export default {
   name: 'CSCRoom',
   data() {
     return {
+      cardIndex: 0,
       cards: []
     }
   },
@@ -37,6 +39,11 @@ export default {
         if (!data) return;
         this.cards = data.cards;
       })
+  },
+  methods: {
+    shuffle() {
+      this.cards = this.cards.sort(() => Math.random() - 0.5);
+    }
   }
 }
 </script>
