@@ -2,7 +2,8 @@
 
 <template>
   <h1>{{ name }}</h1>
-  <em>{{ description }}</em>
+  <em v-if="isAuthenticated">{{ createInstructions }}</em>
+  <em v-else>{{ description }}</em>
   <!-- <img :src="imgPath"/> -->
   <FormKit v-if="isAuthenticated" type="form" @submit="createRoom">
     <ContextForm/>
@@ -26,6 +27,7 @@ export default {
       isAuthenticated: false,
       name: gameModeDict.csc.name,
       description: gameModeDict.csc.description,
+      createInstructions: gameModeDict.csc.createInstructions,
       imgPath: `./${gameModeDict.csc.imgPath}`
     };
   },
