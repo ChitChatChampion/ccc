@@ -6,6 +6,9 @@ import 'sweetalert2/dist/sweetalert2.min.css';
 import App from './App.vue';
 import router from './router';
 
+import './index.css'
+
+
 const app = createApp(App);
 const clientId = '785838083864-vljpaavprlvsq83slqjtf46oop9qtcfd.apps.googleusercontent.com';
 
