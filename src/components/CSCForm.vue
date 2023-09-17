@@ -6,6 +6,7 @@
       label="Number of Cards"
       value="10"
       validation="min:1"
+      step="1"
     />
   </FormKit>
 </template>
