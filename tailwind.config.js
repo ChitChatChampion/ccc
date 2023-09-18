@@ -72,8 +72,7 @@ module.exports = {
             black: "#424242",
         },
         fontFamily: {
-            gilroy: ["Gilroy", "sans-serif"],
-            metropolis: ["Metropolis", "sans-serif"],
+            sans: ["Montserrat", "sans-serif"]
         },
     },
     plugins: [],
