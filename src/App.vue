@@ -2,7 +2,7 @@
   <!-- <NavBar/> -->
   <!-- <br/>
   <br/> -->
-  <router-view/>
+  <router-view />
 </template>
 
 <script>

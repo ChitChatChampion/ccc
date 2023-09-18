@@ -2,10 +2,10 @@
 
 <template>
   <h1>Landing</h1>
-  <PINInput/>
+  <PINInput />
   Game Modes:
   <li v-for="gameMode in gameModes" :key="gameMode.abbreviation">
-    <GameModePreview :name="gameMode.name" :abbreviation="gameMode.abbreviation"/>
+    <GameModePreview :name="gameMode.name" :abbreviation="gameMode.abbreviation" />
   </li>
 </template>
 
@@ -24,6 +24,6 @@ export default {
   components: {
     GameModePreview,
     PINInput
-}
+  }
 }
 </script>
