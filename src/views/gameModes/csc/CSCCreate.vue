@@ -7,7 +7,9 @@
       <h1 class="font-bold text-3xl text-jr pb-10">Create Game</h1>
       {{ createInstructions }}
       <ContextForm ref="context"/>
-      <button @click="hello">H</button>
+      <CSCForm ref="csc"/>
+      <br/>
+      <button @click="generateQuestions">Generate Questions</button>
     </section>
   </div>
 </template>
@@ -18,6 +20,7 @@ import NavBar from '@/components/NavBar.vue';
 import { gameModeDict } from '../gameModes';
 import { getHeader, getUrl } from '@/services';
 import ContextForm from '@/components/ContextForm.vue';
+import CSCForm from '@/components/CSCForm.vue';
 
 export default {
   name: 'CSCCreate',
@@ -35,10 +38,14 @@ export default {
     const element = this.$refs;
     console.log(element);
   },
-  components: { NavBar, ContextForm },
+  components: { NavBar, ContextForm, CSCForm },
   methods: {
-    hello() {
-      console.log(this.$refs.context.getValues());
+    generateQuestions() {
+      const payload = {
+        baseContext: this.$refs.context.getValues(),
+        cscContext: this.$refs.csc.getValues()
+      };
+      console.log(payload);
     },
     async createRoom(fields) {
       const url = getUrl('csc');
