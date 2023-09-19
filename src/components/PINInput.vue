@@ -1,10 +1,6 @@
 <template>
   <form class="rounded-3xl gap-5 z-10 max-w-sm" :class="{ flex: isHorizontal, grid: !isHorizontal, 'bg-light': !isHorizontal, 'p-5': !isHorizontal }">
-    <input
-      v-model="roomId"
-      class="font-sans font-bold rounded-xl border-lrt border-2"
-      :class="{ 'p-2': isHorizontal, 'p-3': !isHorizontal }"
-      placeholder="Game ID"/>
+    <TextInput name="roomId" ref="roomId" placeholder="Game ID"/>
     <OrangeButton :onClick="submitPIN" text="Join Game"/>
   </form>
 </template>
@@ -12,6 +8,7 @@
 <script>
 import { getUrl } from '@/services';
 import OrangeButton from './OrangeButton.vue';
+import TextInput from './TextInput.vue';
 
 export default {
   name: 'PINInput',
@@ -27,11 +24,12 @@ export default {
     }
   },
   components: {
-    OrangeButton
-  },
+    OrangeButton,
+    TextInput
+},
   methods: {
     async submitPIN() {
-      const roomId = this.roomId;
+      const roomId = this.$refs.roomId.value;
       const url = getUrl(`room/${roomId}`);
       console.log(url);
 
