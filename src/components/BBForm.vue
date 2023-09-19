@@ -5,7 +5,8 @@
       name="number_of_rounds"
       label="Number of Rounds"
       value="10"
-      validation="min:1"
+      validation="between:1,20"
+      validation-visibility="live"
     />
   </FormKit>
 </template>
