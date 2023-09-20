@@ -10,14 +10,14 @@
       <div class="flex gap-2 text-light">
         <span>Room ID:</span>
         <span class="font-bold">{{ this.$route.params.id }}</span>
-        <button class="ml-2">
+        <button class="ml-2" @click="copyToClipboard">
           <v-icon><font-awesome-icon icon="fa-regular fa-clipboard" /></v-icon>
         </button>
       </div>
     </section>
 
     <!-- Card Slides -->
-    <carousel ref="myCarousel" :items-to-show="1.3" model-value="1" class="mt-20" v-model="currentSlide">
+    <carousel ref="myCarousel" :items-to-show="1.3" model-value="1" class="mt-16" v-model="currentSlide">
       <slide key="$start$"></slide>
       <slide v-for="card in cards" :key="card">
         <div class="bg-light w-full text-left p-8 h-[22rem] rounded-3xl text-jr-dark text-[20px] font-medium">
@@ -43,6 +43,7 @@
 
 <script>
 import NavBar from "@/components/NavBar.vue"
+import useClipboard from "vue-clipboard3"
 import 'vue3-carousel/dist/carousel.css'
 import { Carousel, Slide } from 'vue3-carousel'
 import { getUrl } from '@/services';
@@ -90,6 +91,22 @@ export default {
     },
     prev() {
       this.$refs.myCarousel.prev();
+    },
+    copyToClipboard() {
+      const { toClipboard } = useClipboard();
+      try {
+        toClipboard(this.$route.params.id);
+        this.$swal.fire({
+          toast: true,
+          position: 'bottom',
+          icon: 'success',
+          title: 'Room ID Copied!',
+          showConfirmButton: false,
+          timer: 1500
+        });
+      } catch (e) {
+        console.error(e);
+      }
     }
   },
   watch: {
@@ -113,7 +130,7 @@ export default {
     Carousel,
     Slide,
     FontAwesomeIcon
-}
+  }
 }
 </script>
 
