@@ -20,11 +20,21 @@
       <slide key="$end$"></slide>
     </carousel>
 
-    <section id="padded" class="flex flex-col mx-9 px-5 gap-5">
+    <section id="padded" class="flex flex-col mx-9 px-5 gap-5 hidden">
       <span>{{ slideNumber }}</span>
       <button @click="prev">Previous</button>
       <button @click="next">Next</button>
     </section>
+    <div class="fixed bottom-0 w-full flex justify-between px-10 pb-9 text-light">
+      <button @click="prev" :class="currentSlide <= 1 ? 'opacity-0' : 'block'" :disabled="currentSlide <= 1">
+        <v-icon><font-awesome-icon icon="fa-solid fa-chevron-left" /></v-icon>
+      </button>
+      <span>{{ slideNumber }} / {{ cards.length }}</span>
+      <button @click="next" :class="currentSlide >= cards.length ? 'opacity-0' : 'block'"
+        :disabled="currentSlide >= cards.length">
+        <v-icon><font-awesome-icon icon="fa-solid fa-chevron-right" /></v-icon>
+      </button>
+    </div>
   </div>
 </template>
 
@@ -40,10 +50,7 @@ export default {
   data() {
     return {
       cardIndex: 0,
-      cards: [
-        "Tell me about yourself",
-        "What is your favorite programming language",
-      ],
+      cards: [],
       instructions: gameModeDict.csc.instructions,
       currentSlide: 1,
     }
