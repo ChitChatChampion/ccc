@@ -7,7 +7,7 @@
       <img :src="imgPath" class="x-auto max-h-80 z-10"/>
       <h1 class="text-2xl text-light font-bold z-10">How to play:</h1>
       <p class="text-light z-10">{{ instructions }}</p>
-      <PINInput isHorizontal="true"/>
+      <PINInput :isHorizontal="true"/>
       <div>
         <OrangeButton v-if="isAuthenticated" :onClick="e => this.$router.push('/bb/create')" text="Create Game"/>
         <Login v-else redirect="/bb/create"/>
@@ -52,12 +52,13 @@ export default {
 <style scoped>
 .background-circle-bb {
   position: absolute;
-  top: 70%;
+  top: 65%;
   left: 100%;
-  transform: translate(-50%, -50%);
-  width: 50vh; /* Adjust the size of the circle as needed */
-  height: 50vh; /* The width and height should be equal for a circle */
-  border-radius: 50%; /* Creates a circle by setting border-radius to 50% */
+  transform: translate(-100%, -50%);
+  width: 30vh; /* Adjust the size of the circle as needed */
+  height: 60vh; /* The width and height should be equal for a circle */
+  border-top-left-radius: 60vh;
+  border-bottom-left-radius: 60vh;
   z-index: 0; /* Place the circle behind other content */
   opacity: 20%;
 }
