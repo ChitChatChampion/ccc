@@ -1,29 +1,30 @@
 <!-- /csc/:id -->
 
 <template>
-  <div class="h-screen bg-gradient-to-b from-jr-light via-jr to-jr-dark z-0">
+  <div class="h-screen bg-gradient-to-b from-jr to-jr-dark z-0">
     <NavBar backLink="/csc" text="Conversation Starter Cards" />
     <section id="padded" class="flex flex-col mx-9 px-5 gap-5">
       <div class="flex gap-2 text-light">
         <span>Room ID:</span>
         <span class="font-bold">{{ this.$route.params.id }}</span>
       </div>
-      <button v-if="cardIndex > 0" @click="cardIndex--">Previous</button>
-      <button v-if="cardIndex < cards.length - 1" @click="next">Next</button>
-      <button @click="shuffle">Shuffle</button>
-      Card {{ cardIndex + 1 }}: <div v-if="cards[cardIndex]">{{ cards[cardIndex]['text'] }}</div>
     </section>
 
-    <carousel ref="myCarousel" :items-to-show="1.3">
-      <slide :key="1">
-        <div></div>
-      </slide>
+    <carousel ref="myCarousel" :items-to-show="1.3" model-value="1" class="mt-20" v-model="currentSlide">
+      <slide key="$start$"></slide>
       <slide v-for="card in cards" :key="card">
         <div class="bg-light w-full text-left p-8 h-[22rem] rounded-3xl text-jr-dark text-[20px] font-medium">
           {{ card.text }}
         </div>
       </slide>
+      <slide key="$end$"></slide>
     </carousel>
+
+    <section id="padded" class="flex flex-col mx-9 px-5 gap-5">
+      <span>{{ slideNumber }}</span>
+      <button @click="prev">Previous</button>
+      <button @click="next">Next</button>
+    </section>
   </div>
 </template>
 
@@ -43,7 +44,8 @@ export default {
         "Tell me about yourself",
         "What is your favorite programming language",
       ],
-      instructions: gameModeDict.csc.instructions
+      instructions: gameModeDict.csc.instructions,
+      currentSlide: 1,
     }
   },
   created() {
@@ -77,6 +79,22 @@ export default {
     },
     prev() {
       this.$refs.myCarousel.prev();
+    }
+  },
+  watch: {
+    currentSlide: {
+      handler() {
+        if (this.currentSlide === 0) {
+          this.$refs.myCarousel.slideTo(1);
+        } else if (this.currentSlide === this.cards.length + 1) {
+          this.$refs.myCarousel.slideTo(this.cards.length);
+        }
+      }
+    }
+  },
+  computed: {
+    slideNumber() {
+      return this.currentSlide <= 0 ? 1 : this.currentSlide > this.cards.length ? this.cards.length : this.currentSlide;
     }
   },
   components: {
