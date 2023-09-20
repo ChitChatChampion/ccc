@@ -1,11 +1,11 @@
 <template>
-  <nav class="grid w-full px-5 justify-start h-1/6 place-content-center z-10">
-    <router-link :to="backLink" class="text-2xl text-light flex z-10">
-      <div class="w-10">
-        <v-icon v-if="!!backLink"><font-awesome-icon icon="fa-solid fa-arrow-left"/></v-icon>
-      </div>
-      <span class="font-bold">{{ text }}</span>
+  <nav class="flex w-full justify-start h-1/6 place-content-center z-10">
+    <router-link :to="backLink" class="text-3xl text-light z-10 grid place-content-center mx-5">
+      <v-icon v-if="!!backLink"><font-awesome-icon icon="fa-solid fa-arrow-left"/></v-icon>
     </router-link>
+    <div class="font-bold m-auto text-center text-light text-3xl w-screen z-10">
+      {{ text }}
+    </div>
   </nav>
 </template>
 
@@ -18,7 +18,7 @@ export default {
     },
     text: {
       type: String,
-    }
+    },
   },
   components: {  }
 }
