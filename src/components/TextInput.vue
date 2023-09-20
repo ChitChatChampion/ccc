@@ -1,9 +1,9 @@
 <template>
-  <label v-if="!!label" :for="name" class="font-bold text-lg"><br/>{{ label }}<br/></label>
+  <label v-if="!!label" :for="name" class="block text-gray-700 text-sm font-bold mb-2"><br/>{{ label }}<br/></label>
   <input
     :name="name"
     v-model="value"
-    class="font-sans rounded-xl border-lrt border-2 p-2"
+    class="shadow appearance-none border rounded-xl w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
     :placeholder="placeholder"/>
 </template>
 
