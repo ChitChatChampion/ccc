@@ -1,67 +1,25 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link>
-    <button v-if='this.isAuthenticated' @click="logout">Logout from Google</button>
-    <button v-else @click="login">Login with Google</button>
+  <nav class="grid w-full px-5 justify-start h-1/6 place-content-center z-10">
+    <router-link :to="backLink" class="text-2xl text-light flex z-10">
+      <div class="w-10">
+        <v-icon v-if="!!backLink"><font-awesome-icon icon="fa-solid fa-arrow-left"/></v-icon>
+      </div>
+      <span class="font-bold">{{ text }}</span>
+    </router-link>
   </nav>
 </template>
 
 <script>
-import axios from 'axios';
-import { googleLogout, googleTokenLogin } from 'vue3-google-login';
-import { getHeader, getUrl } from '@/services';
-
 export default {
-  name: 'NavBar',
-  data() {
-    return {
-      isAuthenticated: false,
-    };
-  },
-  created() {
-    if (localStorage.getItem('expiry') > Date.now()) {
-      this.isAuthenticated = true;
-      return;
-    }
-    this.isAuthenticated = false;
-    localStorage.setItem('token', null);
-    localStorage.setItem('name', null);
-    localStorage.setItem('expiry', null);
-  },
-  methods: {
-    login() {
-      googleTokenLogin().then(tokenResponse => {
-        localStorage.setItem('token', tokenResponse.access_token);
-
-        // get user data from Google
-        fetch(`https://www.googleapis.com/oauth2/v3/userinfo?access_token=${tokenResponse.access_token}`)
-          .then(userDataResponse => userDataResponse.json())
-          .then(data => {
-            localStorage.setItem('name', data.name);
-            localStorage.setItem('expiry', Date.now() + 3600000);
-            this.$router.go();
-            this.isAuthenticated = true;
-          });
-
-        // try to log in the user
-        const url = getUrl('');
-        axios.post(url, {}, getHeader());
-      })
+  name: 'NavBarComponent',
+  props: {
+    backLink: {
+      type: String,
     },
-    logout() {
-      googleLogout();
-      this.isAuthenticated = false;
-      localStorage.setItem('token', null);
-      localStorage.setItem('name', null);
-      localStorage.setItem('expiry', null);
-      this.$router.go();
+    text: {
+      type: String,
     }
   },
+  components: {  }
 }
 </script>
-
-<style scoped>
-nav {
-  position: absolute
-}
-</style>

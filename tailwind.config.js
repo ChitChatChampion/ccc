@@ -1,6 +1,8 @@
 /** @type {import('tailwindcss').Config} */
+const FormKitVariants = require('@formkit/themes/tailwindcss');
+
 module.exports = {
-  content: ["./index.html", "./src/**/*.{vue,js,ts,jsx,tsx}"],
+  content: ["./public/**/*.html", "./src/**/*.{vue,js,ts,jsx,tsx}", './tailwind-theme.js'],
   theme: {
     extend: {},
     colors: {
@@ -75,5 +77,5 @@ module.exports = {
       sans: ["Montserrat", "sans-serif"],
     },
   },
-  plugins: [],
+  plugins: [FormKitVariants],
 };
