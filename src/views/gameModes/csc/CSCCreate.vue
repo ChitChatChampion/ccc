@@ -3,13 +3,19 @@
 <template>
   <div class="h-screen bg-jr">
     <NavBar backLink="/csc" text="Conversation Starter Cards" ref="nav"/>
-    <section id='browse-game-modes' class="px-10 py-10 rounded-t-3xl bg-lrt-background h-5/6">
-      <h1 class="font-bold text-3xl text-jr pb-10">Create Game</h1>
+    <section id='browse-game-modes' class="px-10 py-10 rounded-t-3xl bg-lrt-background h-5/6 grid gap-5 place-content-center">
+      <h1 class="font-bold text-3xl text-jr">Create Game</h1>
       {{ createInstructions }}
-      <ContextForm ref="context"/>
-      <CSCForm ref="csc"/>
-      <br/>
-      <OrangeButton :onClick="generateQuestions" text="Generate Questions"/>
+      <form class="bg-light shadow-md rounded-lg px-8 pt-6 pb-8 mb-4 max-w-xl">
+        <ContextForm ref="context"/>
+        <CSCForm ref="csc"/>
+        <br/>
+        <OrangeButton :onClick="generateQuestions" text="Generate Questions"/>
+      </form>
+
+      <ul>
+        <li q-id:>{{ text }}</li>
+      </ul>
     </section>
   </div>
 </template>
@@ -22,6 +28,7 @@ import { getHeader, getUrl } from '@/services';
 import ContextForm from '@/components/ContextForm.vue';
 import CSCForm from '@/components/CSCForm.vue';
 import OrangeButton from '@/components/OrangeButton.vue';
+import loginToGoogle from '@/components/loginToGoogle';
 
 export default {
   name: 'CSCCreate',
@@ -34,7 +41,18 @@ export default {
   },
   created() {
     if (localStorage.getItem('expiry') < Date.now()) {
-      this.$router.push('/csc')
+      this.$router.push('/csc');
+      this.$swal.fire({
+        icon: 'warning',
+        title: 'Please log in to Google to create a game!',
+        showCancelButton: true,
+        confirmButtonText: 'Log In'
+      }).then(result => {
+        if (result.isDismissed) {
+          return;
+        }
+        loginToGoogle({ redirect: '/csc/create', router: this.$router });
+      });
     }
   },
   mounted() {
