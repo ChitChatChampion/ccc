@@ -19,6 +19,9 @@ export default {
       return {
         number_of_questions: this.$refs.number_of_questions.value,
       }
+    },
+    setValues({ number_of_questions }) {
+      this.$refs.number_of_questions.value = number_of_questions;
     }
   }
 }

@@ -29,7 +29,7 @@ POST /base-context/save
 You receive:
 {
   "purpose": "first date",
-  "familiarity": "acquaintances",
+  "relationship": "acquaintances",
   "description": "20-year-old singaporean university computing students who have no social life"
 }
 I receive:
@@ -44,7 +44,7 @@ You receive:
 I receive:
 200: {
   "purpose": "first date",
-  "familiarity": "acquaintances",
+  "relationship": "acquaintances",
   "description": "20-year-old singaporean university computing students who have no social life"
 }
 400: { "error": "Haiya" }

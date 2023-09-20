@@ -36,6 +36,11 @@ export default {
         description: this.$refs.description.value,
         relationship: this.$refs.relationship.value
       }
+    },
+    setValues({ purpose, description, relationship }) {
+      this.$refs.purpose.value = purpose;
+      this.$refs.description.value = description;
+      this.$refs.relationship.value = relationship;
     }
   }
 }

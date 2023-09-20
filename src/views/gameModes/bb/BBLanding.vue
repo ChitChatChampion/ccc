@@ -1,61 +1,76 @@
 <!-- /bb -->
 
 <template>
-  <h1>{{ name }}</h1>
-  <em>{{ description }}</em>
-  <!-- <img :src="imgPath"/> -->
-  <FormKit v-if="isAuthenticated" type="form" @submit="createRoom">
-    <ContextForm/>
-    <BBForm/>
-  </FormKit>
-  <PINInput v-else/>
+  <div class="h-screen bg-gradient-to-b from-ns-light via-ns to-ns-dark z-0">
+    <NavBar backLink="/browse" text="Conversation Starter Cards"/>
+    <section id="padded" class="mx-10 px-5 grid gap-5">
+      <img :src="imgPath" class="x-auto max-h-80 z-10"/>
+      <h1 class="text-2xl text-light font-bold z-10">How to play:</h1>
+      <p class="text-light z-10">{{ instructions }}</p>
+      <PINInput isHorizontal="true"/>
+      <div>
+        <OrangeButton v-if="isAuthenticated" :onClick="e => this.$router.push('/bb/create')" text="Create Game"/>
+        <Login v-else redirect="/bb/create"/>
+      </div>
+    </section>
+
+    <div class="background-circle-bb bg-ns-light"></div>
+    <div class="background-diamond-bb bg-ns-light"></div>
+  </div>
 </template>
 
 <script>
-import axios from 'axios';
-import ContextForm from '@/components/ContextForm.vue';
-import BBForm from '@/components/BBForm.vue';
+import NavBar from '@/components/NavBar.vue';
 import { gameModeDict } from '../gameModes';
-import { getHeader, getUrl } from '@/services';
 import PINInput from '@/components/PINInput.vue';
+import Login from '@/components/Login.vue';
+import OrangeButton from '@/components/OrangeButton.vue';
 
 export default {
   name: 'BBLanding',
   data() {
     return {
-      isAuthenticated: false,
-      name: gameModeDict.bb.name,
-      description: gameModeDict.bb.description,
-      imgPath: `./${gameModeDict.bb.imgPath}`
-    };
+      instructions: gameModeDict.bb.instructions,
+      imgPath: gameModeDict.bb.imgPath,
+      isAuthenticated: false
+    }
   },
   created() {
-    this.isAuthenticated = localStorage.getItem('expiry') > Date.now();
-  },
-  components: { ContextForm, BBForm, PINInput },
-  methods: {
-    async createRoom(fields) {
-      const url = getUrl('bb');
-      const header = getHeader();
-      axios.post(url, fields, { header })
-        .then(response => {
-          switch (response.status) {
-            case 201:
-              return response.data;
-            default:
-              this.isInvalid = true;
-              this.$swal.fire({
-                icon: 'warning',
-                title: 'Oops...',
-                text: 'Something went wrong when creating your room!'
-              });
-          }
-        })
-        .then(data => {
-          if (!data) return;
-          this.$router.push(`bb/${data.id}`);
-        })
+    if (localStorage.getItem('expiry') > Date.now()) {
+      this.isAuthenticated = true;
     }
-  }
+  },
+  components: {
+    NavBar,
+    PINInput,
+    Login,
+    OrangeButton
+}
 }
 </script>
+
+<style scoped>
+.background-circle-bb {
+  position: absolute;
+  top: 70%;
+  left: 100%;
+  transform: translate(-50%, -50%);
+  width: 50vh; /* Adjust the size of the circle as needed */
+  height: 50vh; /* The width and height should be equal for a circle */
+  border-radius: 50%; /* Creates a circle by setting border-radius to 50% */
+  z-index: 0; /* Place the circle behind other content */
+  opacity: 20%;
+}
+
+.background-diamond-bb {
+  position: absolute;
+  top: 20%;
+  left: 0%;
+  transform: translate(-50%, -50%) rotate(45deg);
+  width: 50vmax; /* Adjust the size of the circle as needed */
+  height: 50vmax; /* The width and height should be equal for a circle */
+  border-radius: 4rem; /* Creates a circle by setting border-radius to 50% */
+  z-index: 0; /* Place the circle behind other content */
+  opacity: 20%;
+}
+</style>

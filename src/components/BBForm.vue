@@ -1,12 +1,25 @@
 <template>
-  <FormKit type="group" name="cscContext">
-    <FormKit
-      type="number"
-      name="number_of_rounds"
-      label="Number of Rounds"
-      value="10"
-      validation="between:1,20"
-      validation-visibility="live"
-    />
-  </FormKit>
+  <NumericInput
+    name="number_of_prompts"
+    ref="number_of_prompts"
+    label="Number of Prompts"
+    placeholder="10"
+    min="1"
+    max="20"/>
 </template>
+
+<script>
+import NumericInput from './NumericInput.vue';
+
+export default {
+  name: 'CSCForm',
+  components: { NumericInput },
+  methods: {
+    getValues() {
+      return {
+        number_of_prompts: this.$refs.number_of_prompts.value,
+      }
+    }
+  }
+}
+</script>
