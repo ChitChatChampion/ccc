@@ -94,7 +94,10 @@ I receive:
 
 POST /csc/questions/generate
 You receive:
-{}
+{
+  "baseContext": {},
+  "cscContext": {}
+}
 I receive:
 201: {
   "questions": [
@@ -140,7 +143,8 @@ I receive:
 POST /csc/questions/update
 You receive:
 {
-  "id": 11357890
+  "id": 11357890,
+  "text": "What do you do for a living?"
 }
 I receive:
 200: {
