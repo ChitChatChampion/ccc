@@ -1,5 +1,5 @@
 <template>
-  <form class="rounded-3xl gap-5 z-10 max-w-sm" :class="{ flex: isHorizontal, grid: !isHorizontal, 'bg-light': !isHorizontal, 'p-5': !isHorizontal }">
+  <form class="rounded-3xl gap-5 z-10 grid" :class="{ 'bg-light': withBackground, 'p-5': withBackground, 'max-w-sm': limitWidth }">
     <TextInput name="roomId" ref="roomId" placeholder="Game ID"/>
     <OrangeButton :onClick="submitPIN" text="Join Game"/>
   </form>
@@ -7,15 +7,19 @@
 
 <script>
 import { getUrl } from '@/services';
-import OrangeButton from './OrangeButton.vue';
-import TextInput from './TextInput.vue';
+import OrangeButton from '@/components/buttons/OrangeButton.vue';
+import TextInput from '@/components/inputs/TextInput.vue';
 
 export default {
-  name: 'PINInput',
+  name: '/inputs/PINInput',
   props: {
-    isHorizontal: {
+    withBackground: {
       type: Boolean,
-      default: false
+      default: true
+    },
+    limitWidth: {
+      type: Boolean,
+      default: true
     }
   },
   data() {

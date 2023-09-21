@@ -2,17 +2,17 @@
   <TextInput
     name="purpose"
     ref="purpose"
-    label="Purpose"
+    label="What's the purpose of the ice-breaker?"
     placeholder="e.g. Freshman orientation, First date etc."/>
   <TextInput
     name="description"
     ref="description"
-    label="Description"
+    label="Briefly describe the group of participants."
     placeholder="e.g. University computing students from Singapore."/>
   <SelectInput
     name="relationship"
     ref="relationship"
-    label="Relationship"
+    label="How are the participants related?"
     placeholder="Choose the relationship"
     :options="[
       { label: 'Strangers', value: 'STRANGERS' },
@@ -23,8 +23,8 @@
 </template>
 
 <script>
-import TextInput from './TextInput.vue';
-import SelectInput from './SelectInput.vue';
+import TextInput from './inputs/TextInput.vue';
+import SelectInput from '@/components/inputs/SelectInput.vue';
 
 export default {
   name: 'ContextForm',
@@ -36,6 +36,11 @@ export default {
         description: this.$refs.description.value,
         relationship: this.$refs.relationship.value
       }
+    },
+    setValues({ purpose, description, relationship }) {
+      this.$refs.purpose.value = purpose;
+      this.$refs.description.value = description;
+      this.$refs.relationship.value = relationship;
     }
   }
 }
