@@ -3,19 +3,18 @@
 <template>
   <div class="h-screen bg-jr">
     <NavBar backLink="/csc" text="Conversation Starter Cards" ref="nav"/>
-    <section id='browse-game-modes' class="px-10 py-10 rounded-t-3xl bg-lrt-background h-5/6 grid gap-5 place-content-center">
+    <section id='browse-game-modes' class="px-10 py-10 rounded-t-3xl bg-lrt-background grid gap-5 place-content-center min-h-[84%]">
       <h1 class="font-bold text-3xl text-jr">Create Game</h1>
-      {{ createInstructions }}
-      <form class="bg-light shadow-md rounded-lg px-8 pt-6 pb-8 mb-4 max-w-xl">
+      <span class="max-w-3xl">{{ createInstructions }}</span>
+
+      <form class="bg-light shadow-md rounded-lg px-8 pt-6 pb-8 mb-4">
         <ContextForm ref="context"/>
         <CSCForm ref="csc"/>
         <br/>
-        <OrangeButton :onClick="generateQuestions" text="Generate Questions"/>
+        <OrangeButton :onClick="generateQuestions" text="Generate Questions" class="mt-5"/>
       </form>
-
-      <ul>
-        <li q-id:>{{ text }}</li>
-      </ul>
+      
+      <QuestionForm ref="questions"/>
     </section>
   </div>
 </template>
@@ -29,16 +28,16 @@ import ContextForm from '@/components/ContextForm.vue';
 import CSCForm from '@/components/CSCForm.vue';
 import OrangeButton from '@/components/OrangeButton.vue';
 import loginToGoogle from '@/components/loginToGoogle';
+import QuestionForm from '@/components/QuestionForm.vue';
 
 export default {
   name: 'CSCCreate',
   data() {
     return {
-      name: gameModeDict.csc.name,
       createInstructions: gameModeDict.csc.createInstructions,
-      imgPath: gameModeDict.csc.imgPath
     };
   },
+  components: { NavBar, ContextForm, CSCForm, OrangeButton, QuestionForm },
   created() {
     if (localStorage.getItem('expiry') < Date.now()) {
       this.$router.push('/csc');
@@ -56,12 +55,12 @@ export default {
     }
   },
   mounted() {
-    this.populateContext({ url: getUrl('/base-context/read'), ref: this.$refs.context });
-    this.populateContext({ url: getUrl('/csc-context/read'), ref: this.$refs.csc });
+    this.populate({ url: getUrl('base-context/read'), ref: this.$refs.context });
+    this.populate({ url: getUrl('csc-context/read'), ref: this.$refs.csc });
+    this.populate({ url: getUrl('questions/read'), ref: this.$refs.questions });
   },
-  components: { NavBar, ContextForm, CSCForm, OrangeButton },
   methods: {
-    populateContext({ url, ref }) {
+    async populate({ url, ref }) {
       const header = getHeader();
       axios.post(url, {}, { header })
         .then(response => {
@@ -89,7 +88,21 @@ export default {
       const header = getHeader();
       axios.post(url, payload, { header })
         .then(response => {
-          console.log(response)
+          switch (response.status) {
+            case 201:
+              return response.json();
+            default:
+              return;
+          }
+        })
+        .then(data => {
+          if (!data) throw new Error();
+          this.questions = data.questions;
+        })
+        .catch(err => {
+          console.log(err);
+          this.$swal.fire('Oops...', 'Generate questions failed!', 'error');
+          // this.$refs.questions.setValues({ questions: [{ id: 12345, text: "Who are you" }, { id: 12345, text: "Who are you" }] })
         })
     },
     async createRoom(fields) {
