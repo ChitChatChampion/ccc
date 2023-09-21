@@ -4,8 +4,8 @@
     ref="number_of_prompts"
     label="Number of Prompts"
     placeholder="10"
-    min="1"
-    max="20"/>
+    :min="1"
+    :max="20"/>
 </template>
 
 <script>
