@@ -142,14 +142,7 @@ You receive:
   "text": "What do you do for a living?"
 }
 I receive:
-200: {
-  "questions": [
-    {
-      "id": 11357890,
-      "text": "What do you do for a living?"
-    }
-  ]
-}
+200: {}
 400: { "error": "Haiya" }
 401: { "error": "Haiya" }
 
@@ -159,14 +152,7 @@ You receive:
   "id": 11357890
 }
 I receive:
-200: {
-  "questions": [
-    {
-      "id": 11357890,
-      "text": "What do you do for a living?"
-    }
-  ]
-}
+200: {}
 400: { "error": "Haiya" }
 401: { "error": "Haiya" }
 
