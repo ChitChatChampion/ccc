@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import PINInput from '@/components/PINInput.vue';
+import PINInput from '@/components/inputs/PINInput.vue';
 
 export default {
   name: 'LandingView',
