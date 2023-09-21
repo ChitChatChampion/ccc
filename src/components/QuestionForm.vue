@@ -30,18 +30,17 @@ export default {
     },
     addQuestion() {
       const header = getHeader();
-      const url = 'questions/create';
+      const url = 'csc/questions/create';
       axios.post(url, {}, header)
         .then(response => {
           switch (response.status) {
             case 201:
               return response.json();
             default:
-              return;
+              throw new Error('Bad method!');
           }
         })
         .then(data => {
-          if (!data) throw new Error();
           this.questions = [...this.questions, { id: data.id, text: '' }];
         })
         .catch(err => {
