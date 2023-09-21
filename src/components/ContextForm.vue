@@ -2,17 +2,17 @@
   <TextInput
     name="purpose"
     ref="purpose"
-    label="Purpose"
+    label="What's the purpose of the ice-breaker?"
     placeholder="e.g. Freshman orientation, First date etc."/>
   <TextInput
     name="description"
     ref="description"
-    label="Description"
+    label="Briefly describe the group of participants."
     placeholder="e.g. University computing students from Singapore."/>
   <SelectInput
     name="relationship"
     ref="relationship"
-    label="Relationship"
+    label="How are the participants related?"
     placeholder="Choose the relationship"
     :options="[
       { label: 'Strangers', value: 'STRANGERS' },
