@@ -27,10 +27,10 @@ import NavBar from '@/components/NavBar.vue';
 import { gameModeDict } from '../gameModes';
 import { getHeader, getUrl } from '@/services';
 import ContextForm from '@/components/ContextForm.vue';
-import CSCForm from '@/components/CSCForm.vue';
-import OrangeButton from '@/components/OrangeButton.vue';
+import CSCForm from '@/components/csc/CSCForm.vue';
+import OrangeButton from '@/components/buttons/OrangeButton.vue';
 import loginToGoogle from '@/components/loginToGoogle';
-import QuestionForm from '@/components/QuestionForm.vue';
+import QuestionForm from '@/components/csc/QuestionForm.vue';
 
 export default {
   name: 'CSCCreate',
