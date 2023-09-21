@@ -48,18 +48,17 @@ export default {
   methods: {
     saveQuestion() {
       const header = getHeader();
-      const url = getUrl('questions/update');
+      const url = getUrl('csc/questions/update');
       axios.post(url, { id: this.id, text: this.text }, { header })
         .then(response => {
           switch (response.status) {
             case 200:
               return response.json();
             default:
-              return;
+              throw new Error('Bad method!');
           }
         })
-        .then(data => {
-          if (!data) throw new Error();
+        .then(() => {
           this.$swal.fire('Success!', 'Question has been saved!', 'success');
           this.hidden = true;
         })
@@ -70,18 +69,17 @@ export default {
     },
     deleteQuestion() {
       const header = getHeader();
-      const url = getUrl('questions/delete');
+      const url = getUrl('csc/questions/delete');
       axios.post(url, { id: this.id }, { header })
         .then(response => {
           switch (response.status) {
             case 200:
               return response.json();
             default:
-              return;
+              throw new Error('Bad method!');
           }
         })
-        .then(data => {
-          if (!data) throw new Error();
+        .then(() => {
           this.$swal.fire('Success!', 'Question has been deleted!', 'success');
           this.hidden = true;
         })
