@@ -8,6 +8,8 @@
     :placeholder="placeholder"
     :min="min"
     :max="max"/>
+  <span v-if="value < min && !!minMsg" class="text-ns"><br/>{{ minMsg(min) }}</span>
+  <span v-if="value > max && !!maxMsg" class="text-ns"><br/>{{ maxMsg(max) }}</span>
 </template>
 
 <script>
@@ -15,7 +17,7 @@ export default {
   name: 'TextInput',
   data() {
     return {
-      value: ''
+      value: 10
     }
   },
   props: {
@@ -35,7 +37,9 @@ export default {
     },
     max: {
       type: Number,
-    }
+    },
+    minMsg: {},
+    maxMsg: {}
   }
 }
 </script>
