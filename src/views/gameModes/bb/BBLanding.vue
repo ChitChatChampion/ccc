@@ -2,49 +2,40 @@
 
 <template>
   <div class="h-screen bg-gradient-to-b from-ns-light via-ns to-ns-dark z-0">
-    <NavBar backLink="/browse" text="Conversation Starter Cards"/>
-    <section id="padded" class="mx-10 px-5 grid gap-5">
-      <img :src="imgPath" class="x-auto max-h-80 z-10"/>
-      <h1 class="text-2xl text-light font-bold z-10">How to play:</h1>
-      <p class="text-light z-10">{{ instructions }}</p>
-      <PINInput :isHorizontal="true"/>
-      <div>
-        <OrangeButton v-if="isAuthenticated" :onClick="e => this.$router.push('/bb/create')" text="Create Game"/>
-        <Login v-else redirect="/bb/create"/>
+    <NavBar backLink="/browse"/>
+    
+    <section class="h-2/3 w-screen z-10 grid place-content-center">
+      <div class="bg-light rounded-3xl max-w-lg p-5 z-10 grid gap-5 m-10">
+        <h1 class="text-3xl font-bold text-ns">Burning Bridges</h1>
+        {{ instructions }}
+        <PINInput :withBackground="false" :limitWidth="false"/>
+        <OrangeButton :onClick="e => this.$router.push('/bb/create')" text="Create Game"/>
       </div>
     </section>
 
-    <div class="background-circle-bb bg-ns-light"></div>
-    <div class="background-diamond-bb bg-ns-light"></div>
+    <div class="background-circle-bb bg-ns-v-light"></div>
+    <div class="background-diamond-bb bg-ns-v-light"></div>
   </div>
 </template>
 
 <script>
 import NavBar from '@/components/NavBar.vue';
 import { gameModeDict } from '../gameModes';
-import PINInput from '@/components/PINInput.vue';
-import Login from '@/components/Login.vue';
-import OrangeButton from '@/components/OrangeButton.vue';
+import PINInput from '@/components/inputs/PINInput.vue';
+import OrangeButton from '@/components/buttons/OrangeButton.vue';
 
 export default {
-  name: 'BBLanding',
+  name: 'CSCLanding',
   data() {
     return {
       instructions: gameModeDict.bb.instructions,
       imgPath: gameModeDict.bb.imgPath,
-      isAuthenticated: false
-    }
-  },
-  created() {
-    if (localStorage.getItem('expiry') > Date.now()) {
-      this.isAuthenticated = true;
     }
   },
   components: {
     NavBar,
-    PINInput,
-    Login,
-    OrangeButton
+  PINInput,
+    OrangeButton,
 }
 }
 </script>
