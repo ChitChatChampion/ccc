@@ -115,12 +115,7 @@ You receive:
 {}
 I receive:
 201: {
-  "questions": [
-    {
-      "id": 11357890,
-      "text": "What do you do for a living?"
-    }
-  ]
+  "id": 11357890
 }
 400: { "error": "Haiya" }
 401: { "error": "Haiya" }
