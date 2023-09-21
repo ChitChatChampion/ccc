@@ -5,8 +5,8 @@
     <NavBar backLink="/browse"/>
     
     <section class="h-2/3 w-screen z-10 grid place-content-center">
-      <div class="bg-light bg-opacity-60 rounded-3xl max-w-lg p-5 z-10 grid gap-5 m-10">
-        <h1 class="text-3xl font-bold">Conversation Starter Cards</h1>
+      <div class="bg-light rounded-3xl max-w-lg p-5 z-10 grid gap-5 m-10">
+        <h1 class="text-3xl font-bold text-jr">Conversation Starter Cards</h1>
         {{ instructions }}
         <PINInput :withBackground="false" :limitWidth="false"/>
         <OrangeButton :onClick="e => this.$router.push('/csc/create')" text="Create Game"/>
@@ -21,8 +21,8 @@
 <script>
 import NavBar from '@/components/NavBar.vue';
 import { gameModeDict } from '../gameModes';
-import PINInput from '@/components/PINInput.vue';
-import OrangeButton from '@/components/OrangeButton.vue';
+import PINInput from '@/components/inputs/PINInput.vue';
+import OrangeButton from '@/components/buttons/OrangeButton.vue';
 
 export default {
   name: 'CSCLanding',
