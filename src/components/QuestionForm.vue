@@ -1,0 +1,56 @@
+<template>
+  <h1 v-if="questions.length" class="font-bold text-3xl text-jr">Questions</h1>
+  <ul v-if="questions.length" class="bg-light shadow-md rounded-lg px-8 pt-6 pb-8 mb-4 grid gap-5">
+    <QuestionPreview
+      v-for="(question, index) in questions"
+      :key="question.id"
+      :index="index"
+      :id="question.id"
+      :text="question.text"/>
+    <OrangeButton @click="addQuestion" text="+ Add Question"/>
+  </ul>
+</template>
+
+<script>
+import axios from 'axios';
+import OrangeButton from './OrangeButton.vue';
+import QuestionPreview from './QuestionPreview.vue';
+import { getHeader } from '@/services';
+
+export default {
+  name: 'QuestionForm',
+  data() {
+    return {
+      questions: []
+    }
+  },
+  methods: {
+    setValues({ questions }) {
+      this.questions = questions;
+    },
+    addQuestion() {
+      const header = getHeader();
+      const url = 'questions/create';
+      axios.post(url, {}, header)
+        .then(response => {
+          switch (response.status) {
+            case 201:
+              return response.json();
+            default:
+              return;
+          }
+        })
+        .then(data => {
+          if (!data) throw new Error();
+          this.questions = [...this.questions, { id: data.id, text: '' }];
+        })
+        .catch(err => {
+          console.log(err);
+          this.$swal.fire('Oops...', 'Add question failed!', 'error');
+          // this.questions = [...this.questions, { id: data.id, text: '' }];
+        });
+    }
+  },
+  components: { QuestionPreview, OrangeButton }
+}
+</script>
