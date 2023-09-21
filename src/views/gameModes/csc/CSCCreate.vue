@@ -15,6 +15,8 @@
       </form>
       
       <QuestionForm ref="questions"/>
+
+      <OrangeButton :onClick="createRoom" text="Create Room"/>
     </section>
   </div>
 </template>
@@ -57,7 +59,7 @@ export default {
   mounted() {
     this.populate({ url: getUrl('base-context/read'), ref: this.$refs.context });
     this.populate({ url: getUrl('csc-context/read'), ref: this.$refs.csc });
-    this.populate({ url: getUrl('questions/read'), ref: this.$refs.questions });
+    this.populate({ url: getUrl('csc/questions/read'), ref: this.$refs.questions });
   },
   methods: {
     async populate({ url, ref }) {
@@ -84,7 +86,7 @@ export default {
         baseContext: this.$refs.context.getValues(),
         cscContext: this.$refs.csc.getValues()
       };
-      const url = getUrl('questions/generate');
+      const url = getUrl('csc/questions/generate');
       const header = getHeader();
       axios.post(url, payload, { header })
         .then(response => {
@@ -92,11 +94,10 @@ export default {
             case 201:
               return response.json();
             default:
-              return;
+              throw new Error('Bad method!');
           }
         })
         .then(data => {
-          if (!data) throw new Error();
           this.questions = data.questions;
         })
         .catch(err => {
@@ -105,27 +106,29 @@ export default {
           // this.$refs.questions.setValues({ questions: [{ id: 12345, text: "Who are you" }, { id: 12345, text: "Who are you" }] })
         })
     },
-    async createRoom(fields) {
-      const url = getUrl('csc');
+    async createRoom() {
+      const url = getUrl('csc/create');
       const header = getHeader();
-      axios.post(url, fields, { header })
+      axios.post(url, {}, { header })
         .then(response => {
           switch (response.status) {
             case 201:
-              return response.data;
+              return response.json();
             default:
-              this.isInvalid = true;
-              this.$swal.fire({
-                icon: 'warning',
-                title: 'Oops...',
-                text: 'Something went wrong when creating your room!'
-              });
+              throw new Error('Bad method!');
           }
         })
         .then(data => {
-          if (!data) return;
           this.$router.push(`csc/${data.id}`);
         })
+        .catch(err => {
+          console.log(err);
+          this.$swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Something went wrong when creating your room!'
+          });
+        });
     }
   }
 }
