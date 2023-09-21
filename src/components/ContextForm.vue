@@ -23,8 +23,8 @@
 </template>
 
 <script>
-import TextInput from './TextInput.vue';
-import SelectInput from './SelectInput.vue';
+import TextInput from './inputs/TextInput.vue';
+import SelectInput from '@/components/inputs/SelectInput.vue';
 
 export default {
   name: 'ContextForm',
