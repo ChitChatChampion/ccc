@@ -2,6 +2,7 @@ import CSCLanding from './csc/CSCLanding';
 import CSCCreate from './csc/CSCCreate';
 import CSCRoom from './csc/CSCRoom';
 import BBLanding from './bb/BBLanding';
+import BBCreate from './bb/BBCreate';
 import BBRoom from './bb/BBRoom';
 
 export const gameModeDict = {
@@ -22,9 +23,10 @@ export const gameModeDict = {
     description: "Burning Bridges is an activity that stirs up lively conversations with AI prompts that might even challenge friendships. Dive in and see if your bonds can withstand the heat!",
     shortDescription: 'Test your friendships with AI!',
     instructions: "Playing 'Burning Bridges' is a breeze! Just pick an AI-generated prompt, share your thoughts on it, and engage in open conversations. Remember, it's all in good fun, even if it tests your friendships!",
-    createInstructions: "Creating your game is easy! Just define the purpose, describe your group, and specify participant familiarity. We'll craft a tailored icebreaker for your unique needs!",
+    createInstructions: "Based on how you answer these questions, we'll ask ChatGPT to craft an ice-breaker game for you! So feel free to be as detailed as possible!",
     imgPath: 'csc.jpg',
     landing: BBLanding,
+    create: BBCreate,
     room: BBRoom,
     bgColor: 'bg-ns'
   }
