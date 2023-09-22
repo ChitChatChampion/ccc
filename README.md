@@ -25,87 +25,38 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ## TRADE DEAL
 ```
-POST /base-context/save
-You receive:
-{
-  "purpose": "first date",
-  "relationship": "acquaintances",
-  "description": "20-year-old singaporean university computing students who have no social life"
-}
-I receive:
-200: {}
-201: {}
-400: { "error": "Haiya" }
-401: { "error": "Haiya" }
-
-POST /base-context/read
+GET /csc/context
 You receive:
 {}
 I receive:
 200: {
-  "purpose": "first date",
-  "relationship": "acquaintances",
-  "description": "20-year-old singaporean university computing students who have no social life"
+  baseContext: {
+      "purpose": "first date",
+      "relationship": "acquaintances",
+      "description": "20-year-old singaporean university computing students who have no social life"
+  },
+  cscContext: {
+      "numberOfCards": 10
+  },
+  questions: [{"id": 123, "What is your favorite food?"}, {"id:234, "What is your favorite icecream?"}]
 }
 400: { "error": "Haiya" }
 401: { "error": "Haiya" }
 
-POST /csc-context/save
-You receive:
-{
-  "number_of_questions": 10
-}
-I receive:
-200: {}
-201: {}
-400: { "error": "Haiya" }
-401: { "error": "Haiya" }
-
-POST /csc-context/read
+GET /bb/context
 You receive:
 {}
 I receive:
 200: {
-  "number_of_questions": 10
-}
-400: { "error": "Haiya" }
-401: { "error": "Haiya" }
-
-POST /bb-context/save
-You receive:
-{
-  "number_of_prompts": 10
-}
-I receive:
-200: {}
-201: {}
-400: { "error": "Haiya" }
-401: { "error": "Haiya" }
-
-POST /bb-context/read
-You receive:
-{}
-I receive:
-200: {
-  "number_of_prompts": 10
-}
-400: { "error": "Haiya" }
-401: { "error": "Haiya" }
-
-POST /csc/questions/generate
-You receive:
-{
-  "baseContext": {},
-  "cscContext": {}
-}
-I receive:
-201: {
-  "questions": [
-    {
-      "id": 11357890,
-      "text": "What do you do for a living?"
-    }
-  ]
+  baseContext: {
+      "purpose": "first date",
+      "relationship": "acquaintances",
+      "description": "20-year-old singaporean university computing students who have no social life"
+  },
+  bbContext: {
+      "numberOfCards": 10
+  },
+  questions: [{"id": 123, "content": "Who is more likely to burn down the computing building?"}, {"id": 123, "content": "Who is the most likely to use Haskel?"}]
 }
 400: { "error": "Haiya" }
 401: { "error": "Haiya" }
@@ -115,48 +66,56 @@ You receive:
 {}
 I receive:
 201: {
-  "id": 11357890
-}
-400: { "error": "Haiya" }
-401: { "error": "Haiya" }
-
-POST /csc/questions/read
-You receive:
-{}
-I receive:
-200: {
-  "questions": [
-    {
       "id": 11357890,
-      "text": "What do you do for a living?"
-    }
-  ]
 }
 400: { "error": "Haiya" }
 401: { "error": "Haiya" }
 
-POST /csc/questions/update
+PUT /csc/questions/:id
 You receive:
 {
-  "id": 11357890,
-  "text": "What do you do for a living?"
+  content: "Who is more likely to burn down the computing building?"
 }
 I receive:
-200: {}
+201: {
+      "id": 11357890,
+}
 400: { "error": "Haiya" }
 401: { "error": "Haiya" }
 
-POST /csc/questions/delete
+GET /csc/questions
 You receive:
 {
-  "id": 11357890
 }
 I receive:
-200: {}
+201:
+{
+questions: [
+{
+      "id": 11357891,
+      "text": "Who is more likely to burn down the computing building?"
+},
+{
+      "id": 11357890,
+      "text": "Who is more likely to burn down the computing building?"
+}
+]
+}
 400: { "error": "Haiya" }
 401: { "error": "Haiya" }
 
-POST /csc/create
+DELETE /csc/questions/:id
+You receive:
+{
+}
+I receive:
+201: {
+      "id": 11357890,
+}
+400: { "error": "Haiya" }
+401: { "error": "Haiya" }
+
+POST /room/csc/create
 You receive:
 {}
 I receive:
@@ -164,77 +123,114 @@ I receive:
   "id": "ABGED"
 }
 
-POST /bb/prompts/generate
-You receive:
-{}
-I receive:
-201: {
-  "questions": [
-    {
-      "id": 11357890,
-      "text": "Who's most likely to love C++?"
-    }
-  ]
-}
-400: { "error": "Haiya" }
-401: { "error": "Haiya" }
 
-POST /bb/prompts/create
-You receive:
-{}
-I receive:
-201: {
-  "prompts": [
-    {
-      "id": 11357890,
-      "text": "Who's most likely to love C++?"
-    }
-  ]
-}
-400: { "error": "Haiya" }
-401: { "error": "Haiya" }
 
-POST /bb/prompts/read
+
+
+
+
+
+
+
+
+
+
+
+GET /bb/context
 You receive:
 {}
 I receive:
 200: {
-  "prompts": [
-    {
+  baseContext: {
+      "purpose": "first date",
+      "relationship": "acquaintances",
+      "description": "20-year-old singaporean university computing students who have no social life"
+  },
+  bbContext: {
+      "numberOfCards": 10
+  },
+  questions: [{"id": 123, "What is your favorite food?"}, {"id:234, "What is your favorite icecream?"}]
+}
+400: { "error": "Haiya" }
+401: { "error": "Haiya" }
+
+GET /bb/context
+You receive:
+{}
+I receive:
+200: {
+  baseContext: {
+      "purpose": "first date",
+      "relationship": "acquaintances",
+      "description": "20-year-old singaporean university computing students who have no social life"
+  },
+  bbContext: {
+      "numberOfCards": 10
+  },
+  questions: [{"id": 123, "content": "Who is more likely to burn down the computing building?"}, {"id": 123, "content": "Who is the most likely to use Haskel?"}]
+}
+400: { "error": "Haiya" }
+401: { "error": "Haiya" }
+
+POST /bb/questions/create
+You receive:
+{}
+I receive:
+201: {
       "id": 11357890,
-      "text": "Who's most likely to love C++?"
-    }
-  ]
 }
 400: { "error": "Haiya" }
 401: { "error": "Haiya" }
 
-POST /bb/prompts/update
+PUT /bb/questions/:id
 You receive:
 {
-  "id": 11357890
+  content: "Who is more likely to burn down the computing building?"
 }
 I receive:
-200: {}
+201: {
+      "id": 11357890,
+}
 400: { "error": "Haiya" }
 401: { "error": "Haiya" }
 
-POST /bb/prompts/delete
+GET /bb/questions
 You receive:
 {
-  "id": 11357890
 }
 I receive:
-200: {}
+201:
+{
+questions: [
+{
+      "id": 11357891,
+      "text": "Who is more likely to burn down the computing building?"
+},
+{
+      "id": 11357890,
+      "text": "Who is more likely to burn down the computing building?"
+}
+]
+}
 400: { "error": "Haiya" }
 401: { "error": "Haiya" }
 
-POST /bb/create
+DELETE /bb/questions/:id
+You receive:
+{
+}
+I receive:
+201: {
+      "id": 11357890,
+}
+400: { "error": "Haiya" }
+401: { "error": "Haiya" }
+
+POST /room/bb/create
 You receive:
 {}
 I receive:
 201: {
   "id": "ABGED"
 }
-
 ```
