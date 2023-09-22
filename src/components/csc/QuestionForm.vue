@@ -6,7 +6,7 @@
       :key="question.id"
       :index="index"
       :id="question.id"
-      :text="question.text"/>
+      :content="question.content"/>
     <OrangeButton @click="addQuestion" text="+ Add Question"/>
   </ul>
 </template>
@@ -41,12 +41,12 @@ export default {
           }
         })
         .then(data => {
-          this.questions = [...this.questions, { id: data.id, text: '' }];
+          this.questions = [...this.questions, { id: data.id, content: '' }];
         })
         .catch(err => {
           console.log(err);
           this.$swal.fire('Oops...', 'Add question failed!', 'error');
-          // this.questions = [...this.questions, { id: data.id, text: '' }];
+          // this.questions = [...this.questions, { id: 1234, content: 's' }];
         });
     }
   },
