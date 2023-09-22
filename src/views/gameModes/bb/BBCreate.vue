@@ -11,10 +11,10 @@
         <ContextForm ref="context"/>
         <BBForm ref="bb"/>
         <br/>
-        <OrangeButton :onClick="generatePrompts" text="Generate Prompts" class="mt-5"/>
+        <OrangeButton :onClick="generateQuestions" text="Generate Prompts" class="mt-5"/>
       </form>
       
-      <QuestionForm ref="prompts"/>
+      <QuestionForm ref="questions"/>
 
       <OrangeButton :onClick="createRoom" text="Create Room"/>
     </section>
@@ -33,7 +33,7 @@ import loginToGoogle from '@/components/loginToGoogle';
 import QuestionForm from '@/components/bb/QuestionForm.vue';
 
 export default {
-  name: 'CSCCreate',
+  name: 'BBCreate',
   data() {
     return {
       createInstructions: gameModeDict.bb.createInstructions,
@@ -57,12 +57,10 @@ export default {
     }
   },
   mounted() {
-    this.populate({ url: getUrl('base-context/read'), ref: this.$refs.context });
-    this.populate({ url: getUrl('bb-context/read'), ref: this.$refs.bb });
-    this.populate({ url: getUrl('bb/prompts/read'), ref: this.$refs.prompts });
+    this.populate({ url: getUrl('bb/context') });
   },
   methods: {
-    async populate({ url, ref }) {
+    async populate({ url }) {
       const header = getHeader();
       axios.post(url, {}, { header })
         .then(response => {
@@ -75,18 +73,20 @@ export default {
         })
         .then(data => {
           if (!data) return;
-          ref.setValues(data);
+          this.$refs.context.setValues(data.baseContext);
+          this.$refs.csc.setValues(data.bbContext);
+          this.$refs.questions.setValues(data.questions);
         })
         .catch(err => {
           console.log(err);
         });
     },
-    async generatePrompts() {
+    async generateQuestions() {
       const payload = {
         baseContext: this.$refs.context.getValues(),
         bbContext: this.$refs.bb.getValues()
       };
-      const url = getUrl('bb/prompts/generate');
+      const url = getUrl('bb/questions/generate');
       const header = getHeader();
       axios.post(url, payload, { header })
         .then(response => {
@@ -98,12 +98,12 @@ export default {
           }
         })
         .then(data => {
-          this.prompts = data.prompts;
+          this.questions = data.questions;
         })
         .catch(err => {
           console.log(err);
-          this.$swal.fire('Oops...', 'Generate prompts failed!', 'error');
-          // this.$refs.prompts.setValues({ prompts: [{ id: 12345, text: "Who are you" }, { id: 12345, text: "Who are you" }] })
+          this.$swal.fire('Oops...', 'Generate questions failed!', 'error');
+          // this.$refs.questions.setValues({ questions: [{ id: 12345, content: "Who are you" }, { id: 12345, content: "Who are you" }] })
         })
     },
     async createRoom() {
