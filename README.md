@@ -215,14 +215,7 @@ You receive:
   "id": 11357890
 }
 I receive:
-200: {
-  "prompts": [
-    {
-      "id": 11357890,
-      "text": "Who's most likely to love C++?"
-    }
-  ]
-}
+200: {}
 400: { "error": "Haiya" }
 401: { "error": "Haiya" }
 
@@ -232,14 +225,7 @@ You receive:
   "id": 11357890
 }
 I receive:
-200: {
-  "prompts": [
-    {
-      "id": 11357890,
-      "text": "Who's most likely to love C++?"
-    }
-  ]
-}
+200: {}
 400: { "error": "Haiya" }
 401: { "error": "Haiya" }
 
