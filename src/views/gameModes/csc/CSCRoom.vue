@@ -185,4 +185,3 @@ export default {
   transform: rotateY(0) scale(1);
 }
 </style>
-Custom Navig
