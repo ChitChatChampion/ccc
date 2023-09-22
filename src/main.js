@@ -17,6 +17,8 @@ import { createVuetify } from 'vuetify';
 import * as components from 'vuetify/components';
 import * as directives from 'vuetify/directives';
 
+import VueMeta from 'vue-meta';
+
 import {
   faArrowLeft,
   faChevronLeft,
@@ -50,6 +52,7 @@ const vuetify = createVuetify({
 })
 
 app.use(vuetify);
+app.use(VueMeta);
 app.use(router);
 
 app.mount('#app');
