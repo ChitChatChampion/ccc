@@ -52,7 +52,7 @@ const vuetify = createVuetify({
 })
 
 app.use(vuetify);
-app.use(VueMeta);
+app.use(VueMeta, { keyName: 'head' });
 app.use(router);
 
 app.mount('#app');

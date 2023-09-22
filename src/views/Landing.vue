@@ -26,6 +26,9 @@ export default {
   name: 'LandingView',
   components: {
     PINInput
+  },
+  metaInfo: {
+    title: 'Hello World!'
   }
 }
 </script>
