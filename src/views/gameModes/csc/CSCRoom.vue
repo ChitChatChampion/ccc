@@ -3,10 +3,14 @@
 <template>
   <div class="h-screen bg-gradient-to-b from-jr to-jr-dark z-0">
     <!-- Navbar -->
-    <NavBar backLink="/csc" text="Conversation Starter Cards" />
+    <div class="flex px-5 pt-10">
+      <NavBarBackOnly backLink="/csc" />
+      <ProgressBar :value="percentage" background="jr-light" foreground="jr-v-light" class="my-auto" />
+    </div>
 
     <!-- Text and Room ID -->
-    <section id="padded" class="flex flex-col mx-9 px-5 gap-5">
+    <section id="padded" class="flex flex-col mx-5 px-5 gap-2 mt-8">
+      <span class="text-2xl text-light font-bold">Conversation Starter Cards</span>
       <div class="flex gap-2 text-light">
         <span>Room ID:</span>
         <span class="font-bold">{{ this.$route.params.id }}</span>
@@ -42,8 +46,9 @@
 </template>
 
 <script>
-import NavBar from "@/components/NavBar.vue"
+import NavBarBackOnly from "@/components/NavBarBackOnly.vue"
 import useClipboard from "vue-clipboard3"
+import ProgressBar from '@/components/ProgressBar.vue';
 import 'vue3-carousel/dist/carousel.css'
 import { Carousel, Slide } from 'vue3-carousel'
 import { getUrl } from '@/services';
@@ -123,13 +128,17 @@ export default {
   computed: {
     slideNumber() {
       return this.currentSlide <= 0 ? 1 : this.currentSlide > this.cards.length ? this.cards.length : this.currentSlide;
+    },
+    percentage() {
+      return (this.slideNumber - 1) / (this.cards.length - 1) * 100;
     }
   },
   components: {
-    NavBar,
+    NavBarBackOnly,
     Carousel,
     Slide,
-    FontAwesomeIcon
+    FontAwesomeIcon,
+    ProgressBar,
   }
 }
 </script>
