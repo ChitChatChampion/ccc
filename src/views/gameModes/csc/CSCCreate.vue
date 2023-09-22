@@ -109,7 +109,7 @@ export default {
     async createRoom() {
       const url = getUrl('csc/create');
       const header = getHeader();
-      axios.post(url, { }, { header })
+      axios.post(url, {}, { header })
         .then(response => {
           switch (response.status) {
             case 201:
