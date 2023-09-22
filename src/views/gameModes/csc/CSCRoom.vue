@@ -1,6 +1,9 @@
 <!-- /csc/:id -->
 
 <template>
+  <h1>Conversation Starter Cards</h1>
+  Room ID: {{ this.$route.params.id }}<br/>
+  {{ instructions }}
   <button v-if="cardIndex > 0" @click="cardIndex--">Previous</button>
   <button v-if="cardIndex < cards.length - 1" @click="cardIndex++">Next</button>
   <button @click="shuffle">Shuffle</button>
@@ -9,13 +12,15 @@
 
 <script>
 import { getUrl } from '@/services';
+import { gameModeDict } from '../gameModes';
 
 export default {
   name: 'CSCRoom',
   data() {
     return {
       cardIndex: 0,
-      cards: []
+      cards: [],
+      instructions: gameModeDict.csc.instructions
     }
   },
   created() {

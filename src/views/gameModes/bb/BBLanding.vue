@@ -1,20 +1,20 @@
-<!-- /csc -->
+<!-- /bb -->
 
 <template>
-  <div class="h-screen bg-gradient-to-b from-jr-light via-jr to-jr-dark z-0">
+  <div class="h-screen bg-gradient-to-b from-ns-light via-ns to-ns-dark z-0">
     <NavBar backLink="/browse"/>
     
     <section class="h-2/3 w-screen z-10 grid place-content-center">
       <div class="bg-light rounded-3xl max-w-lg p-5 z-10 grid gap-5 m-10">
-        <h1 class="text-3xl font-bold text-jr">Conversation Starter Cards</h1>
+        <h1 class="text-3xl font-bold text-ns">Burning Bridges</h1>
         {{ instructions }}
         <PINInput :withBackground="false" :limitWidth="false"/>
-        <OrangeButton :onClick="e => this.$router.push('/csc/create')" text="Create Game"/>
+        <OrangeButton :onClick="e => this.$router.push('/bb/create')" text="Create Game"/>
       </div>
     </section>
 
-    <div class="background-circle-csc bg-jr-v-light"></div>
-    <div class="background-diamond-csc bg-jr-v-light"></div>
+    <div class="background-circle-bb bg-ns-v-light"></div>
+    <div class="background-diamond-bb bg-ns-v-light"></div>
   </div>
 </template>
 
@@ -28,20 +28,20 @@ export default {
   name: 'CSCLanding',
   data() {
     return {
-      instructions: gameModeDict.csc.instructions,
-      imgPath: gameModeDict.csc.imgPath,
+      instructions: gameModeDict.bb.instructions,
+      imgPath: gameModeDict.bb.imgPath,
     }
   },
   components: {
     NavBar,
-    PINInput,
+  PINInput,
     OrangeButton,
 }
 }
 </script>
 
 <style scoped>
-.background-circle-csc {
+.background-circle-bb {
   position: absolute;
   top: 65%;
   left: 100%;
@@ -54,7 +54,7 @@ export default {
   opacity: 20%;
 }
 
-.background-diamond-csc {
+.background-diamond-bb {
   position: absolute;
   top: 20%;
   left: 0%;
