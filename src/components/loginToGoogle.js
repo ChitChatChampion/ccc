@@ -2,7 +2,6 @@ import { googleTokenLogin } from 'vue3-google-login';
 
 const loginToGoogle = ({ redirect, router }) => {
   googleTokenLogin().then(tokenResponse => {
-    console.log(tokenResponse.access_token);
     localStorage.setItem('token', tokenResponse.access_token);
 
     // get user data from Google
