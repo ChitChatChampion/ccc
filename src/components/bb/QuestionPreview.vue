@@ -6,8 +6,8 @@
     <div class="flex">
       <input
         v-model="value"
-        class="shadow appearance-none border rounded-l-xl w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"/>
-      <SaveButton :onClick="saveQuestion"/>
+        class="shadow appearance-none border rounded-l-xl w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        @blur="saveQuestion"/>
       <DeleteButton :onClick="deleteQuestion"/>
     </div>
   </li>
@@ -16,7 +16,6 @@
 <script>
 import { getHeader, getUrl } from '@/services';
 import DeleteButton from '@/components/buttons/DeleteButton.vue';
-import SaveButton from '@/components/buttons/SaveButton.vue';
 import axios from 'axios';
 
 export default {
@@ -36,20 +35,20 @@ export default {
       type: Number,
       required: true
     },
-    text: {
+    content: {
       type: String,
       required: true
     }
   },
   mounted() {
-    this.value = this.text;
+    this.value = this.content;
   },
-  components: { DeleteButton, SaveButton },
+  components: { DeleteButton },
   methods: {
     saveQuestion() {
       const header = getHeader();
-      const url = getUrl('csc/questions/update');
-      axios.post(url, { id: this.id, text: this.text }, { header })
+      const url = getUrl(`csc/questions/${this.id}`);
+      axios.put(url, { content: this.content }, { header })
         .then(response => {
           switch (response.status) {
             case 200:
@@ -69,8 +68,8 @@ export default {
     },
     deleteQuestion() {
       const header = getHeader();
-      const url = getUrl('csc/questions/delete');
-      axios.post(url, { id: this.id }, { header })
+      const url = getUrl(`csc/questions/${this.id}`);
+      axios.post(url, {}, { header })
         .then(response => {
           switch (response.status) {
             case 200:
