@@ -69,7 +69,7 @@ export default {
     deleteQuestion() {
       const header = getHeader();
       const url = getUrl(`csc/questions/${this.id}`);
-      axios.post(url, {}, { header })
+      axios.delete(url, {}, { header })
         .then(response => {
           switch (response.status) {
             case 200:
