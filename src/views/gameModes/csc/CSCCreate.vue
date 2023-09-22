@@ -57,12 +57,10 @@ export default {
     }
   },
   mounted() {
-    this.populate({ url: getUrl('base-context/read'), ref: this.$refs.context });
-    this.populate({ url: getUrl('csc-context/read'), ref: this.$refs.csc });
-    this.populate({ url: getUrl('csc/questions/read'), ref: this.$refs.questions });
+    this.populate({ url: getUrl('csc/context') });
   },
   methods: {
-    async populate({ url, ref }) {
+    async populate({ url }) {
       const header = getHeader();
       axios.post(url, {}, { header })
         .then(response => {
@@ -75,7 +73,9 @@ export default {
         })
         .then(data => {
           if (!data) return;
-          ref.setValues(data);
+          this.$refs.context.setValues(data.baseContext);
+          this.$refs.csc.setValues(data.cscContext);
+          this.$refs.questions.setValues(data.questions);
         })
         .catch(err => {
           console.log(err);
@@ -103,13 +103,13 @@ export default {
         .catch(err => {
           console.log(err);
           this.$swal.fire('Oops...', 'Generate questions failed!', 'error');
-          // this.$refs.questions.setValues({ questions: [{ id: 12345, text: "Who are you" }, { id: 12345, text: "Who are you" }] })
+          this.$refs.questions.setValues({ questions: [{ id: 12345, text: "Who are you" }, { id: 12345, text: "Who are you" }] })
         })
     },
     async createRoom() {
       const url = getUrl('csc/create');
       const header = getHeader();
-      axios.post(url, {}, { header })
+      axios.post(url, { }, { header })
         .then(response => {
           switch (response.status) {
             case 201:
