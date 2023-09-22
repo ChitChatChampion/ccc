@@ -1,0 +1,643 @@
+swagger: '2.0'
+info:
+  title: Your API
+  version: 1.0
+paths:
+  /base-context/save:
+    post:
+      summary: Save Base Context
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              purpose:
+                type: string
+              relationship:
+                type: string
+              description:
+                type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            type: object
+        '201':
+          description: Created
+          schema:
+            type: object
+        '400':
+          description: Bad Request
+          schema:
+            type: object
+              properties:
+                error:
+                  type: string
+        '401':
+          description: Unauthorized
+          schema:
+            type: object
+              properties:
+                error:
+                  type: string
+
+  /base-context/read:
+    post:
+      summary: Read Base Context
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Success
+          schema:
+            type: object
+        '400':
+          description: Bad Request
+          schema:
+            type: object
+              properties:
+                error:
+                  type: string
+        '401':
+          description: Unauthorized
+          schema:
+            type: object
+              properties:
+                error:
+                  type: string
+
+  /csc-context/save:
+    post:
+      summary: Save CSC Context
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              number_of_questions:
+                type: integer
+      responses:
+        '200':
+          description: Success
+          schema:
+            type: object
+        '201':
+          description: Created
+          schema:
+            type: object
+        '400':
+          description: Bad Request
+          schema:
+            type: object
+              properties:
+                error:
+                  type: string
+        '401':
+          description: Unauthorized
+          schema:
+            type: object
+              properties:
+                error:
+                  type: string
+
+  /csc-context/read:
+    post:
+      summary: Read CSC Context
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Success
+          schema:
+            type: object
+              properties:
+                number_of_questions:
+                  type: integer
+        '400':
+          description: Bad Request
+          schema:
+            type: object
+              properties:
+                error:
+                  type: string
+        '401':
+          description: Unauthorized
+          schema:
+            type: object
+              properties:
+                error:
+                  type: string
+
+  /bb-context/save:
+    post:
+      summary: Save BB Context
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              number_of_prompts:
+                type: integer
+      responses:
+        '200':
+          description: Success
+          schema:
+            type: object
+        '201':
+          description: Created
+          schema:
+            type: object
+        '400':
+          description: Bad Request
+          schema:
+            type: object
+              properties:
+                error:
+                  type: string
+        '401':
+          description: Unauthorized
+          schema:
+            type: object
+              properties:
+                error:
+                  type: string
+
+  /bb-context/read:
+    post:
+      summary: Read BB Context
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Success
+          schema:
+            type: object
+              properties:
+                number_of_prompts:
+                  type: integer
+        '400':
+          description: Bad Request
+          schema:
+            type: object
+              properties:
+                error:
+                  type: string
+        '401':
+          description: Unauthorized
+          schema:
+            type: object
+              properties:
+                error:
+                  type: string
+
+  /csc/questions/generate:
+    post:
+      summary: Generate CSC Questions
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              baseContext:
+                type: object
+              cscContext:
+                type: object
+      responses:
+        '201':
+          description: Created
+          schema:
+            type: object
+              properties:
+                questions:
+                  type: array
+                  items:
+                    type: object
+                      properties:
+                        id:
+                          type: integer
+                        text:
+                          type: string
+        '400':
+          description: Bad Request
+          schema:
+            type: object
+              properties:
+                error:
+                  type: string
+        '401':
+          description: Unauthorized
+          schema:
+            type: object
+              properties:
+                error:
+                  type: string
+
+  /csc/questions/create:
+    post:
+      summary: Create CSC Question
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+      responses:
+        '201':
+          description: Created
+          schema:
+            type: object
+              properties:
+                id:
+                  type: integer
+        '400':
+          description: Bad Request
+          schema:
+            type: object
+              properties:
+                error:
+                  type: string
+        '401':
+          description: Unauthorized
+          schema:
+            type: object
+              properties:
+                error:
+                  type: string
+
+  /csc/questions/read:
+    post:
+      summary: Read CSC Questions
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Success
+          schema:
+            type: object
+              properties:
+                questions:
+                  type: array
+                  items:
+                    type: object
+                      properties:
+                        id:
+                          type: integer
+                        text:
+                          type: string
+        '400':
+          description: Bad Request
+          schema:
+            type: object
+              properties:
+                error:
+                  type: string
+        '401':
+          description: Unauthorized
+          schema:
+            type: object
+              properties:
+                error:
+                  type: string
+
+  /csc/questions/update:
+    post:
+      summary: Update CSC Question
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              id:
+                type: integer
+              text:
+                type: string
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+          schema:
+            type: object
+              properties:
+                error:
+                  type: string
+        '401':
+          description: Unauthorized
+          schema:
+            type: object
+              properties:
+                error:
+                  type: string
+
+  /csc/questions/delete:
+    post:
+      summary: Delete CSC Question
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              id:
+                type: integer
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+          schema:
+            type: object
+              properties:
+                error:
+                  type: string
+        '401':
+          description: Unauthorized
+          schema:
+            type: object
+              properties:
+                error:
+                  type: string
+
+  /csc/create:
+    post:
+      summary: Create CSC
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+      responses:
+        '201':
+          description: Created
+          schema:
+            type: object
+              properties:
+                id:
+                  type: string
+
+  /bb/prompts/generate:
+    post:
+      summary: Generate BB Prompts
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+      responses:
+        '201':
+          description: Created
+          schema:
+            type: object
+              properties:
+                prompts:
+                  type: array
+                  items:
+                    type: object
+                      properties:
+                        id:
+                          type: integer
+                        text:
+                          type: string
+        '400':
+          description: Bad Request
+          schema:
+            type: object
+              properties:
+                error:
+                  type: string
+        '401':
+          description: Unauthorized
+          schema:
+            type: object
+              properties:
+                error:
+                  type: string
+
+  /bb/prompts/create:
+    post:
+      summary: Create BB Prompt
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+      responses:
+        '201':
+          description: Created
+          schema:
+            type: object
+              properties:
+                prompts:
+                  type: array
+                  items:
+                    type: object
+                      properties:
+                        id:
+                          type: integer
+                        text:
+                          type: string
+        '400':
+          description: Bad Request
+          schema:
+            type: object
+              properties:
+                error:
+                  type: string
+        '401':
+          description: Unauthorized
+          schema:
+            type: object
+              properties:
+                error:
+                  type: string
+
+  /bb/prompts/read:
+    post:
+      summary: Read BB Prompts
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Success
+          schema:
+            type: object
+              properties:
+                prompts:
+                  type: array
+                  items:
+                    type: object
+                      properties:
+                        id:
+                          type: integer
+                        text:
+                          type: string
+        '400':
+          description: Bad Request
+          schema:
+            type: object
+              properties:
+                error:
+                  type: string
+        '401':
+          description: Unauthorized
+          schema:
+            type: object
+              properties:
+                error:
+                  type: string
+
+  /bb/prompts/update:
+    post:
+      summary: Update BB Prompt
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              id:
+                type: integer
+      responses:
+        '200':
+          description: Success
+          schema:
+            type: object
+              properties:
+                prompts:
+                  type: array
+                  items:
+                    type: object
+                      properties:
+                        id:
+                          type: integer
+                        text:
+                          type: string
+        '400':
+          description: Bad Request
+          schema:
+            type: object
+              properties:
+                error:
+                  type: string
+        '401':
+          description: Unauthorized
+          schema:
+            type: object
+              properties:
+                error:
+                  type: string
+
+  /bb/prompts/delete:
+    post:
+      summary: Delete BB Prompt
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              id:
+                type: integer
+      responses:
+        '200':
+          description: Success
+          schema:
+            type: object
+              properties:
+                prompts:
+                  type: array
+                  items:
+                    type: object
+                      properties:
+                        id:
+                          type: integer
+                        text:
+                          type: string
+        '400':
+          description: Bad Request
+          schema:
+            type: object
+              properties:
+                error:
+                  type: string
+        '401':
+          description: Unauthorized
+          schema:
+            type: object
+              properties:
+                error:
+                  type: string
