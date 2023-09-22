@@ -569,18 +569,6 @@ paths:
       responses:
         '200':
           description: Success
-          schema:
-            type: object
-              properties:
-                prompts:
-                  type: array
-                  items:
-                    type: object
-                      properties:
-                        id:
-                          type: integer
-                        text:
-                          type: string
         '400':
           description: Bad Request
           schema:
@@ -615,18 +603,6 @@ paths:
       responses:
         '200':
           description: Success
-          schema:
-            type: object
-              properties:
-                prompts:
-                  type: array
-                  items:
-                    type: object
-                      properties:
-                        id:
-                          type: integer
-                        text:
-                          type: string
         '400':
           description: Bad Request
           schema:
