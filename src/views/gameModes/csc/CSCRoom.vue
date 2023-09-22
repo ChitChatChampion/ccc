@@ -1,11 +1,11 @@
 <!-- /csc/:id -->
 
 <template>
-  <div class="h-screen bg-gradient-to-b from-jr to-jr-dark z-0">
+  <div class="h-screen bg-gradient-to-b from-jr-light via-jr to-jr-dark z-0">
     <!-- Navbar -->
-    <div class="flex px-5 pt-10">
+    <div class="flex gap-3 px-5 pt-10">
       <NavBarBackOnly backLink="/csc" />
-      <ProgressBar :value="percentage" background="jr-light" foreground="jr-v-light" class="my-auto" />
+      <ProgressBar :value="percentage" background="jr" foreground="jr-v-light" class="my-auto" />
     </div>
 
     <!-- Text and Room ID -->
