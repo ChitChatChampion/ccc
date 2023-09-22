@@ -1,8 +1,13 @@
 /** @type {import('tailwindcss').Config} */
-const FormKitVariants = require('@formkit/themes/tailwindcss');
+const FormKitVariants = require("@formkit/themes/tailwindcss");
 
 module.exports = {
-  content: ["./public/**/*.html", "./src/**/*.{vue,js,ts,jsx,tsx}", './tailwind-theme.js'],
+  content: [
+    "./public/**/*.html",
+    "./src/**/*.{vue,js,ts,jsx,tsx}",
+    "./tailwind-theme.js",
+    "./node_modules/primevue/**/*.{vue,js,ts,jsx,tsx}",
+  ],
   theme: {
     extend: {},
     colors: {
