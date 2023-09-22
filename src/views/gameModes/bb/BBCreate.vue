@@ -62,7 +62,7 @@ export default {
   methods: {
     async populate({ url }) {
       const header = getHeader();
-      axios.post(url, {}, { header })
+      axios.get(url, {}, { header })
         .then(response => {
           switch (response.status) {
             case 200:

@@ -62,7 +62,7 @@ export default {
   methods: {
     async populate({ url }) {
       const header = getHeader();
-      axios.post(url, {}, { header })
+      axios.get(url, {}, { header })
         .then(response => {
           switch (response.status) {
             case 200:
@@ -103,7 +103,7 @@ export default {
         .catch(err => {
           console.log(err);
           this.$swal.fire('Oops...', 'Generate questions failed!', 'error');
-          this.$refs.questions.setValues({ questions: [{ id: 12345, text: "Who are you" }, { id: 12345, text: "Who are you" }] })
+          // this.$refs.questions.setValues({ questions: [{ id: 12345, text: "Who are you" }, { id: 12345, text: "Who are you" }] })
         })
     },
     async createRoom() {

@@ -10,6 +10,7 @@
         @blur="saveQuestion"/>
       <DeleteButton :onClick="deleteQuestion"/>
     </div>
+    <p class="text-ns" v-if="!this.value">Question cannot be left blank!</p>
   </li>
 </template>
 
