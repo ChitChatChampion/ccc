@@ -1,61 +1,68 @@
 <!-- /bb -->
 
 <template>
-  <h1>{{ name }}</h1>
-  <em>{{ description }}</em>
-  <!-- <img :src="imgPath"/> -->
-  <FormKit v-if="isAuthenticated" type="form" @submit="createRoom">
-    <ContextForm/>
-    <BBForm/>
-  </FormKit>
-  <PINInput v-else/>
+  <div class="h-screen bg-gradient-to-b from-ns-light via-ns to-ns-dark z-0">
+    <NavBar backLink="/browse"/>
+    
+    <section class="h-2/3 w-screen z-10 grid place-content-center">
+      <div class="bg-light rounded-3xl max-w-lg p-5 z-10 grid gap-5 m-10">
+        <h1 class="text-3xl font-bold text-ns">Burning Bridges</h1>
+        {{ instructions }}
+        <PINInput :withBackground="false" :limitWidth="false"/>
+        <OrangeButton :onClick="e => this.$router.push('/bb/create')" text="Create Game"/>
+      </div>
+    </section>
+
+    <div class="background-circle-bb bg-ns-v-light"></div>
+    <div class="background-diamond-bb bg-ns-v-light"></div>
+  </div>
 </template>
 
 <script>
-import axios from 'axios';
-import ContextForm from '@/components/ContextForm.vue';
-import BBForm from '@/components/BBForm.vue';
+import NavBar from '@/components/NavBar.vue';
 import { gameModeDict } from '../gameModes';
-import { getHeader, getUrl } from '@/services';
-import PINInput from '@/components/PINInput.vue';
+import PINInput from '@/components/inputs/PINInput.vue';
+import OrangeButton from '@/components/buttons/OrangeButton.vue';
 
 export default {
-  name: 'BBLanding',
+  name: 'CSCLanding',
   data() {
     return {
-      isAuthenticated: false,
-      name: gameModeDict.bb.name,
-      description: gameModeDict.bb.description,
-      imgPath: `./${gameModeDict.bb.imgPath}`
-    };
-  },
-  created() {
-    this.isAuthenticated = localStorage.getItem('expiry') > Date.now();
-  },
-  components: { ContextForm, BBForm, PINInput },
-  methods: {
-    async createRoom(fields) {
-      const url = getUrl('bb');
-      const header = getHeader();
-      axios.post(url, fields, { header })
-        .then(response => {
-          switch (response.status) {
-            case 201:
-              return response.data;
-            default:
-              this.isInvalid = true;
-              this.$swal.fire({
-                icon: 'warning',
-                title: 'Oops...',
-                text: 'Something went wrong when creating your room!'
-              });
-          }
-        })
-        .then(data => {
-          if (!data) return;
-          this.$router.push(`bb/${data.id}`);
-        })
+      instructions: gameModeDict.bb.instructions,
+      imgPath: gameModeDict.bb.imgPath,
     }
-  }
+  },
+  components: {
+    NavBar,
+  PINInput,
+    OrangeButton,
+}
 }
 </script>
+
+<style scoped>
+.background-circle-bb {
+  position: absolute;
+  top: 65%;
+  left: 100%;
+  transform: translate(-100%, -50%);
+  width: 30vh; /* Adjust the size of the circle as needed */
+  height: 60vh; /* The width and height should be equal for a circle */
+  border-top-left-radius: 60vh;
+  border-bottom-left-radius: 60vh;
+  z-index: 0; /* Place the circle behind other content */
+  opacity: 20%;
+}
+
+.background-diamond-bb {
+  position: absolute;
+  top: 20%;
+  left: 0%;
+  transform: translate(-50%, -50%) rotate(45deg);
+  width: 50vmax; /* Adjust the size of the circle as needed */
+  height: 50vmax; /* The width and height should be equal for a circle */
+  border-radius: 4rem; /* Creates a circle by setting border-radius to 50% */
+  z-index: 0; /* Place the circle behind other content */
+  opacity: 20%;
+}
+</style>

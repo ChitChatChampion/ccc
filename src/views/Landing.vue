@@ -14,13 +14,13 @@
       </p>
     </footer>
 
-    <div class="background-circle bg-dt-light"></div>
-    <div class="background-diamond bg-dt-light"></div>
+    <div class="background-circle bg-dt-v-light"></div>
+    <div class="background-diamond bg-dt-v-light"></div>
   </div>
 </template>
 
 <script>
-import PINInput from '@/components/PINInput.vue';
+import PINInput from '@/components/inputs/PINInput.vue';
 
 export default {
   name: 'LandingView',
@@ -33,14 +33,15 @@ export default {
 <style scoped>
 .background-circle {
   position: absolute;
-  top: 70%;
+  top: 65%;
   left: 100%;
-  transform: translate(-50%, -50%);
-  width: 50vh; /* Adjust the size of the circle as needed */
-  height: 50vh; /* The width and height should be equal for a circle */
-  border-radius: 50%; /* Creates a circle by setting border-radius to 50% */
+  transform: translate(-100%, -50%);
+  width: 30vh; /* Adjust the size of the circle as needed */
+  height: 60vh; /* The width and height should be equal for a circle */
+  border-top-left-radius: 60vh;
+  border-bottom-left-radius: 60vh;
   z-index: 0; /* Place the circle behind other content */
-  opacity: 20%;
+  opacity: 10%;
 }
 
 .background-diamond {
@@ -52,6 +53,6 @@ export default {
   height: 50vmax; /* The width and height should be equal for a circle */
   border-radius: 4rem; /* Creates a circle by setting border-radius to 50% */
   z-index: 0; /* Place the circle behind other content */
-  opacity: 20%;
+  opacity: 10%;
 }
 </style>
