@@ -1,7 +1,7 @@
 <template>
     <ProgressBar :value="percentage" :pt="{
         root: {
-            class: [`overflow-hidden w-full relative rounded-full h-[15px] my-auto', 'border-0 h-6 bg-${background}`]
+            class: ['overflow-hidden w-full relative rounded-full h-[15px] my-auto', `border-0 h-6 bg-${background}`]
         },
         value: ({ props }) => ({
             class: [
