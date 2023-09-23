@@ -19,6 +19,7 @@
 </template>
 
 <script>
+import { useMeta } from 'vue-meta';
 import NavBar from '@/components/NavBar.vue';
 import { gameModeDict } from '../gameModes';
 import PINInput from '@/components/inputs/PINInput.vue';
@@ -26,6 +27,11 @@ import OrangeButton from '@/components/buttons/OrangeButton.vue';
 
 export default {
   name: 'CSCLanding',
+  setup() {
+    useMeta({
+      title: 'Conversation Starter Cards'
+    })
+  },
   data() {
     return {
       instructions: gameModeDict.csc.instructions,
