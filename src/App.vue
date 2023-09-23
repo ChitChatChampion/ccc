@@ -1,12 +1,19 @@
 <template>
+  <metainfo>
+    <template v-slot:title="{ content }">{{ content ? `${content} | ChitChatChampion` : `ChitChatChampion` }}</template>
+  </metainfo>
   <router-view />
 </template>
 
 <script>
+import { useMeta } from 'vue-meta';
+
 export default {
   name: 'App',
-  metaInfo: {
-    titleTemplate: '%s | ChitChatChampion'
+  setup() {
+    useMeta({
+      title: '',
+    })
   }
 }
 </script>
