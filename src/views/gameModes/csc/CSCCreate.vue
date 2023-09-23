@@ -57,14 +57,12 @@ export default {
     }
   },
   mounted() {
-    this.populate({ url: getUrl('base-context/read'), ref: this.$refs.context });
-    this.populate({ url: getUrl('csc-context/read'), ref: this.$refs.csc });
-    this.populate({ url: getUrl('csc/questions/read'), ref: this.$refs.questions });
+    this.populate({ url: getUrl('csc/context') });
   },
   methods: {
-    async populate({ url, ref }) {
+    async populate({ url }) {
       const header = getHeader();
-      axios.post(url, {}, { header })
+      axios.get(url, {}, { header })
         .then(response => {
           switch (response.status) {
             case 200:
@@ -75,7 +73,9 @@ export default {
         })
         .then(data => {
           if (!data) return;
-          ref.setValues(data);
+          this.$refs.context.setValues(data.baseContext);
+          this.$refs.csc.setValues(data.cscContext);
+          this.$refs.questions.setValues(data.questions);
         })
         .catch(err => {
           console.log(err);

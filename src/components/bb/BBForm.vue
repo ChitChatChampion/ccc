@@ -1,13 +1,13 @@
 <template>
   <NumericInput
-    name="number_of_prompts"
-    ref="number_of_prompts"
-    label="How many prompts do you want to create?"
+    name="number_of_questions"
+    ref="number_of_questions"
+    label="How many questions do you want to create?"
     placeholder="10"
     :min="1"
     :max="20"
-    :minMsg="val => `Haiya must have at least ${val} prompt${val > 1 ? 's' : ''}.`"
-    :maxMsg="val => `Haiya maximum ${val} prompt${val > 1 ? 's' : ''}.`"
+    :minMsg="val => `Haiya must have at least ${val} question${val > 1 ? 's' : ''}.`"
+    :maxMsg="val => `Haiya maximum ${val} question${val > 1 ? 's' : ''}.`"
     />
 </template>
 
@@ -20,11 +20,11 @@ export default {
   methods: {
     getValues() {
       return {
-        number_of_prompts: this.$refs.number_of_prompts.value,
+        number_of_questions: this.$refs.number_of_questions.value,
       }
     },
-    setValues({ number_of_prompts }) {
-      this.$refs.number_of_prompts.value = number_of_prompts;
+    setValues({ number_of_questions }) {
+      this.$refs.number_of_questions.value = number_of_questions;
     }
   }
 }
