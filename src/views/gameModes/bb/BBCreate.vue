@@ -22,6 +22,7 @@
 </template>
 
 <script>
+import { useMeta } from 'vue-meta';
 import axios from 'axios';
 import NavBar from '@/components/NavBar.vue';
 import { gameModeDict } from '../gameModes';
@@ -34,6 +35,11 @@ import QuestionForm from '@/components/bb/QuestionForm.vue';
 
 export default {
   name: 'CSCCreate',
+  setup() {
+    useMeta({
+      title: 'Burning Bridges'
+    })
+  },
   data() {
     return {
       createInstructions: gameModeDict.bb.createInstructions,
