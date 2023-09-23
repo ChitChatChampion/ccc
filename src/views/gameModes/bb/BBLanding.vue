@@ -19,13 +19,19 @@
 </template>
 
 <script>
+import { useMeta } from 'vue-meta';
 import NavBar from '@/components/NavBar.vue';
 import { gameModeDict } from '../gameModes';
 import PINInput from '@/components/inputs/PINInput.vue';
 import OrangeButton from '@/components/buttons/OrangeButton.vue';
 
 export default {
-  name: 'CSCLanding',
+  name: 'BBLanding',
+  setup() {
+    useMeta({
+      title: 'Burning Bridges'
+    })
+  },
   data() {
     return {
       instructions: gameModeDict.bb.instructions,
