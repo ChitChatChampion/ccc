@@ -46,6 +46,7 @@
 </template>
 
 <script>
+import { useMeta } from 'vue-meta';
 import NavBarBackOnly from "@/components/NavBarBackOnly.vue"
 import useClipboard from "vue-clipboard3"
 import ProgressBar from '@/components/ProgressBar.vue';
@@ -57,6 +58,11 @@ import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
 export default {
   name: 'CSCRoom',
+  setup() {
+    useMeta({
+      title: 'Conversation Starter Cards'
+    })
+  },
   data() {
     return {
       cardIndex: 0,
