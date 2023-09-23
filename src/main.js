@@ -17,7 +17,7 @@ import { createVuetify } from 'vuetify';
 import * as components from 'vuetify/components';
 import * as directives from 'vuetify/directives';
 
-import VueMeta from 'vue-meta';
+import { createMetaManager } from 'vue-meta';
 
 import {
   faArrowLeft,
@@ -52,7 +52,8 @@ const vuetify = createVuetify({
 })
 
 app.use(vuetify);
-app.use(VueMeta, { keyName: 'head' });
 app.use(router);
+app.use(createMetaManager());
 
 app.mount('#app');
+console.log(app);
