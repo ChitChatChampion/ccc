@@ -26,11 +26,17 @@
 </template>
 
 <script>
+import { useMeta } from 'vue-meta';
 import { getUrl } from '@/services';
 import { gameModeDict } from '../gameModes';
 
 export default {
   name: 'BBRoom',
+  setup() {
+    useMeta({
+      title: 'Burning Bridges'
+    })
+  },
   data() {
     return {
       GAME_STATES: {
