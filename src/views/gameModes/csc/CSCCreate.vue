@@ -22,6 +22,7 @@
 </template>
 
 <script>
+import { useMeta } from 'vue-meta';
 import axios from 'axios';
 import NavBar from '@/components/NavBar.vue';
 import { gameModeDict } from '../gameModes';
@@ -34,6 +35,11 @@ import QuestionForm from '@/components/csc/QuestionForm.vue';
 
 export default {
   name: 'CSCCreate',
+  setup() {
+    useMeta({
+      title: 'Conversation Starter Cards'
+    })
+  },
   data() {
     return {
       createInstructions: gameModeDict.csc.createInstructions,
