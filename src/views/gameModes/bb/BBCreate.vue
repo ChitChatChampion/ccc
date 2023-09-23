@@ -34,7 +34,7 @@ import loginToGoogle from '@/components/loginToGoogle';
 import QuestionForm from '@/components/bb/QuestionForm.vue';
 
 export default {
-  name: 'CSCCreate',
+  name: 'BBCreate',
   setup() {
     useMeta({
       title: 'Burning Bridges'
