@@ -11,43 +11,9 @@ import "sweetalert2/dist/sweetalert2.min.css";
 import { createApp } from "vue";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-import {
-  faClipboard,
-  // faArrowLeft,
-  // faChevronLeft,
-  // faChevronRight,
-  // faSave,
-  // faTrash
-} from "@fortawesome/free-regular-svg-icons";
-// import {
-//   faArrowLeft,
-//   faChevronLeft,
-//   faChevronRight,
-//   faSave,
-//   faTrash
-// } from "@fortawesome/free-solid-svg-icons";
-// let faArrowLeft, faChevronLeft, faChevronRight, faSave, faTrash;
+import { faClipboard } from "@fortawesome/free-regular-svg-icons";
 
-async function importSolidIcons() {
-  const solidIcons = await import("@fortawesome/free-solid-svg-icons");
-  library.add(solidIcons.faArrowLeft);
-  library.add(solidIcons.faChevronLeft);
-  library.add(solidIcons.faChevronRight);
-  library.add(solidIcons.faSave);
-  library.add(solidIcons.faTrash);
-  library.add(faClipboard);
-}
-
-importSolidIcons();
-
-// importSolidIcons().then(() => {
-//   library.add(faArrowLeft);
-//   library.add(faChevronLeft);
-//   library.add(faChevronRight);
-//   library.add(faClipboard);
-//   library.add(faTrash);
-//   library.add(faSave);
-// });
+library.add(faClipboard);
 
 import { createVuetify } from 'vuetify';
 import * as components from 'vuetify/components';
@@ -62,13 +28,6 @@ app.use(vue3GoogleLogin, {
 
 app.use(VueSweetalert2);
 app.use(PrimeVue, { unstyled: true, pt: Tailwind });
-
-// library.add(faArrowLeft);
-// library.add(faChevronLeft);
-// library.add(faChevronRight);
-// library.add(faClipboard);
-// library.add(faTrash);
-// library.add(faSave);
 
 app.component('font-awesome-icon', FontAwesomeIcon);
 
