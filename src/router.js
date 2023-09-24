@@ -1,17 +1,14 @@
 import { createRouter, createWebHistory } from "vue-router";
-import LandingView from "./views/Landing.vue";
-import BrowseView from './views/Browse.vue';
-import NotFoundView from './views/NotFound';
 import { gameModeList } from "./views/gameModes/gameModes";
 
 const routes = [
   {
     path: '/',
-    component: LandingView
+    component: () => import("./views/Landing.vue")
   },
   {
     path: '/browse',
-    component: BrowseView
+    component: () => import('./views/Browse.vue')
   },
   ...gameModeList.map(gm => ({
     path: `/${gm.abbr}`,
@@ -27,7 +24,7 @@ const routes = [
   })),
   {
     path: '/:pathMatch(.*)*',
-    component: NotFoundView
+    component: () => import('./views/NotFound')
   }
 ];
 
