@@ -9,11 +9,6 @@ import "./index.css";
 import "sweetalert2/dist/sweetalert2.min.css";
 
 import { createApp } from "vue";
-import { library } from "@fortawesome/fontawesome-svg-core";
-import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-import { faClipboard } from "@fortawesome/free-regular-svg-icons";
-
-library.add(faClipboard);
 
 import { createVuetify } from 'vuetify';
 import * as components from 'vuetify/components';
@@ -28,8 +23,6 @@ app.use(vue3GoogleLogin, {
 
 app.use(VueSweetalert2);
 app.use(PrimeVue, { unstyled: true, pt: Tailwind });
-
-app.component('font-awesome-icon', FontAwesomeIcon);
 
 const vuetify = createVuetify({
   components,

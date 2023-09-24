@@ -1,10 +1,3 @@
-import CSCLanding from './csc/CSCLanding';
-import CSCCreate from './csc/CSCCreate';
-import CSCRoom from './csc/CSCRoom';
-import BBLanding from './bb/BBLanding';
-import BBCreate from './bb/BBCreate';
-import BBRoom from './bb/BBRoom';
-
 export const gameModeDict = {
   csc: {
     name: 'Conversation Starter Cards',
@@ -13,9 +6,9 @@ export const gameModeDict = {
     instructions: 'Take turns reading out and share your experiences about the prompt given on the card. Feel free to keep it lighthearted and fun, and encourage open and honest sharing!',
     createInstructions: "Based on how you answer these questions, we'll ask ChatGPT to craft an ice-breaker game for you! So feel free to be as detailed as possible! ",
     imgPath: 'csc.jpg',
-    landing: CSCLanding,
-    create: CSCCreate,
-    room: CSCRoom,
+    landing: () => import('./csc/CSCLanding'),
+    create: () => import('./csc/CSCCreate'),
+    room: () => import('./csc/CSCRoom'),
     bgColor: 'bg-jr'
   },
   bb: {
@@ -25,9 +18,9 @@ export const gameModeDict = {
     instructions: "Playing 'Burning Bridges' is a breeze! Just pick an AI-generated prompt, share your thoughts on it, and engage in open conversations. Remember, it's all in good fun, even if it tests your friendships!",
     createInstructions: "Based on how you answer these questions, we'll ask ChatGPT to craft an ice-breaker game for you! So feel free to be as detailed as possible!",
     imgPath: 'csc.jpg',
-    landing: BBLanding,
-    create: BBCreate,
-    room: BBRoom,
+    landing: () => import('./bb/BBLanding'),
+    create: () => import('./bb/BBCreate'),
+    room: () => import('./bb/BBRoom'),
     bgColor: 'bg-ns'
   }
 };
