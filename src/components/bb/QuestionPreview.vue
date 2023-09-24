@@ -47,9 +47,9 @@ export default {
   components: { DeleteButton },
   methods: {
     saveQuestion() {
-      const header = getHeader();
+      const headers = getHeader();
       const url = getUrl(`csc/questions/${this.id}`);
-      axios.put(url, { content: this.content }, { header })
+      axios.put(url, { content: this.content }, { headers })
         .then(response => {
           switch (response.status) {
             case 200:
@@ -68,9 +68,9 @@ export default {
         });
     },
     deleteQuestion() {
-      const header = getHeader();
+      const headers = getHeader();
       const url = getUrl(`csc/questions/${this.id}`);
-      axios.delete(url, {}, { header })
+      axios.delete(url, {}, { headers })
         .then(response => {
           switch (response.status) {
             case 200:

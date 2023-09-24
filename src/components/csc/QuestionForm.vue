@@ -29,9 +29,9 @@ export default {
       this.questions = questions;
     },
     addQuestion() {
-      const header = getHeader();
+      const headers = getHeader();
       const url = 'csc/questions/create';
-      axios.post(url, {}, header)
+      axios.post(url, {}, headers)
         .then(response => {
           switch (response.status) {
             case 201:
