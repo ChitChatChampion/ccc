@@ -62,7 +62,7 @@ export default {
   methods: {
     async populate({ url }) {
       const headers = getHeader();
-      axios.get(url, {}, { headers })
+      axios.get(url, { headers })
         .then(response => {
           switch (response.status) {
             case 200:
@@ -98,7 +98,7 @@ export default {
           }
         })
         .then(data => {
-          this.$refs.questions.setValues({ questions: data.questions });
+          this.$refs.questions.setValues(data.questions);
           console.log(this.questions);
         })
         .catch(err => {
