@@ -47,13 +47,13 @@ export default {
   components: { DeleteButton },
   methods: {
     saveQuestion() {
-      const header = getHeader();
+      const headers = getHeader();
       const url = getUrl(`csc/questions/${this.id}`);
-      axios.put(url, { content: this.content }, { header })
+      axios.put(url, { content: this.content }, { headers })
         .then(response => {
           switch (response.status) {
             case 200:
-              return response.json();
+              return response.data;
             default:
               throw new Error('Bad method!');
           }
@@ -68,13 +68,13 @@ export default {
         });
     },
     deleteQuestion() {
-      const header = getHeader();
+      const headers = getHeader();
       const url = getUrl(`csc/questions/${this.id}`);
-      axios.delete(url, { id: this.id }, { header })
+      axios.delete(url, { id: this.id }, { headers })
         .then(response => {
           switch (response.status) {
             case 200:
-              return response.json();
+              return response.data;
             default:
               throw new Error('Bad method!');
           }

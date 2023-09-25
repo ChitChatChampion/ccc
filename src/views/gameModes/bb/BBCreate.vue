@@ -61,12 +61,12 @@ export default {
   },
   methods: {
     async populate({ url }) {
-      const header = getHeader();
-      axios.get(url, {}, { header })
+      const headers = getHeader();
+      axios.get(url, {}, { headers })
         .then(response => {
           switch (response.status) {
             case 200:
-              return response.json();
+              return response.data;
             default:
               return;
           }
@@ -87,12 +87,12 @@ export default {
         bbContext: this.$refs.bb.getValues()
       };
       const url = getUrl('bb/questions/generate');
-      const header = getHeader();
-      axios.post(url, payload, { header })
+      const headers = getHeader();
+      axios.post(url, payload, { headers })
         .then(response => {
           switch (response.status) {
             case 201:
-              return response.json();
+              return response.data;
             default:
               throw new Error('Bad method!');
           }
@@ -108,12 +108,12 @@ export default {
     },
     async createRoom() {
       const url = getUrl('bb/create');
-      const header = getHeader();
-      axios.post(url, {}, { header })
+      const headers = getHeader();
+      axios.post(url, {}, { headers })
         .then(response => {
           switch (response.status) {
             case 201:
-              return response.json();
+              return response.data;
             default:
               throw new Error('Bad method!');
           }
