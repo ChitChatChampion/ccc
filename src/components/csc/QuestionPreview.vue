@@ -49,7 +49,7 @@ export default {
     saveQuestion() {
       const headers = getHeader();
       const url = getUrl(`csc/questions/${this.id}`);
-      axios.put(url, { content: this.content }, { headers })
+      axios.put(url, { content: this.value }, { headers })
         .then(response => {
           switch (response.status) {
             case 200:
@@ -60,7 +60,6 @@ export default {
         })
         .then(() => {
           this.$swal.fire('Success!', 'Question has been saved!', 'success');
-          this.hidden = true;
         })
         .catch(err => {
           console.log(err);
@@ -70,7 +69,7 @@ export default {
     deleteQuestion() {
       const headers = getHeader();
       const url = getUrl(`csc/questions/${this.id}`);
-      axios.delete(url, { id: this.id }, { headers })
+      axios.delete(url, { headers })
         .then(response => {
           switch (response.status) {
             case 200:

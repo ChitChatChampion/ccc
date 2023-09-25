@@ -23,8 +23,8 @@ export default {
         number_of_questions: this.$refs.number_of_questions.value,
       }
     },
-    setValues({ number_of_questions }) {
-      this.$refs.number_of_questions.value = number_of_questions;
+    setValues({ numberOfQuestions }) {
+      this.$refs.number_of_questions.value = numberOfQuestions;
     }
   }
 }
