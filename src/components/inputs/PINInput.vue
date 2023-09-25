@@ -52,7 +52,7 @@ export default {
         })
         .then(data => {
           if (!data) return;
-          const gameMode = data.type;
+          const gameMode = data.game_type;
           this.$router.push(`${gameMode}/${roomId}`);
         })
         .catch(() => {
