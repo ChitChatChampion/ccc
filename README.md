@@ -19,7 +19,7 @@ Contributions:
 * Design UI on Figma
 * Set up Tailwind CSS styling
 * Gameplay mechanics
-### AXXXXXXXX
+### A0164584W
 Name: [Kevin Chua Kian Chun](https://github.com/kevinchua6)<br/>
 Role: Backend Engineer<br/>
 Contributions:
