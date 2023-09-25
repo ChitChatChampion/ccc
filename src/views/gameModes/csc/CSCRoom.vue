@@ -83,7 +83,7 @@ export default {
       })
       .then(data => {
         if (!data) return;
-        this.cards = data.cards;
+        this.cards = data.questions;
       })
   },
   methods: {
