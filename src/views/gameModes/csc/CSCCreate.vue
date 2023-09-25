@@ -66,7 +66,7 @@ export default {
         .then(response => {
           switch (response.status) {
             case 200:
-              return response.json();
+              return response.data;
             default:
               return;
           }
@@ -92,13 +92,14 @@ export default {
         .then(response => {
           switch (response.status) {
             case 201:
-              return response.json();
+              return response.data;
             default:
               throw new Error('Bad method!');
           }
         })
         .then(data => {
           this.questions = data.questions;
+          console.log(this.questions);
         })
         .catch(err => {
           console.log(err);
@@ -107,13 +108,13 @@ export default {
         })
     },
     async createRoom() {
-      const url = getUrl('csc/create');
+      const url = getUrl('room/csc/create');
       const headers = getHeader();
       axios.post(url, {}, { headers })
         .then(response => {
           switch (response.status) {
             case 201:
-              return response.json();
+              return response.data;
             default:
               throw new Error('Bad method!');
           }

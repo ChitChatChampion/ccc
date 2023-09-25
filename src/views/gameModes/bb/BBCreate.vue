@@ -66,7 +66,7 @@ export default {
         .then(response => {
           switch (response.status) {
             case 200:
-              return response.json();
+              return response.data;
             default:
               return;
           }
@@ -92,7 +92,7 @@ export default {
         .then(response => {
           switch (response.status) {
             case 201:
-              return response.json();
+              return response.data;
             default:
               throw new Error('Bad method!');
           }
@@ -113,7 +113,7 @@ export default {
         .then(response => {
           switch (response.status) {
             case 201:
-              return response.json();
+              return response.data;
             default:
               throw new Error('Bad method!');
           }

@@ -35,7 +35,7 @@ export default {
         .then(response => {
           switch (response.status) {
             case 201:
-              return response.json();
+              return response.data;
             default:
               throw new Error('Bad method!');
           }
