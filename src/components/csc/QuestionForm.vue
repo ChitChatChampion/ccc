@@ -1,6 +1,6 @@
 <template>
-  <h1 v-if="questions.length" class="font-bold text-3xl text-jr">Questions</h1>
-  <ul v-if="questions.length" class="bg-light shadow-md rounded-lg px-8 pt-6 pb-8 mb-4 grid gap-5">
+  <h1 v-if="!!questions" class="font-bold text-3xl text-jr">Questions</h1>
+  <ul v-if="!!questions" class="bg-light shadow-md rounded-lg px-8 pt-6 pb-8 mb-4 grid gap-5">
     <QuestionPreview
       v-for="(question, index) in questions"
       :key="question.id"
@@ -15,7 +15,7 @@
 import axios from 'axios';
 import OrangeButton from '@/components/buttons/OrangeButton.vue';
 import QuestionPreview from './QuestionPreview.vue';
-import { getHeader } from '@/services';
+import { getHeader, getUrl } from '@/services';
 
 export default {
   name: 'QuestionForm',
@@ -25,17 +25,18 @@ export default {
     }
   },
   methods: {
-    setValues({ questions }) {
+    setValues(questions) {
       this.questions = questions;
     },
     addQuestion() {
-      const header = getHeader();
-      const url = 'csc/questions/create';
-      axios.post(url, {}, header)
+      const headers = getHeader();
+      const url = getUrl('csc/questions/create');
+      axios.post(url, {}, { headers })
         .then(response => {
+          console.log(response);
           switch (response.status) {
-            case 201:
-              return response.json();
+            case 200:
+              return response.data;
             default:
               throw new Error('Bad method!');
           }
