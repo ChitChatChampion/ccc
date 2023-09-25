@@ -1,4 +1,34 @@
-# chit-chat-champion
+# ChitChatChampion
+ChitChatChampion aims to facilitate engaging ice-breaker games and conversation starters for various social settings, with a focus on customisation and user interaction. Its objectives include fostering connections, breaking the ice, and making social gatherings more enjoyable through tailored ice-breaker activities. They are meant to be played in-person, with a phone or laptop as a companion to the activity.
+
+URL: [Fill up here]()
+
+## Group Members and Contribution
+
+### A0234693X
+Name: [Izz Hafeez Bin Zek Hazley](https://github.com/mynameizzhafeez)<br/>
+Role: Frontend Engineer<br/>
+Contributions:
+* Set up Vue project components
+* Set up Google authentication and client-side caching
+* Report
+### A0244120Y
+Name: [Jason Christopher](https://github.com/jasonchristopher21)<br/>
+Role: Frontend Designer<br/>
+Contributions:
+* Design UI on Figma
+* Set up Tailwind CSS styling
+* Gameplay mechanics
+### AXXXXXXXX
+Name: [Kevin Chua Kian Chun](https://github.com/kevinchua6)<br/>
+Role: Backend Engineer<br/>
+Contributions:
+* TODO
+### AXXXXXXXX
+Name: [Neo Jing Xuan](https://github.com/neojxuan)<br/>
+Role: Integration<br/>
+Contributions:
+* TODO
 
 ## Project setup
 ```
@@ -22,3 +52,21 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+## Resources Used
+
+### Frontend
+* JavaScript
+* Vue.js
+* Google OAuth
+* Tailwind CSS
+* Fontawesome
+* Primevue
+* Sweetalert
+* Axios
+
+### Backend
+* Python
+* Quart.py
+* Motor
+* MongoDB
