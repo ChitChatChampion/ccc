@@ -98,7 +98,7 @@ export default {
           }
         })
         .then(data => {
-          this.questions = data.questions;
+          this.$refs.questions.setValues({ questions: data.questions });
         })
         .catch(err => {
           console.log(err);
