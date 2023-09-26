@@ -30,8 +30,8 @@
 </template>
 
 <script>
-import axios from "axios";
-import io from "socket.io-client";
+// import axios from "axios";
+// import io from "socket.io-client";
 import { mapState } from "vuex";
 import GameQuestions from "./GameQuestions.vue";
 import GameQuestionOver from "./GameQuestionOver.vue";
@@ -51,8 +51,9 @@ export default {
       leaderBoard: [],
     };
   },
+  components: { GameQuestions, GameQuestionOver },
   methods: {
-    questionOver() {
+    endQuestion() {
       // Implementation for the questionOver method.
       // ...
     },
@@ -69,10 +70,12 @@ export default {
       // ...
     },
     addPlayer(name, id) {
+      console.log(name, id);
       // Implementation for the addPlayer method.
       // ...
     },
     submitAnswer(name, answer) {
+      console.log(name, answer);
       // Implementation for the submitAnswer method.
       // ...
     },
