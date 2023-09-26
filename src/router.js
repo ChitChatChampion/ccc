@@ -10,6 +10,10 @@ const routes = [
     path: '/browse',
     component: () => import('./views/Browse.vue')
   },
+  {
+    path: '/quiz/room',
+    component: () => import('./components/quiz/GameView.vue')
+  },
   ...gameModeList.map(gm => ({
     path: `/${gm.abbr}`,
     component: gm.landing
