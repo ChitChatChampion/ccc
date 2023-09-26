@@ -1,6 +1,6 @@
 <template>
-  <h1 v-if="questions.length" class="font-bold text-3xl text-jr">Questions</h1>
-  <ul v-if="questions.length" class="bg-light shadow-md rounded-lg px-8 pt-6 pb-8 mb-4 grid gap-5">
+  <h1 v-if="!!questions" class="font-bold text-3xl text-ns">Questions</h1>
+  <ul v-if="!!questions" class="bg-light shadow-md rounded-lg px-8 pt-6 pb-8 mb-4 grid gap-5">
     <QuestionPreview
       v-for="(question, index) in questions"
       :key="question.id"
@@ -25,7 +25,7 @@ export default {
     }
   },
   methods: {
-    setValues({ questions }) {
+    setValues(questions) {
       this.questions = questions;
     },
     addQuestion() {

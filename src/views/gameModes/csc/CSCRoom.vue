@@ -66,7 +66,7 @@ export default {
   },
   created() {
     const roomId = this.$route.params.id;
-    const url = getUrl(`csc/${roomId}`);
+    const url = getUrl(`room/${roomId}`);
     fetch(url)
       .then(response => {
         switch (response.status) {
@@ -83,7 +83,7 @@ export default {
       })
       .then(data => {
         if (!data) return;
-        this.cards = data.cards;
+        this.cards = data.questions;
       })
   },
   methods: {
