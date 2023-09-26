@@ -59,7 +59,7 @@ export default {
           }
         })
         .then(() => {
-          this.$swal.fire('Success!', 'Question has been saved!', 'success');
+          // this.$swal.fire('Success!', 'Question has been saved!', 'success');
         })
         .catch(err => {
           console.log(err);
@@ -79,7 +79,7 @@ export default {
           }
         })
         .then(() => {
-          this.$swal.fire('Success!', 'Question has been deleted!', 'success');
+          // this.$swal.fire('Success!', 'Question has been deleted!', 'success');
           this.hidden = true;
         })
         .catch(err => {
