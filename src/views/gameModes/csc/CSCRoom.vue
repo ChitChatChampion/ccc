@@ -59,7 +59,8 @@ export default {
   name: 'CSCRoom',
   setup() {
     useMeta({
-      title: 'Conversation Starter Cards'
+      title: 'Conversation Starter Cards',
+      description: 'Take turns reading out and share your experiences about the prompt given on the card. Feel free to keep it lighthearted and fun, and encourage open and honest sharing!'
     })
   },
   data() {
