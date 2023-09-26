@@ -126,7 +126,7 @@ export default {
           }
         })
         .then(data => {
-          this.$router.push(`csc/${data.id}`);
+          this.$router.push(`${data.id}`);
         })
         .catch(err => {
           console.log(err);

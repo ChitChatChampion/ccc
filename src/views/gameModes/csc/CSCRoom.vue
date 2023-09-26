@@ -25,7 +25,7 @@
       <slide key="$start$"></slide>
       <slide v-for="card in cards" :key="card">
         <div class="bg-light w-full text-left p-8 h-[22rem] rounded-3xl text-jr-dark text-[20px] font-medium">
-          {{ card.text }}
+          {{ card.content }}
         </div>
       </slide>
       <slide key="$end$"></slide>
@@ -77,7 +77,7 @@ export default {
       .then(response => {
         switch (response.status) {
           case 200:
-            return response.data
+            return response.json();
           default:
             this.$router.push('.');
             this.$swal.fire({

@@ -14,6 +14,7 @@
     "vue": "^3.3.4",
     "vue-clipboard3": "^2.0.0",
     "vue-meta": "^3.0.0-alpha.10",
+    "vue-flip": "^3.0.2",
     "vue-router": "^4.2.4",
     "vue-sweetalert2": "^5.0.5",
     "vue3-carousel": "^0.3.1",
