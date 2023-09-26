@@ -37,7 +37,8 @@ export default {
   name: 'BBCreate',
   setup() {
     useMeta({
-      title: 'Burning Bridges'
+      title: 'Burning Bridges',
+      description: 'Burning Bridges is an activity that stirs up lively conversations with AI prompts that might even challenge friendships. Dive in and see if your bonds can withstand the heat!'
     })
   },
   data() {
