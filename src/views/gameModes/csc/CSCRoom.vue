@@ -78,6 +78,7 @@ export default {
       .then(response => {
         switch (response.status) {
           case 200:
+          case 201:
             return response.json();
           default:
             this.$router.push('.');

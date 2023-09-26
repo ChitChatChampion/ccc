@@ -35,6 +35,7 @@ export default {
       axios.post(url, {}, headers)
         .then(response => {
           switch (response.status) {
+            case 200:
             case 201:
               return response.data;
             default:
