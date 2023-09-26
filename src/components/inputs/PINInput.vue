@@ -41,7 +41,7 @@ export default {
         .then(response => {
           switch (response.status) {
             case 200:
-              return response.data;
+              return response.json();
             default:
               this.$swal.fire({
                 icon: 'error',
