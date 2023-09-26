@@ -63,25 +63,25 @@ export default {
     }
   },
   mounted() {
-    this.populate({ url: getUrl('base-context/read'), ref: this.$refs.context });
-    this.populate({ url: getUrl('csc-context/read'), ref: this.$refs.csc });
-    this.populate({ url: getUrl('csc/questions/read'), ref: this.$refs.questions });
+    this.populate({ url: getUrl('csc/context') });
   },
   methods: {
-    async populate({ url, ref }) {
-      const header = getHeader();
-      axios.post(url, {}, { header })
+    async populate({ url }) {
+      const headers = getHeader();
+      axios.get(url, { headers })
         .then(response => {
           switch (response.status) {
             case 200:
-              return response.json();
+              return response.data;
             default:
               return;
           }
         })
         .then(data => {
           if (!data) return;
-          ref.setValues(data);
+          this.$refs.context.setValues(data.baseContext);
+          this.$refs.csc.setValues(data.cscContext);
+          this.$refs.questions.setValues(data.questions);
         })
         .catch(err => {
           console.log(err);
@@ -93,18 +93,19 @@ export default {
         cscContext: this.$refs.csc.getValues()
       };
       const url = getUrl('csc/questions/generate');
-      const header = getHeader();
-      axios.post(url, payload, { header })
+      const headers = getHeader();
+      axios.post(url, payload, { headers })
         .then(response => {
           switch (response.status) {
             case 201:
-              return response.json();
+              return response.data;
             default:
               throw new Error('Bad method!');
           }
         })
         .then(data => {
-          this.questions = data.questions;
+          this.$refs.questions.setValues(data.questions);
+          console.log(this.questions);
         })
         .catch(err => {
           console.log(err);
@@ -113,13 +114,13 @@ export default {
         })
     },
     async createRoom() {
-      const url = getUrl('csc/create');
-      const header = getHeader();
-      axios.post(url, {}, { header })
+      const url = getUrl('room/csc/create');
+      const headers = getHeader();
+      axios.post(url, {}, { headers })
         .then(response => {
           switch (response.status) {
             case 201:
-              return response.json();
+              return response.data;
             default:
               throw new Error('Bad method!');
           }

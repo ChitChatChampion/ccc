@@ -1,4 +1,34 @@
-# chit-chat-champion
+# ChitChatChampion
+ChitChatChampion aims to facilitate engaging ice-breaker games and conversation starters for various social settings, with a focus on customisation and user interaction. Its objectives include fostering connections, breaking the ice, and making social gatherings more enjoyable through tailored ice-breaker activities. They are meant to be played in-person, with a phone or laptop as a companion to the activity.
+
+URL: [Fill up here]()
+
+## Group Members and Contribution
+
+### A0234693X
+Name: [Izz Hafeez Bin Zek Hazley](https://github.com/mynameizzhafeez)<br/>
+Role: Frontend Engineer<br/>
+Contributions:
+* Set up Vue project components
+* Set up Google authentication and client-side caching
+* Report
+### A0244120Y
+Name: [Jason Christopher](https://github.com/jasonchristopher21)<br/>
+Role: Frontend Designer<br/>
+Contributions:
+* Design UI on Figma
+* Set up Tailwind CSS styling
+* Gameplay mechanics
+### A0164584W
+Name: [Kevin Chua Kian Chun](https://github.com/kevinchua6)<br/>
+Role: Backend Engineer<br/>
+Contributions:
+* TODO
+### AXXXXXXXX
+Name: [Neo Jing Xuan](https://github.com/neojxuan)<br/>
+Role: Integration<br/>
+Contributions:
+* TODO
 
 ## Project setup
 ```
@@ -23,214 +53,20 @@ npm run lint
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
-## TRADE DEAL
-```
-GET /csc/context
-You receive:
-{}
-I receive:
-200: {
-  baseContext: {
-      "purpose": "first date",
-      "relationship": "acquaintances",
-      "description": "20-year-old singaporean university computing students who have no social life"
-  },
-  cscContext: {
-      "numberOfCards": 10
-  },
-  questions: [{"id": 123, "What is your favorite food?"}, {"id:234, "What is your favorite icecream?"}]
-}
-400: { "error": "Haiya" }
-401: { "error": "Haiya" }
+## Resources Used
 
-GET /bb/context
-You receive:
-{}
-I receive:
-200: {
-  baseContext: {
-      "purpose": "first date",
-      "relationship": "acquaintances",
-      "description": "20-year-old singaporean university computing students who have no social life"
-  },
-  bbContext: {
-      "numberOfCards": 10
-  },
-  questions: [{"id": 123, "content": "Who is more likely to burn down the computing building?"}, {"id": 123, "content": "Who is the most likely to use Haskel?"}]
-}
-400: { "error": "Haiya" }
-401: { "error": "Haiya" }
+### Frontend
+* JavaScript
+* Vue.js
+* Google OAuth
+* Tailwind CSS
+* Fontawesome
+* Primevue
+* Sweetalert
+* Axios
 
-POST /csc/questions/create
-You receive:
-{}
-I receive:
-201: {
-      "id": 11357890,
-}
-400: { "error": "Haiya" }
-401: { "error": "Haiya" }
-
-PUT /csc/questions/:id
-You receive:
-{
-  content: "Who is more likely to burn down the computing building?"
-}
-I receive:
-201: {
-      "id": 11357890,
-}
-400: { "error": "Haiya" }
-401: { "error": "Haiya" }
-
-GET /csc/questions
-You receive:
-{
-}
-I receive:
-201:
-{
-questions: [
-{
-      "id": 11357891,
-      "text": "Who is more likely to burn down the computing building?"
-},
-{
-      "id": 11357890,
-      "text": "Who is more likely to burn down the computing building?"
-}
-]
-}
-400: { "error": "Haiya" }
-401: { "error": "Haiya" }
-
-DELETE /csc/questions/:id
-You receive:
-{
-}
-I receive:
-201: {
-      "id": 11357890,
-}
-400: { "error": "Haiya" }
-401: { "error": "Haiya" }
-
-POST /room/csc/create
-You receive:
-{}
-I receive:
-201: {
-  "id": "ABGED"
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-GET /bb/context
-You receive:
-{}
-I receive:
-200: {
-  baseContext: {
-      "purpose": "first date",
-      "relationship": "acquaintances",
-      "description": "20-year-old singaporean university computing students who have no social life"
-  },
-  bbContext: {
-      "numberOfCards": 10
-  },
-  questions: [{"id": 123, "What is your favorite food?"}, {"id:234, "What is your favorite icecream?"}]
-}
-400: { "error": "Haiya" }
-401: { "error": "Haiya" }
-
-GET /bb/context
-You receive:
-{}
-I receive:
-200: {
-  baseContext: {
-      "purpose": "first date",
-      "relationship": "acquaintances",
-      "description": "20-year-old singaporean university computing students who have no social life"
-  },
-  bbContext: {
-      "numberOfCards": 10
-  },
-  questions: [{"id": 123, "content": "Who is more likely to burn down the computing building?"}, {"id": 123, "content": "Who is the most likely to use Haskel?"}]
-}
-400: { "error": "Haiya" }
-401: { "error": "Haiya" }
-
-POST /bb/questions/create
-You receive:
-{}
-I receive:
-201: {
-      "id": 11357890,
-}
-400: { "error": "Haiya" }
-401: { "error": "Haiya" }
-
-PUT /bb/questions/:id
-You receive:
-{
-  content: "Who is more likely to burn down the computing building?"
-}
-I receive:
-201: {
-      "id": 11357890,
-}
-400: { "error": "Haiya" }
-401: { "error": "Haiya" }
-
-GET /bb/questions
-You receive:
-{
-}
-I receive:
-201:
-{
-questions: [
-{
-      "id": 11357891,
-      "text": "Who is more likely to burn down the computing building?"
-},
-{
-      "id": 11357890,
-      "text": "Who is more likely to burn down the computing building?"
-}
-]
-}
-400: { "error": "Haiya" }
-401: { "error": "Haiya" }
-
-DELETE /bb/questions/:id
-You receive:
-{
-}
-I receive:
-201: {
-      "id": 11357890,
-}
-400: { "error": "Haiya" }
-401: { "error": "Haiya" }
-
-POST /room/bb/create
-You receive:
-{}
-I receive:
-201: {
-  "id": "ABGED"
-}
-```
+### Backend
+* Python
+* Quart.py
+* Motor
+* MongoDB

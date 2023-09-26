@@ -41,7 +41,7 @@ export default {
         .then(response => {
           switch (response.status) {
             case 200:
-              return response.json();
+              return response.data;
             default:
               this.$swal.fire({
                 icon: 'error',
@@ -52,7 +52,7 @@ export default {
         })
         .then(data => {
           if (!data) return;
-          const gameMode = data.type;
+          const gameMode = data.game_type;
           this.$router.push(`${gameMode}/${roomId}`);
         })
         .catch(() => {
