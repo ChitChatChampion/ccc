@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import Timer from "./Timer.vue"; // Make sure to replace with the correct path
+import Timer from "./TimerComponent.vue"; // Make sure to replace with the correct path
 
 export default {
   props: {
