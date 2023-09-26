@@ -1,6 +1,6 @@
 <template>
   <div class="game-over">
-    <Zoom />
+    <!-- <Zoom /> -->
     <h1 class="leaderBoard-title">Game Over</h1>
     <br />
     <h2 class="leaderBoard">1st Place: {{ leaderboard[0].name }}</h2>
@@ -14,15 +14,15 @@
 </template>
 
 <script>
-import Zoom from "@/components/animations/ZoomIn.vue"; // Make sure to replace with the correct path
+// import Zoom from "@/components/animations/ZoomIn.vue"; // Make sure to replace with the correct path
 
 export default {
   props: {
     leaderboard: Array,
   },
-  components: {
-    Zoom,
-  },
+  // components: {
+  //   Zoom,
+  // },
 };
 </script>
 
