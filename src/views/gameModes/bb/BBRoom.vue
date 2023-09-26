@@ -107,7 +107,8 @@ export default {
   name: 'BBRoom',
   setup() {
     useMeta({
-      title: 'Burning Bridges'
+      title: 'Burning Bridges',
+      description: "A single phone is passed around among players for their turns. They can press and hold a button to reveal the card's description secretly, then point to the person who fits the description and play scissors-paper-stone. If they lose, they must reveal the description to everyone. Afterward, they press the 'next person' button and pass the phone to the next player, continuing the game."
     })
   },
   data() {
