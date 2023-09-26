@@ -81,7 +81,7 @@ export default {
         .then(data => {
           if (!data) return;
           this.$refs.context.setValues(data.baseContext);
-          this.$refs.csc.setValues(data.bbContext);
+          this.$refs.bb.setValues(data.bbContext);
           this.$refs.questions.setValues(data.questions);
         })
         .catch(err => {
@@ -114,7 +114,7 @@ export default {
         })
     },
     async createRoom() {
-      const url = getUrl('bb/create');
+      const url = getUrl('room/bb/create');
       const headers = getHeader();
       axios.post(url, {}, { headers })
         .then(response => {
@@ -126,7 +126,7 @@ export default {
           }
         })
         .then(data => {
-          this.$router.push(`bb/${data.id}`);
+          this.$router.push(`${data.id}`);
         })
         .catch(err => {
           console.log(err);
