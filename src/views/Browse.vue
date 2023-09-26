@@ -5,7 +5,7 @@
     <NavBar backLink="/" text="Chit Chat Champion"/>
     <section id='browse-game-modes' class="px-10 py-10 rounded-t-3xl bg-lrt-background h-5/6">
       <h1 class="font-bold text-3xl text-dt pb-10">Game Modes</h1>
-      <ul id="game-modes" class="grid 2xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5">
+      <ul id="game-modes" class="grid 2xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5 items-stretch">
         <li v-for="gameMode in gameModes" :key="gameMode.key">
           <GameModePreview v-bind="gameMode"/>
         </li>

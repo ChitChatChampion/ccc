@@ -47,7 +47,7 @@ export default {
   methods: {
     saveQuestion() {
       const headers = getHeader();
-      const url = getUrl(`csc/questions/${this.id}`);
+      const url = getUrl(`bb/questions/${this.id}`);
       axios.put(url, { content: this.value }, { headers })
         .then(response => {
           switch (response.status) {
@@ -68,7 +68,7 @@ export default {
     },
     deleteQuestion() {
       const headers = getHeader();
-      const url = getUrl(`csc/questions/${this.id}`);
+      const url = getUrl(`bb/questions/${this.id}`);
       axios.delete(url, { headers })
         .then(response => {
           switch (response.status) {
