@@ -73,6 +73,7 @@ export default {
         .then(response => {
           switch (response.status) {
             case 200:
+            case 201:
               return response.data;
             default:
               return;
@@ -98,6 +99,7 @@ export default {
       axios.post(url, payload, { headers })
         .then(response => {
           switch (response.status) {
+            case 200:
             case 201:
               return response.data;
             default:
@@ -119,6 +121,7 @@ export default {
       axios.post(url, {}, { headers })
         .then(response => {
           switch (response.status) {
+            case 200:
             case 201:
               return response.data;
             default:
