@@ -32,7 +32,7 @@ export default {
       const headers = getHeader();
       // const url = 'csc/questions/create';
       const url = getUrl('bb/questions/create');
-      axios.post(url, {}, headers)
+      axios.post(url, {}, { headers })
         .then(response => {
           switch (response.status) {
             case 200:

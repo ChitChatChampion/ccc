@@ -54,7 +54,7 @@
             <template v-slot:back>
               <div class="bg-light w-full text-left p-8 h-[22rem] rounded-3xl text-ns-dark text-[20px] font-medium drop-shadow-xl"
                 @click="flipCard">
-                <span>{{ cards[cardIndex].text }}</span>
+                <span>{{ cards[cardIndex].content }}</span>
               </div>
             </template>
           </VueFlip>
@@ -135,13 +135,13 @@ export default {
   },
   created() {
     const roomId = this.$route.params.id;
-    const url = getUrl(`bb/${roomId}`);
+    const url = getUrl(`room/${roomId}`);
     fetch(url)
       .then(response => {
         switch (response.status) {
           case 200:
           case 201:
-            return response.data
+            return response.json();
           default:
             this.$router.push('.');
             this.$swal.fire({
@@ -153,7 +153,8 @@ export default {
       })
       .then(data => {
         if (!data) return;
-        this.cards = data.cards;
+        console.log(data);
+        this.cards = data.questions;
       })
   },
   methods: {
