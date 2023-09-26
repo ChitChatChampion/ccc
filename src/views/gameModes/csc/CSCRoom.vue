@@ -46,6 +46,7 @@
 </template>
 
 <script>
+import { useMeta } from 'vue-meta';
 import NavBarBackOnly from "@/components/NavBarBackOnly.vue"
 import useClipboard from "vue-clipboard3"
 import ProgressBar from '@/components/ProgressBar.vue';
@@ -56,6 +57,12 @@ import { gameModeDict } from '../gameModes';
 
 export default {
   name: 'CSCRoom',
+  setup() {
+    useMeta({
+      title: 'Conversation Starter Cards',
+      description: 'Take turns reading out and share your experiences about the prompt given on the card. Feel free to keep it lighthearted and fun, and encourage open and honest sharing!'
+    })
+  },
   data() {
     return {
       cardIndex: 0,

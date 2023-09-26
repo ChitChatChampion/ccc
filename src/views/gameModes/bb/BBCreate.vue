@@ -22,6 +22,7 @@
 </template>
 
 <script>
+import { useMeta } from 'vue-meta';
 import axios from 'axios';
 import NavBar from '@/components/NavBar.vue';
 import { gameModeDict } from '../gameModes';
@@ -34,6 +35,12 @@ import QuestionForm from '@/components/bb/QuestionForm.vue';
 
 export default {
   name: 'BBCreate',
+  setup() {
+    useMeta({
+      title: 'Burning Bridges',
+      description: 'Burning Bridges is an activity that stirs up lively conversations with AI prompts that might even challenge friendships. Dive in and see if your bonds can withstand the heat!'
+    })
+  },
   data() {
     return {
       createInstructions: gameModeDict.bb.createInstructions,
