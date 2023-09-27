@@ -19,16 +19,16 @@ export const gameModeDict = {
     room: () => import('./bb/BBRoom'),
     bgColor: 'bg-ns'
   },
-  // bingo: {
-  //   name: "Social Bingo",
-  //   description: "Social Bingo puts your social skills to the test! Our app provides intriguing descriptions of fellow players, and it's your challenge to identify them. Just give us some fun facts about yourself, and the AI will create fun and exciting descriptions!",
-  //   shortDescription: "Guess who matches the descriptions!",
-  //   imgPath: 'csc.jpg',
-  //   landing: () => import('./bingo/BingoLanding'),
-  //   room: () => import('./bingo/BingoCreate'),
-  //   create: () => import('./bingo/BingoRoom'),
-  //   bgColor: 'bg-ne'
-  // }
+  bingo: {
+    name: "Social Bingo",
+    description: "Social Bingo puts your social skills to the test! Our app provides intriguing descriptions of fellow players, and it's your challenge to identify them. Just give us some fun facts about yourself, and the AI will create fun and exciting descriptions!",
+    shortDescription: "Guess who matches the descriptions!",
+    imgPath: 'csc.jpg',
+    landing: () => import('./bingo/BingoLanding'),
+    create: () => import('./bingo/BingoCreate'),
+    room: () => import('./bingo/BingoRoom'),
+    bgColor: 'bg-ne'
+  }
 };
 
 export const gameModeList = Object.entries(gameModeDict).map(([k, v]) => ({...v, abbr: k}));
