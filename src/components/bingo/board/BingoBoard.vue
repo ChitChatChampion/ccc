@@ -1,0 +1,65 @@
+<template>
+  BingoBoard
+  <BingoSquare
+    v-for="(square, index) in squares"
+    :name="square.name"
+    :title="square.title"
+    :description="square.description"
+    :allNames="names"
+    :index="index"
+    :ref="square.name"
+    :key="square.name"/>
+</template>
+
+<script>
+import { getUrl } from "@/services";
+import BingoSquare from "./BingoSquare.vue";
+
+export default {
+  name: "BingoBoard",
+  mounted() {
+    const roomId = this.$route.params.id;
+    const url = getUrl(`/bingo/${roomId}/squares`);
+    fetch(url)
+      .then(response => {
+      switch (response.status) {
+        case 200:
+        case 201:
+          return response.data;
+        default:
+          throw new Error("Bad method!");
+      }
+    })
+      .then(data => {
+      this.squares = data.squares;
+      this.totalScore = data.squares.length;
+      this.names = data.squares.map(square => square.name);
+    })
+      .catch(err => {
+      this.$swal.fire('Oops...', 'Something went wrong went retrieving your Bingo!', 'error');
+      console.log(err);
+    });
+  },
+  data() {
+    return {
+      squares: [],
+      totalScore: 0,
+      names: []
+    };
+  },
+  components: { BingoSquare },
+  methods: {
+    evaluate() {
+      let score = 0;
+      for (let square in this.squares) {
+        const name = square.name;
+        score += this.$refs[name].evaluate();
+      }
+      return score;
+    },
+    getTotal() {
+      return this.totalScore;
+    }
+  }
+}
+</script>
