@@ -5,7 +5,10 @@
     v-model="value"
     class="shadow appearance-none border rounded-xl w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
     :class="{ 'text-center': isCenter }"
-    :placeholder="placeholder"/>
+    :placeholder="placeholder"
+    @input="validateInput"
+    />
+  <p v-if="inputError" class="text-ns">{{ inputError }}</p>
 </template>
 
 <script>
@@ -13,7 +16,8 @@ export default {
   name: 'TextInput',
   data() {
     return {
-      value: ''
+      value: '',
+      inputError: "",
     }
   },
   props: {
@@ -34,7 +38,21 @@ export default {
     isCenter: {
       type: Boolean,
       default: false
-    }
+    },
+    min: Number,
+    max: Number,
+  },
+  methods: {
+    validateInput() {
+      const inputLength = this.value.length;
+      if (inputLength < this.min) {
+        this.inputError = `Minimum ${this.min} characters required`;
+      } else if (inputLength > this.max) {
+        this.inputError = `Maximum ${this.max} characters allowed`;
+      } else {
+        this.inputError = "";
+      }
+    },
   }
 }
 </script>
