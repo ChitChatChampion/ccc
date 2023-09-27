@@ -3,12 +3,19 @@
     name="purpose"
     ref="purpose"
     label="What's the purpose of the ice-breaker?"
-    placeholder="e.g. Freshman orientation, First date etc."/>
+    placeholder="e.g. Freshman orientation, First date etc."
+    :min=3
+    :max=20
+  />
+    
   <TextInput
     name="description"
     ref="description"
     label="Briefly describe the group of participants."
-    placeholder="e.g. University computing students from Singapore."/>
+    placeholder="e.g. University computing students from Singapore."
+    :min=3
+    :max=20
+  />
   <SelectInput
     name="relationship"
     ref="relationship"
@@ -41,7 +48,7 @@ export default {
       this.$refs.purpose.value = purpose;
       this.$refs.description.value = description;
       this.$refs.relationship.value = relationship;
-    }
+    },
   }
 }
 </script>
