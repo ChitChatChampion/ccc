@@ -1,6 +1,6 @@
 <template>
-  <form class="rounded-3xl gap-5 z-10 grid" :class="{ 'bg-light': withBackground, 'p-5': withBackground, 'max-w-sm': limitWidth }">
-    <TextInput name="roomId" ref="roomId" placeholder="Game ID"/>
+  <form class="rounded-3xl gap-5 z-10 grid mx-auto" :class="{ 'bg-light': withBackground, 'p-5': withBackground }">
+    <TextInput name="roomId" ref="roomId" placeholder="Game ID" :isCenter="true" :isBig="true"/>
     <OrangeButton :onClick="submitPIN" text="Join Game"/>
   </form>
 </template>
