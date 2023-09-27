@@ -4,6 +4,7 @@
     :name="name"
     v-model="value"
     class="shadow appearance-none border rounded-xl w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+    :class="{ 'text-center': isCenter }"
     :placeholder="placeholder"/>
 </template>
 
@@ -25,6 +26,14 @@ export default {
     name: {
       type: String,
       required: true
+    },
+    isBig: {
+      type: Boolean,
+      default: false
+    },
+    isCenter: {
+      type: Boolean,
+      default: false
     }
   }
 }
