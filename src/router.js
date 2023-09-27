@@ -4,11 +4,15 @@ import { gameModeList } from "./views/gameModes/gameModes";
 const routes = [
   {
     path: '/',
-    component: () => import("./views/Landing.vue")
+    component: () => import("./views/LandingPage.vue")
   },
   {
     path: '/browse',
     component: () => import('./views/Browse.vue')
+  },
+  {
+    path: '/play',
+    component: () => import('./views/GameLanding.vue')
   },
   ...gameModeList.map(gm => ({
     path: `/${gm.abbr}`,
