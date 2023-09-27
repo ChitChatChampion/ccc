@@ -15,7 +15,7 @@ export const gameModeDict = {
     name: 'Burning Bridges',
     description: "Burning Bridges is an activity that stirs up lively conversations with AI prompts that might even challenge friendships. Dive in and see if your bonds can withstand the heat!",
     shortDescription: 'Test your friendships with AI!',
-    instructions: "Playing 'Burning Bridges' is a breeze! Just pick an AI-generated prompt, share your thoughts on it, and engage in open conversations. Remember, it's all in good fun, even if it tests your friendships!",
+    instructions: "A single phone is passed around among players for their turns. They can press and hold a button to reveal the card's description secretly, then point to the person who fits the description and play scissors-paper-stone. If they lose, they must reveal the description to everyone. Afterward, they press the 'next person' button and pass the phone to the next player, continuing the game.",
     createInstructions: "Based on how you answer these questions, we'll ask ChatGPT to craft an ice-breaker game for you! So feel free to be as detailed as possible!",
     imgPath: 'csc.jpg',
     landing: () => import('./bb/BBLanding'),

@@ -22,6 +22,7 @@
 </template>
 
 <script>
+import { useMeta } from 'vue-meta';
 import axios from 'axios';
 import NavBar from '@/components/NavBar.vue';
 import { gameModeDict } from '../gameModes';
@@ -34,6 +35,12 @@ import QuestionForm from '@/components/bb/QuestionForm.vue';
 
 export default {
   name: 'BBCreate',
+  setup() {
+    useMeta({
+      title: 'Burning Bridges',
+      description: 'Burning Bridges is an activity that stirs up lively conversations with AI prompts that might even challenge friendships. Dive in and see if your bonds can withstand the heat!'
+    })
+  },
   data() {
     return {
       createInstructions: gameModeDict.bb.createInstructions,
@@ -66,6 +73,7 @@ export default {
         .then(response => {
           switch (response.status) {
             case 200:
+            case 201:
               return response.data;
             default:
               return;
@@ -74,7 +82,7 @@ export default {
         .then(data => {
           if (!data) return;
           this.$refs.context.setValues(data.baseContext);
-          this.$refs.csc.setValues(data.bbContext);
+          this.$refs.bb.setValues(data.bbContext);
           this.$refs.questions.setValues(data.questions);
         })
         .catch(err => {
@@ -91,6 +99,7 @@ export default {
       axios.post(url, payload, { headers })
         .then(response => {
           switch (response.status) {
+            case 200:
             case 201:
               return response.data;
             default:
@@ -107,11 +116,12 @@ export default {
         })
     },
     async createRoom() {
-      const url = getUrl('bb/create');
+      const url = getUrl('room/bb/create');
       const headers = getHeader();
       axios.post(url, {}, { headers })
         .then(response => {
           switch (response.status) {
+            case 200:
             case 201:
               return response.data;
             default:
@@ -119,7 +129,7 @@ export default {
           }
         })
         .then(data => {
-          this.$router.push(`bb/${data.id}`);
+          this.$router.push(`${data.id}`);
         })
         .catch(err => {
           console.log(err);

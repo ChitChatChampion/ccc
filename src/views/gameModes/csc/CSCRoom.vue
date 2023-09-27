@@ -25,7 +25,7 @@
       <slide key="$start$"></slide>
       <slide v-for="card in cards" :key="card">
         <div class="bg-light w-full text-left p-8 h-[22rem] rounded-3xl text-jr-dark text-[20px] font-medium">
-          {{ card.text }}
+          {{ card.content }}
         </div>
       </slide>
       <slide key="$end$"></slide>
@@ -46,6 +46,7 @@
 </template>
 
 <script>
+import { useMeta } from 'vue-meta';
 import NavBarBackOnly from "@/components/NavBarBackOnly.vue"
 import useClipboard from "vue-clipboard3"
 import ProgressBar from '@/components/ProgressBar.vue';
@@ -56,6 +57,12 @@ import { gameModeDict } from '../gameModes';
 
 export default {
   name: 'CSCRoom',
+  setup() {
+    useMeta({
+      title: 'Conversation Starter Cards',
+      description: 'Take turns reading out and share your experiences about the prompt given on the card. Feel free to keep it lighthearted and fun, and encourage open and honest sharing!'
+    })
+  },
   data() {
     return {
       cardIndex: 0,
@@ -66,12 +73,13 @@ export default {
   },
   created() {
     const roomId = this.$route.params.id;
-    const url = getUrl(`csc/${roomId}`);
+    const url = getUrl(`room/${roomId}`);
     fetch(url)
       .then(response => {
         switch (response.status) {
           case 200:
-            return response.data
+          case 201:
+            return response.json();
           default:
             this.$router.push('.');
             this.$swal.fire({
@@ -83,7 +91,7 @@ export default {
       })
       .then(data => {
         if (!data) return;
-        this.cards = data.cards;
+        this.cards = data.questions;
       })
   },
   methods: {

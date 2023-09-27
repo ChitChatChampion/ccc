@@ -19,6 +19,7 @@
 </template>
 
 <script>
+import { useMeta } from 'vue-meta';
 import NavBar from '@/components/NavBar.vue';
 import { gameModeDict } from '../gameModes';
 import PINInput from '@/components/inputs/PINInput.vue';
@@ -26,6 +27,12 @@ import OrangeButton from '@/components/buttons/OrangeButton.vue';
 
 export default {
   name: 'BBLanding',
+  setup() {
+    useMeta({
+      title: 'Burning Bridges',
+      description: 'Burning Bridges is an activity that stirs up lively conversations with AI prompts that might even challenge friendships. Dive in and see if your bonds can withstand the heat!'
+    })
+  },
   data() {
     return {
       instructions: gameModeDict.bb.instructions,

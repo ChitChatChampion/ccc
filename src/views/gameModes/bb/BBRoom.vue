@@ -54,7 +54,7 @@
             <template v-slot:back>
               <div class="bg-light w-full text-left p-8 h-[22rem] rounded-3xl text-ns-dark text-[20px] font-medium drop-shadow-xl"
                 @click="flipCard">
-                <span>{{ cards[cardIndex].text }}</span>
+                <span>{{ cards[cardIndex].content }}</span>
               </div>
             </template>
           </VueFlip>
@@ -94,6 +94,7 @@
 </template>
 
 <script>
+import { useMeta } from 'vue-meta';
 import { getUrl } from '@/services';
 import { gameModeDict } from '../gameModes';
 import useClipboard from "vue-clipboard3"
@@ -104,6 +105,12 @@ import { VueFlip } from 'vue-flip';
 
 export default {
   name: 'BBRoom',
+  setup() {
+    useMeta({
+      title: 'Burning Bridges',
+      description: "A single phone is passed around among players for their turns. They can press and hold a button to reveal the card's description secretly, then point to the person who fits the description and play scissors-paper-stone. If they lose, they must reveal the description to everyone. Afterward, they press the 'next person' button and pass the phone to the next player, continuing the game."
+    })
+  },
   data() {
     return {
       GAME_STATES: {
@@ -128,12 +135,13 @@ export default {
   },
   created() {
     const roomId = this.$route.params.id;
-    const url = getUrl(`bb/${roomId}`);
+    const url = getUrl(`room/${roomId}`);
     fetch(url)
       .then(response => {
         switch (response.status) {
           case 200:
-            return response.data
+          case 201:
+            return response.json();
           default:
             this.$router.push('.');
             this.$swal.fire({
@@ -145,7 +153,8 @@ export default {
       })
       .then(data => {
         if (!data) return;
-        this.cards = data.cards;
+        console.log(data);
+        this.cards = data.questions;
       })
   },
   methods: {

@@ -15,6 +15,7 @@ import { createVuetify } from 'vuetify';
 import * as components from 'vuetify/components';
 import * as directives from 'vuetify/directives';
 
+import { createMetaManager } from 'vue-meta';
 const app = createApp(App);
 const clientId = "785838083864-vljpaavprlvsq83slqjtf46oop9qtcfd.apps.googleusercontent.com";
 
@@ -32,9 +33,11 @@ const vuetify = createVuetify({
 
 app.use(vuetify);
 app.use(router);
+app.use(createMetaManager());
 
 app.use(VueGtag, {
   config: { id: "G-5BP4VWC912" },
 });
 
 app.mount('#app');
+console.log(app);

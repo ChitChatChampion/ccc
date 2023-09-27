@@ -15,7 +15,7 @@
 import axios from 'axios';
 import OrangeButton from '@/components/buttons/OrangeButton.vue';
 import QuestionPreview from './QuestionPreview.vue';
-import { getHeader } from '@/services';
+import { getHeader, getUrl } from '@/services';
 
 export default {
   name: 'QuestionForm',
@@ -30,10 +30,12 @@ export default {
     },
     addQuestion() {
       const headers = getHeader();
-      const url = 'csc/questions/create';
-      axios.post(url, {}, headers)
+      // const url = 'csc/questions/create';
+      const url = getUrl('bb/questions/create');
+      axios.post(url, {}, { headers })
         .then(response => {
           switch (response.status) {
+            case 200:
             case 201:
               return response.data;
             default:
