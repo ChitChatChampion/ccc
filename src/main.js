@@ -4,6 +4,7 @@ import router from "./router";
 import Tailwind from "primevue/passthrough/tailwind";
 import vue3GoogleLogin from "vue3-google-login";
 import VueSweetalert2 from "vue-sweetalert2";
+import VueGtag from "vue-gtag";
 
 import "./index.css";
 import "sweetalert2/dist/sweetalert2.min.css";
@@ -31,5 +32,9 @@ const vuetify = createVuetify({
 
 app.use(vuetify);
 app.use(router);
+
+app.use(VueGtag, {
+  config: { id: "G-5BP4VWC912" },
+});
 
 app.mount('#app');
