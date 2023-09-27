@@ -68,7 +68,7 @@ export default {
       }
 
       const payload = {};
-      for (field in this.fields) {
+      for (field of this.fields) {
         payload[field] = this.$refs[field].value;
       }
       payload.name = this.$refs.name.value;
