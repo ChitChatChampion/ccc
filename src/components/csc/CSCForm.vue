@@ -6,8 +6,8 @@
     placeholder="10"
     :min="1"
     :max="20"
-    :minMsg="val => `Haiya must have at least ${val} question${val > 1 ? 's' : ''}.`"
-    :maxMsg="val => `Haiya maximum ${val} question${val > 1 ? 's' : ''}.`"
+    :minMsg="val => `You must have at least ${val} question${val > 1 ? 's' : ''}.`"
+    :maxMsg="val => `You are only allowed to generate a maximum of ${val} question${val > 1 ? 's' : ''}.`"
     />
 </template>
 

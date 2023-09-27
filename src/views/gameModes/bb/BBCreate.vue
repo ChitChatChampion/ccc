@@ -98,7 +98,7 @@ export default {
             case 201:
               return response.data;
             default:
-              throw new Error('Bad method!');
+              throw new Error(response?.message ?? 'Bad method!');
           }
         })
         .then(data => {
@@ -106,7 +106,7 @@ export default {
         })
         .catch(err => {
           console.log(err);
-          this.$swal.fire('Oops...', 'Generate questions failed!', 'error');
+          this.$swal.fire('Oops...', `Generate questions failed! ${err}`, 'error');
           // this.$refs.questions.setValues({ questions: [{ id: 12345, content: "Who are you" }, { id: 12345, content: "Who are you" }] })
         })
     },
