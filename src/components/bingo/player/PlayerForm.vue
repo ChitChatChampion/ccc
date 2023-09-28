@@ -1,13 +1,16 @@
 <template>
   <TextInput
+    name="name"
     label="Name"
     ref="name"/>
   <TextInput
     v-for="field in fields"
+    :name="field"
     :label="field"
     :key="field"
     :ref="field"/>
   <TextInput
+    name="other_information"
     label="Other Information"
     ref="other_information"/>
   <OrangeButton :onClick="submitForm" text="Submit Form"/>
@@ -30,7 +33,7 @@ export default {
         switch (response.status) {
           case 200:
           case 201:
-            return response.data;
+            return response.json();
           default:
             throw new Error("Bad method!");
         }
@@ -50,7 +53,6 @@ export default {
   },
   methods: {
     submitForm() {
-      let isDone = false;
       this.$swal.fire({
         title: "Are you done filling up the form?",
         text: "You won't be able to edit the form again.",
@@ -60,15 +62,14 @@ export default {
         cancelButtonColor: '#D42E12',
         confirmButtonText: "Yes, I'm sure!"
       }).then(result => {
-        isDone = result.isConfirmed;
+        if (result.isConfirmed) {
+          this.sendPayload();
+        }
       });
-
-      if (!isDone) {
-        return;
-      }
-
+    },
+    sendPayload() {
       const payload = {};
-      for (field of this.fields) {
+      for (let field of this.fields) {
         payload[field] = this.$refs[field].value;
       }
       payload.name = this.$refs.name.value;
@@ -81,15 +82,16 @@ export default {
           switch (response.status) {
             case 200:
             case 201:
-              return response.json();
+              return response.data;
+            case 409:
+              this.$swal.fire("Oops...", "Someone with that name has already joined! Please use a different name!", "error")
+              throw new Error("Bad method!");
             default:
               throw new Error("Bad method!");
           }
         })
         .then(() => {
-          const hasSubmitted = localStorage.getItem("hasSubmitted") || {};
-          hasSubmitted[roomId] = true;
-          localStorage.setItem('hasSubmitted', hasSubmitted);
+          localStorage.setItem("player_name", this.$refs.name.value);
           this.$forceUpdate();
         })
         .catch(err => {
