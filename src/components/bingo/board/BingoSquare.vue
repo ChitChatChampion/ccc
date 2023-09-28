@@ -59,7 +59,10 @@ export default {
         options[name] = name;
       }
 
-      if (!this.isPlayer) return;
+      if (!this.isPlayer) {
+        this.$swal.fire("Oops...", "As the game host, you are not supposed to submit your answers here! Use another device if you want to play!", "info");
+        return;
+      }
 
       this.$swal.fire({
         title: this.title,
