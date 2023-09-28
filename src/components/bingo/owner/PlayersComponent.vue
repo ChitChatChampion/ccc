@@ -1,13 +1,15 @@
 <template>
-  Players
-  <PlayerPreview
-    v-for="(player, index) in players"
-    :key="player"
-    :name="player"
-    :index="index"/>
-  <OrangeButton
-    text="Refresh"
-    :onClick="getPlayers"/>
+  <section class="w-1/2 max-w-3xl mx-auto w-full p-4 z-10 bg-ne-dark bg-opacity-50 rounded-lg">
+    <h1 class="text-light text-3xl font-bold">Waiting for players...</h1>
+    <ol v-if="players.length" class="flex flex-row mt-5 gap-4">
+      <PlayerPreview
+        v-for="(player, index) in players"
+        :key="player"
+        :name="player"
+        :index="index"/>
+    </ol>
+    <OrangeButton :onClick="getPlayers" text="Refresh Players List" class="mt-5 z-10"/>
+  </section>
 </template>
 
 <script>
