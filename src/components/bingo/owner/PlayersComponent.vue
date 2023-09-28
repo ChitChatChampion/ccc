@@ -5,7 +5,9 @@
     :key="player"
     :name="player"
     :index="index"/>
-  <OrangeButton/>
+  <OrangeButton
+    text="Refresh"
+    :onClick="getPlayers"/>
 </template>
 
 <script>
@@ -22,27 +24,32 @@ export default {
     };
   },
   mounted() {
-    const roomId = this.$refs.params.id;
-    const headers = getHeader();
-    const url = getUrl(`bingo/${roomId}/players`);
-    axios.get(url, { headers })
-      .then(response => {
-      switch (response.status) {
-        case 200:
-        case 201:
-          return response.data;
-        default:
-          throw new Error("Bad method!");
-      }
-    })
-      .then(data => {
-      this.players = data.players;
-    })
-      .catch(err => {
-      console.log(err);
-      this.$swal.fire("Oops...", "Could not retrieve player data!", "error");
-    });
+    this.getPlayers();
   },
-  components: { PlayerPreview, OrangeButton }
+  components: { PlayerPreview, OrangeButton },
+  methods: {
+    getPlayers() {
+      const roomId = this.$route.params.id;
+      const headers = getHeader();
+      const url = getUrl(`bingo/${roomId}/players`);
+      axios.get(url, { headers })
+        .then(response => {
+        switch (response.status) {
+          case 200:
+          case 201:
+            return response.data;
+          default:
+            throw new Error("Bad method!");
+        }
+      })
+        .then(data => {
+        this.players = data.players;
+      })
+        .catch(err => {
+        console.log(err);
+        this.$swal.fire("Oops...", "Could not retrieve player data!", "error");
+      });
+    }
+  }
 }
 </script>
