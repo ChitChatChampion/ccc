@@ -10,14 +10,10 @@ import PlayerSubmitted from './PlayerSubmitted.vue';
 
 export default {
   name: "PlayerNotStarted",
-  data() {
-    return {
-      hasSubmitted: false
-    };
-  },
-  mounted() {
-    const roomId = this.$route.params.id;
-    this.hasSubmitted = !!localStorage.getItem("hasSubmitted") && !!localStorage.getItem("hasSubmitted")[roomId];
+  props: {
+    hasSubmitted: {
+      type: Boolean,
+    }
   },
   components: { PlayerSubmitted, PlayerNotSubmitted }
 }
