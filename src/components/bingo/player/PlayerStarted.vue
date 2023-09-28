@@ -1,6 +1,10 @@
 <template>
   <div class="w-full">
     <div class="absolute w-full z-10 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-2">
+      <div class="p-4">
+        <h1 class="w-full max-w-3xl mx-auto text-light text-3xl font-bold mb-2">How to play</h1>
+        <p class="w-full max-w-3xl mx-auto text-light">Each tile in the bingo board contains the description of a particular player. Your goal is to go around and figure out who that player is! Note that sometimes, there are descriptions that can apply to several players. However, based on what your responses were for the form, there is only one perfect answer!</p>
+      </div>
       <BingoBoard ref="board" :isPlayer="true"/>
       <div class="w-full max-w-3xl mx-auto p-4">
         <div class="w-full max-w-xs">
