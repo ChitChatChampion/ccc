@@ -32,6 +32,7 @@ Contributions:
 * Implement websockets for game modes
 * Backend routes
 * Prompt engineering
+* Migration from Flask to Quart
 ### A0221849Y
 Name: [Neo Jing Xuan](https://github.com/neojxuan)<br/>
 Role: Integration<br/>
