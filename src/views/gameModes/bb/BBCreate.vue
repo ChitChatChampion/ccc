@@ -1,24 +1,30 @@
 <!-- /bb/create -->
 
 <template>
-  <div class="h-screen bg-ns">
-    <NavBar backLink="/bb" text="Burning Bridges" ref="nav"/>
-    <section id='browse-game-modes' class="px-10 py-10 rounded-t-3xl bg-lrt-background grid gap-5 place-content-center min-h-[84%]">
-      <h1 class="font-bold text-3xl text-ns">Create Game</h1>
-      <span class="max-w-3xl">Based on how you answer these questions, we'll ask ChatGPT to craft an ice-breaker game for you! So feel free to be as detailed as possible!</span>
+  <div class="fixed h-screen bg-gradient-to-b from-ns-light via-ns to-ns-dark w-full bg-ns -z-1"></div>
+  <div class="min-h-screen">
+    <div class="absolute w-full h-screen z-10 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-2">
+      <NavBar backLink="/bb" text="Burning Bridges" ref="nav"/>
+      <section id='browse-game-modes' class="md:px-10 px-5 py-10 rounded-t-3xl bg-lrt-background place-content-center mx-auto min-h-[84%] max-w-3xl">
+        <h1 class="font-bold text-3xl text-ns mb-5">Create Game</h1>
+        <span class="max-w-3xl mb-5">Based on how you answer these questions, we'll ask ChatGPT to craft an ice-breaker game for you! So feel free to be as detailed as possible!</span>
 
-      <form class="bg-light shadow-md rounded-lg px-8 pt-6 pb-8 mb-4">
-        <ContextForm ref="context"/>
-        <BBForm ref="bb"/>
-        <br/>
-        <OrangeButton :onClick="generateQuestions" text="Generate Questions" class="mt-5"/>
-      </form>
-      
-      <QuestionForm ref="questions"/>
+        <form class="bg-light shadow-md rounded-lg px-8 pt-6 pb-8 mb-4 mt-5">
+          <ContextForm ref="context"/>
+          <BBForm ref="bb"/>
+          <br/>
+          <OrangeButton :onClick="generateQuestions" text="Generate Questions" class="mt-5"/>
+        </form>
+        
+        <QuestionForm ref="questions"/>
 
-      <OrangeButton :onClick="createRoom" text="Create Room"/>
-    </section>
+        <OrangeButton :onClick="createRoom" text="Create Room" class="mt-5"/>
+      </section>
+    </div>
   </div>
+
+  <div class="background-circle-bb bg-ns-v-light"></div>
+  <div class="background-diamond-bb bg-ns-v-light"></div>
 </template>
 
 <script>
@@ -138,3 +144,36 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.background-circle-bb {
+  position: absolute;
+  top: 65%;
+  left: 100%;
+  transform: translate(-100%, -50%);
+  width: 30vh;
+  /* Adjust the size of the circle as needed */
+  height: 60vh;
+  /* The width and height should be equal for a circle */
+  border-top-left-radius: 60vh;
+  border-bottom-left-radius: 60vh;
+  /* z-index: 0; */
+  /* Place the circle behind other content */
+  opacity: 20%;
+}
+
+.background-diamond-bb {
+  position: absolute;
+  top: 20%;
+  left: 0%;
+  transform: translate(-50%, -50%) rotate(45deg);
+  width: 50vmax;
+  /* Adjust the size of the circle as needed */
+  height: 50vmax;
+  /* The width and height should be equal for a circle */
+  border-radius: 4rem;
+  /* Creates a circle by setting border-radius to 50% */
+  /* z-index: 0; */
+  /* Place the circle behind other content */
+  opacity: 20%;
+}</style>
