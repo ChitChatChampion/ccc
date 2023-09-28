@@ -24,6 +24,12 @@ import NavBar from "@/components/NavBar.vue";
 export default {
   name: "BingoRoom",
   created() {
+    this.$swal.fire({
+      title: "Retrieving Room Information...",
+      didOpen: () => {
+        this.$swal.showLoading();
+      }
+    });
     const roomId = this.$route.params.id;
     const url = getUrl(`bingo/${roomId}`);
     const headers = getHeader();
@@ -31,27 +37,28 @@ export default {
     headers.player_name = player_name;
     axios.get(url, { headers })
       .then(response => {
-      switch (response.status) {
-        case 200:
-        case 201:
-          return response.data;
-        default:
-          throw new Error("Bad method!");
-      }
-    })
-    .then(data => {
-      this.isOwner = data.isOwner;
-      this.hasStarted = data.hasStarted;
-      this.hasSubmitted = data.hasSubmitted;
-      if (!data.hasSubmitted) {
-        const attemptsDict = JSON.parse(localStorage.getItem("attempts")) || {};
-        attemptsDict[roomId] = false;
-        localStorage.setItem("attempts", JSON.stringify(attemptsDict))
-      }
-    })
+        switch (response.status) {
+          case 200:
+          case 201:
+            return response.data;
+          default:
+            throw new Error("Bad method!");
+        }
+      })
+      .then(data => {
+        this.isOwner = data.isOwner;
+        this.hasStarted = data.hasStarted;
+        this.hasSubmitted = data.hasSubmitted;
+        if (!data.hasSubmitted) {
+          const attemptsDict = JSON.parse(localStorage.getItem("attempts")) || {};
+          attemptsDict[roomId] = false;
+          localStorage.setItem("attempts", JSON.stringify(attemptsDict))
+        }
+        this.$swal.close();
+      })
       .catch(err => {
-      console.log(err);
-    });
+        console.log(err);
+      });
     this.isLoading = false;
   },
   data() {
