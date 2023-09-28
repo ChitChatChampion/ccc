@@ -141,6 +141,12 @@ export default {
     }
   },
   created() {
+    this.$swal.fire({
+      title: "Retrieving Room Information...",
+      didOpen: () => {
+        this.$swal.showLoading();
+      }
+    });
     const roomId = this.$route.params.id;
     const url = getUrl(`room/${roomId}`);
     fetch(url)
@@ -160,8 +166,8 @@ export default {
       })
       .then(data => {
         if (!data) return;
-        console.log(data);
         this.cards = data.questions;
+        this.$swal.close();
       })
   },
   methods: {
