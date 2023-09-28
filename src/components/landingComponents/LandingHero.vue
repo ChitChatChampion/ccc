@@ -8,27 +8,35 @@
                     ChitChatChampion leverages Generative AI technology to create personalised games that suits every team
                     occassion.
                 </p>
-                <a href="#"
-                    class="inline-flex items-center justify-center px-5 py-3 mr-3 text-base font-medium text-center text-white rounded-lg bg-cc hover:bg-cc-light focus:ring-4 focus:ring-cc-light focus:ring-opacity-25">
-                    Play Game
-                    <svg class="w-5 h-5 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd"
-                            d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                            clip-rule="evenodd"></path>
-                    </svg>
-                </a>
-                <a href="#"
-                    class="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center border border-light rounded-lg hover:bg-dt-dark">
-                    Contact Sales
-                </a>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <div class="flex bg-light rounded-xl p-2 gap-2">
+                        <input
+                            class="text-black rounded-lg border-2 border-[#dedede] py-2 px-4 bg-light font-medium active:border-dt"
+                            placeholder="Game ID">
+                        <button class="flex gap-2 bg-cc rounded-lg px-4 py-2 font-bold">
+                            <span class="my-auto">Play</span>
+                            <svg class="w-5 h-5 my-auto" fill="currentColor" viewBox="0 0 20 20"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                    d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                                    clip-rule="evenodd"></path>
+                            </svg>
+                        </button>
+                    </div>
+                    <button @click="scrollTo('contact')"
+                        class="inline-flex items-center justify-center px-5 py-3 my-1 text-base font-medium text-center border border-light rounded-lg hover:bg-dt-dark">
+                        Contact Sales
+                    </button>
+                </div>
             </div>
+
             <div class="hidden lg:mt-0 lg:col-span-5 lg:flex">
                 <img src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/hero/phone-mockup.png" alt="mockup">
             </div>
         </div>
 
-        <div class="flex flex-row gap-5 justify-center px-4 mx-auto text-center md:max-w-screen-md lg:max-w-screen-lg lg:px-36 mb-20 items-center">
+        <div
+            class="flex flex-col sm:flex-row gap-5 justify-center px-4 mx-auto text-center md:max-w-screen-md lg:max-w-screen-lg lg:px-36 mb-20 items-center">
             <span class="font-semibold text-gray-400 uppercase">FEATURED IN</span>
             <a href="#" class="mr-5 mb-5 lg:mb-0 hover:text-gray-800 dark:hover:text-gray-400">
                 <svg class="h-11" viewBox="0 0 208 42" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -46,3 +54,7 @@
         </div>
     </section>
 </template>
+
+<script setup>
+import { scrollTo } from "@/utils/utils.js"
+</script>

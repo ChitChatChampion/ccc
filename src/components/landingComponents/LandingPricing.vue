@@ -79,16 +79,17 @@
                             <span><b>Unlimited</b> access to Pro games</span>
                         </li>
                     </ul>
-                    <a href="#"
+                    <button @click="scrollTo('contact')"
                         class="text-white bg-cc hover:bg-cc-light font-bold rounded-lg text-sm px-5 py-2.5 text-center">
-                        Subscribe to Pro
-                    </a>
+                        Contact Sales
+                    </button>
                 </div>
                 <!-- Pricing Card -->
                 <div
                     class="flex flex-col p-6 mx-auto max-w-lg text-center text-gray-900 bg-white rounded-lg border border-gray-100 shadow dark:border-gray-600 xl:p-8 dark:bg-gray-800 dark:text-white">
                     <h3 class="mb-4 text-2xl font-semibold">Teams</h3>
-                    <p class="font-light text-gray-500 sm:text-lg dark:text-gray-400">Best for corporate and team-building occassions</p>
+                    <p class="font-light text-gray-500 sm:text-lg dark:text-gray-400">Best for corporate and team-building
+                        occassions</p>
                     <div class="flex justify-center items-baseline my-8">
                         <span class="mr-2 text-5xl font-extrabold">$49.99</span>
                         <span class="text-gray-500 dark:text-gray-400">/month</span>
@@ -116,12 +117,16 @@
                             <span>Up to <b>20</b> users</span>
                         </li>
                     </ul>
-                    <a href="#"
+                    <button @click="scrollTo('contact')"
                         class="text-white bg-cc hover:bg-cc-light font-bold rounded-lg text-sm px-5 py-2.5 text-center">
                         Contact Sales
-                    </a>
+                    </button>
                 </div>
             </div>
         </div>
     </section>
 </template>
+
+<script setup>
+import { scrollTo } from '@/utils/utils';
+</script>

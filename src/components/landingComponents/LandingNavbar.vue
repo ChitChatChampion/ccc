@@ -3,14 +3,14 @@
         <nav class="bg-dt fixed top-0 w-full border-gray-200 px-4 lg:px-6 py-6 z-10">
             <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
                 <button @click="scrollTo('hero')" class="flex items-center">
-                    <img :src="ccclogo" class="mr-3 h-4 sm:h-9" alt="Flowbite Logo" />
-                    <!-- <span
-                        class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">ChitChatChampion</span> -->
+                    <img :src="ccclogo" class="mr-3 h-4 sm:h-9" alt="ChitChatChampion Logo" />
                 </button>
                 <div class="flex items-center lg:order-2">
-                    <a href="#"
-                        class="text-white bg-cc hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 lg:px-5 py- lg:py-2.5 mr-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">Log
-                        In</a>
+                    <router-link to="/">
+                        <button
+                            class="text-white bg-cc hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 lg:px-5 py- lg:py-2.5 mr-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">Get
+                            Started</button>
+                    </router-link>
                     <button data-collapse-toggle="mobile-menu-2" type="button"
                         class="inline-flex items-center p-2 ml-1 text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
                         aria-controls="mobile-menu-2" aria-expanded="false">
@@ -30,11 +30,6 @@
                 </div>
                 <div class="hidden justify-between items-center w-full lg:flex lg:w-auto lg:order-1" id="mobile-menu-2">
                     <ul class="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0 lg:gap-5">
-                        <li>
-                            <button @click="scrollTo('about')"
-                                class="block py-2 pr-4 pl-3 text-white rounded bg-primary-700 lg:bg-transparent lg:text-primary-700 lg:p-0 dark:text-white"
-                                aria-current="page">About</button>
-                        </li>
                         <li>
                             <button @click="scrollTo('features')"
                                 class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">Features</button>
@@ -56,10 +51,5 @@
 
 <script setup>
 import ccclogo from "@/assets/logo.png"
-
-function scrollTo(elementName) {
-    console.log(elementName)
-    const element = document.getElementById(elementName)
-    if (element) { element.scrollIntoView({ behavior: "smooth" }); }
-}
+import { scrollTo } from "@/utils/utils.js"
 </script>
