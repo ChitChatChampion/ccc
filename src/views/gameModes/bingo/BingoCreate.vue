@@ -58,7 +58,7 @@ export default {
     this.populate({ url: getUrl('bingo/context') });
   },
   methods: {
-    async populate({ url }) {
+    populate({ url }) {
       this.$swal.fire({
         title: "Retrieving Data...",
         didOpen: () => {
