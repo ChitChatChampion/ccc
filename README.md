@@ -11,6 +11,7 @@ Role: Frontend Engineer<br/>
 Contributions:
 * Set up Vue project components
 * Set up Google authentication and client-side caching
+* Design and enginerr the Bingo game
 * Report
 ### A0244120Y
 Name: [Jason Christopher](https://github.com/jasonchristopher21)<br/>
@@ -18,7 +19,7 @@ Role: Frontend Designer<br/>
 Contributions:
 * Design UI on Figma
 * Set up Tailwind CSS styling
-* Gameplay mechanics
+* Gameplay mechanics for CSC and BB
 ### A0164584W
 Name: [Kevin Chua Kian Chun](https://github.com/kevinchua6)<br/>
 Role: Backend Engineer<br/>
