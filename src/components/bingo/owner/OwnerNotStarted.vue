@@ -30,6 +30,12 @@ export default {
   components: { BingoBoard, PlayersComponent, OrangeButton },
   methods: {
     generate() {
+      this.$swal.fire({
+        title: "Generating Bingo Board...",
+        didOpen: () => {
+          this.$swal.showLoading();
+        }
+      });
       const roomId = this.$route.params.id;
       const url = getUrl(`bingo/${roomId}/generate`);
       const headers = getHeader();
@@ -44,6 +50,7 @@ export default {
           }
         })
         .then(() => {
+          this.$swal.close();
           this.$refs.board.getSquares();
         })
         .catch(err => {
@@ -52,6 +59,12 @@ export default {
         })
     },
     startGame() {
+      this.$swal.fire({
+        title: "Starting Game...",
+        didOpen: () => {
+          this.$swal.showLoading();
+        }
+      });
       const roomId = this.$route.params.id;
       const headers = getHeader();
       const url = getUrl(`bingo/${roomId}/start`);
@@ -66,7 +79,8 @@ export default {
           }
         })
         .then(() => {
-          this.$forceUpdate();
+          this.$swal.close();
+          this.$router.push(`/bingo/${roomId}`);
         })
         .catch(err => {
           console.log(err);

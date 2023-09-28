@@ -1,17 +1,17 @@
 <template>
   <div class="w-full">
     <div class="absolute w-full z-10 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-2">
+      <div class="p-4">
+        <h1 class="w-full max-w-3xl mx-auto text-light text-3xl font-bold mb-2">How to play</h1>
+        <p class="w-full max-w-3xl mx-auto text-light">Each tile in the bingo board contains the description of a particular player. Your goal is to go around and figure out who that player is! Note that sometimes, there are descriptions that can apply to several players. However, based on what your responses were for the form, there is only one perfect answer!</p>
+      </div>
       <BingoBoard ref="board" :isPlayer="true"/>
       <div class="w-full max-w-3xl mx-auto p-4">
-        <div class="w-full max-w-xs">
-          <TextInput
-            label="Your Name (for the leaderboard)"
-            name="name"
-            :isLight="true"
-            ref="name"/>
+        <div class="w-full max-w-xs text-light">
+          Name: <span class="font-bold text-xl text-cc">{{ player_name }}</span>
         </div>
       </div>
-      <div class="flex flex-row items-center justify-between p-4 max-w-3xl mx-auto">
+      <div class="flex flex-row items-center justify-between px-4 pb-4 max-w-3xl mx-auto">
         <div class="text-light">Score: <span class="text-cc font-bold text-xl">{{ score }}<span v-if="total_score">/{{ total_score }}</span></span></div>
         <div class="text-light">Remaining Attempts: <span class="text-cc font-bold text-xl">{{ attempts }}</span></div>
         <OrangeButton text="Submit Guesses" :onClick="submit"/>
@@ -26,18 +26,18 @@
 <script>
 import BingoBoard from '../board/BingoBoard.vue';
 import OrangeButton from "@/components/buttons/OrangeButton";
-import TextInput from "@/components/inputs/TextInput.vue";
 import { getUrl } from "@/services";
 import axios from 'axios';
 
 export default {
   name: "PlayerStarted",
-  components: { BingoBoard, OrangeButton, TextInput },
+  components: { BingoBoard, OrangeButton },
   data() {
     return {
       attempts: 5,
       score: 0,
-      total_score: 0
+      total_score: 0,
+      player_name: localStorage.getItem("player_name") || ""
     }
   },
   mounted() {
@@ -48,8 +48,9 @@ export default {
   },
   methods: {
     submit() {
-      if (this.attempts === 0) {
+      if (this.attempts <= 0) {
         this.$swal.fire("Oops...", "You have no more attempts left!", "error");
+        this.attempts = 0;
         return;
       }
 
@@ -68,6 +69,12 @@ export default {
       });
     },
     sendPayload() {
+      this.$swal.fire({
+        title: "Submitting Guesses...",
+        didOpen: () => {
+          this.$swal.showLoading();
+        }
+      });
       const name = this.$refs.name.value;
       if (!name) {
         this.$swal.fire("Oops...", "Please add a valid name!", "error");
@@ -80,7 +87,6 @@ export default {
       const timestamp = Date.now();
 
       const payload = { name, score, total_score, timestamp };
-      console.log(payload);
 
       const roomId = this.$route.params.id;
       const url = getUrl(`bingo/${roomId}/submit`);
@@ -99,6 +105,7 @@ export default {
           attempts[roomId] = this.attempts - 1;
           localStorage.setItem("attempts", JSON.stringify(attempts));
           this.attempts -= 1;
+          this.$swal.close();
         })
         .catch(err => {
           console.log(err);

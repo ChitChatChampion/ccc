@@ -1,7 +1,7 @@
 # ChitChatChampion
 ChitChatChampion aims to facilitate engaging ice-breaker games and conversation starters for various social settings, with a focus on customisation and user interaction. Its objectives include fostering connections, breaking the ice, and making social gatherings more enjoyable through tailored ice-breaker activities. They are meant to be played in-person, with a phone or laptop as a companion to the activity.
 
-URL: [Fill up here]()
+URL: [ChitChatChampion](https://chitchatchampion.netlify.app/)
 
 ## Group Members and Contribution
 
@@ -11,26 +11,44 @@ Role: Frontend Engineer<br/>
 Contributions:
 * Set up Vue project components
 * Set up Google authentication and client-side caching
-* Report
+* Design and engineer the Bingo game
+* Engineer the CSC and BB games
+* Integration
+* Product logo & themes
+* Styling
+* Set up SEO
+* Report (first draft)
 ### A0244120Y
 Name: [Jason Christopher](https://github.com/jasonchristopher21)<br/>
 Role: Frontend Designer<br/>
 Contributions:
 * Design UI on Figma
 * Set up Tailwind CSS styling
-* Gameplay mechanics
+* Frontend design for CSC and BB
+* Product hunt
+* Google analytics
+* Landing page
 ### A0164584W
 Name: [Kevin Chua Kian Chun](https://github.com/kevinchua6)<br/>
 Role: Backend Engineer<br/>
 Contributions:
-* TODO
-### AXXXXXXXX
+* Implement websockets for game modes
+* CSC Backend routes
+* Prompt engineering
+* Migration from Flask to Quart
+### A0221849Y
 Name: [Neo Jing Xuan](https://github.com/neojxuan)<br/>
 Role: Integration<br/>
 Contributions:
-* TODO
+* Database schema design, setup and integration
+* BB, Bingo Backend routes
+* Prompt engineering
+* Report
+* Product Name
 
 ## Project setup
+
+### Package installation
 ```
 npm install
 ```
@@ -40,18 +58,13 @@ npm install
 npm run serve
 ```
 
-### Compiles and minifies for production
+### Environment Variables
 ```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
+VUE_APP_BASE_URL: For the server.
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### Set up backend
+Head to our [server](https://github.com/ChitChatChampion/chit-chat-champion-server/tree/master) and clone the repo. Then, follow the instructions on the README.
 
 ## Resources Used
 

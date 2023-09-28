@@ -1,6 +1,6 @@
 <template>
   <form class="rounded-3xl gap-5 z-10 grid mx-auto" :class="{ 'bg-light': withBackground, 'p-5': withBackground }">
-    <TextInput name="roomId" ref="roomId" placeholder="Game ID" :isCenter="true" :isBig="true"/>
+    <TextInput name="roomId" ref="roomId" placeholder="Game ID" :isCenter="true" :isBig="true" :max="10"/>
     <OrangeButton :onClick="submitPIN" text="Join Game"/>
   </form>
 </template>
@@ -33,6 +33,12 @@ export default {
 },
   methods: {
     async submitPIN() {
+      this.$swal.fire({
+        title: "Finding Your Room...",
+        didOpen: () => {
+          this.$swal.showLoading();
+        }
+      });
       const roomId = this.$refs.roomId.value;
       const url = getUrl(`room/${roomId}`);
       console.log(url);
@@ -55,6 +61,7 @@ export default {
           if (!data) return;
           const gameMode = data.game_type;
           this.$router.push(`${gameMode}/${roomId}`);
+          this.$swal.close();
         })
         .catch(() => {
           this.$swal.fire({

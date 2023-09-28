@@ -1,8 +1,9 @@
 <!-- Form for host before creating the room -->
 
 <template>
-  <h1 class="font-bold text-3xl text-ne max-w-md mx-auto">Information</h1>
-  <ul class="bg-light shadow-md rounded-lg px-8 pt-6 pb-8 mb-4 grid gap-5 max-w-md mx-auto">
+  <h1 class="font-bold text-3xl text-ne max-w-md my-5">Information</h1>
+  <p class="mb-5">What information would you like to get from the players? Remember that these will all be text fields, so feel free to go wild with the details!</p>
+  <ul class="bg-light shadow-md rounded-lg px-8 pt-6 pb-8 mb-4 grid gap-5">
     <FieldPreview
       v-for="(field, index) in fields"
       :key="field.id"
@@ -31,6 +32,12 @@ export default {
       this.fields = fields;
     },
     addField() {
+      this.$swal.fire({
+        title: "Adding Field...",
+        didOpen: () => {
+          this.$swal.showLoading();
+        }
+      });
       const headers = getHeader();
       const url = getUrl('bingo/fields/create');
       axios.post(url, {}, { headers })
@@ -44,6 +51,7 @@ export default {
           }
         })
         .then(data => {
+          this.$swal.close();
           this.fields = [...this.fields, { id: data.id, content: '' }];
         })
         .catch(err => {

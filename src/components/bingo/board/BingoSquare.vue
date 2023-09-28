@@ -4,7 +4,7 @@
     :class="{ 'border-ew': hasSubmitted && isCorrect, 'border-cc': !hasSubmitted, 'border-ns': hasSubmitted && !isCorrect }"
     @click="showPopup">
     <h1 class="font-bold">{{ title }}</h1>
-    Guess: {{ guess }}
+    <p v-if="isPlayer">Guess: {{ guess }}</p>
     <p>
       <span v-if="hasSubmitted && !isCorrect" class="text-ns font-bold">Wrong!</span>
       <span v-else-if="hasSubmitted && isCorrect" class="text-ew font-bold">Correct!</span>
@@ -59,7 +59,10 @@ export default {
         options[name] = name;
       }
 
-      if (!this.isPlayer) return;
+      if (!this.isPlayer) {
+        this.$swal.fire("Oops...", "As the game host, you are not supposed to submit your answers here! Use another device if you want to play!", "info");
+        return;
+      }
 
       this.$swal.fire({
         title: this.title,

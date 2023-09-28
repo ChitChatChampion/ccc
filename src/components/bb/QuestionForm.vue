@@ -1,6 +1,7 @@
 <template>
-  <h1 v-if="!!questions" class="font-bold text-3xl text-ns">Questions</h1>
-  <ul v-if="!!questions" class="bg-light shadow-md rounded-lg px-8 pt-6 pb-8 mb-4 grid gap-5">
+  <h1 v-if="questions.length" class="font-bold text-3xl text-ns">Questions</h1>
+  <p v-if="questions.length" class="mt-5">See any prompts that you don't like? Feel free to edit them or add your own. Make the best ice-breaker!</p>
+  <ul v-if="questions.length" class="bg-light shadow-md rounded-lg px-8 pt-6 pb-8 mb-4 grid gap-5 mt-5">
     <QuestionPreview
       v-for="(question, index) in questions"
       :key="question.id"
@@ -31,6 +32,12 @@ export default {
     addQuestion() {
       const headers = getHeader();
       // const url = 'csc/questions/create';
+      this.$swal.fire({
+        title: "Adding Question...",
+        didOpen: () => {
+          this.$swal.showLoading();
+        }
+      });
       const url = getUrl('bb/questions/create');
       axios.post(url, {}, { headers })
         .then(response => {
@@ -44,6 +51,7 @@ export default {
         })
         .then(data => {
           this.questions = [...this.questions, { id: data.id, content: '' }];
+          this.$swal.close();
         })
         .catch(err => {
           console.log(err);
