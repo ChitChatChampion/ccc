@@ -11,8 +11,10 @@ Role: Frontend Engineer<br/>
 Contributions:
 * Set up Vue project components
 * Set up Google authentication and client-side caching
-* Design and enginerr the Bingo game
+* Design and engineer the Bingo game
+* Engineer the CSC and BB games
 * Integration
+* Set up SEO
 * Report
 ### A0244120Y
 Name: [Jason Christopher](https://github.com/jasonchristopher21)<br/>
