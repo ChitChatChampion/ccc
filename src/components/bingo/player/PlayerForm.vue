@@ -1,19 +1,29 @@
 <template>
-  <TextInput
-    name="name"
-    label="Name"
-    ref="name"/>
-  <TextInput
-    v-for="field in fields"
-    :name="field"
-    :label="field"
-    :key="field"
-    :ref="field"/>
-  <TextInput
-    name="other_information"
-    label="Other Information"
-    ref="other_information"/>
-  <OrangeButton :onClick="submitForm" text="Submit Form"/>
+  <h1 class="text-3xl text-light max-w-3xl mx-auto font-bold">Player Form</h1>
+  <p class="max-w-3xl mx-auto text-light mt-4">The game hasn't started yet! In the meantime, fill up this form and tell us about yourself. Feel free to be as funny and descriptive as you'd like, as we can get ChatGPT to create an awesome game!</p>
+  <div class="bg-ne-dark bg-opacity-50 rounded-lg p-4 max-w-3xl mx-auto mt-4">
+    <TextInput
+      name="name"
+      label="Name"
+      :isLight="true"
+      :max="20"
+      ref="name"/>
+    <TextInput
+      v-for="field in fields"
+      :name="field"
+      :label="field"
+      :key="field"
+      :isLight="true"
+      :max="300"
+      :ref="field"/>
+    <TextInput
+      name="other_information"
+      label="Other Information"
+      :isLight="true"
+      :max="300"
+      ref="other_information"/>
+    <OrangeButton :onClick="submitForm" text="Submit Form" class="mt-5"/>
+  </div>
 </template>
 
 <script>
