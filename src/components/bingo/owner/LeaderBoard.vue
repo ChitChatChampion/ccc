@@ -40,7 +40,7 @@ export default {
             throw new Error("Bad method!");
         }
       })
-        .then(data => {
+      .then(data => {
         this.players = data.players;
       })
         .catch(err => {
