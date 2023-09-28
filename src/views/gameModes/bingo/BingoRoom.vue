@@ -1,11 +1,10 @@
 <!-- /bingo/:id -->
 
 <template>
-  <h1>Hi</h1>
   <OwnerStarted v-if="isOwner && hasStarted"/>
   <OwnerNotStarted v-else-if="isOwner && !hasStarted"/>
   <PlayerStarted v-else-if="!isOwner && hasStarted"/>
-  <PlayerNotStarted v-else/>
+  <PlayerNotStarted v-else :hasSubmitted="hasSubmitted"/>
 </template>
 
 <script>
@@ -22,6 +21,8 @@ export default {
     const roomId = this.$route.params.id;
     const url = getUrl(`bingo/${roomId}`);
     const headers = getHeader();
+    const player_name = localStorage.getItem("player_name") || "";
+    headers.player_name = player_name;
     axios.get(url, { headers })
       .then(response => {
       switch (response.status) {
@@ -33,8 +34,10 @@ export default {
       }
     })
       .then(data => {
+        console.log(data);
       this.isOwner = data.isOwner;
       this.hasStarted = data.hasStarted;
+      this.hasSubmitted = data.hasSubmitted;
     })
       .catch(err => {
       console.log(err);
@@ -45,7 +48,8 @@ export default {
     return {
       isLoading: true,
       isOwner: false,
-      hasStarted: false
+      hasStarted: false,
+      hasSubmitted: false
     };
   },
   components: { OwnerStarted, OwnerNotStarted, PlayerStarted, PlayerNotStarted }
