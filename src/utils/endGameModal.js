@@ -2,7 +2,7 @@ import axios from "axios";
 import { getUrl, getHeader } from "../services";
 
 // TODO: change confirm button to red
-export const fireEndGameModal = (swal, router, route) =>
+export const fireEndGameModal = (swal, router, route, ws) =>
   swal
     .fire({
       icon: "info",
@@ -27,6 +27,7 @@ export const fireEndGameModal = (swal, router, route) =>
             }
           })
           .then(() => {
+            ws.closeRoom(roomId);
             swal
               .fire({
                 icon: "success",

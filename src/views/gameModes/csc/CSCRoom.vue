@@ -61,6 +61,7 @@ import { Carousel, Slide } from 'vue3-carousel'
 import { getHeader, getUrl } from '@/services';
 import { gameModeDict } from '../gameModes';
 import { fireEndGameModal } from '@/utils/endGameModal';
+import {WebSocketClient} from '@/services/websockets';
 
 export default {
   name: 'CSCRoom',
@@ -69,6 +70,7 @@ export default {
       title: 'Conversation Starter Cards',
       description: 'Take turns reading out and share your experiences about the prompt given on the card. Feel free to keep it lighthearted and fun, and encourage open and honest sharing!'
     })
+
   },
   data() {
     return {
@@ -77,10 +79,15 @@ export default {
       instructions: gameModeDict.csc.instructions,
       currentSlide: 1,
       isOwner: false,
+      ws: null
     }
   },
   created() {
+    const ws = new WebSocketClient();
+    this.ws = ws
+    
     const roomId = this.$route.params.id;
+
     const roomUrl = getUrl(`room/${roomId}`);
 
     fetch(roomUrl)
@@ -116,8 +123,21 @@ export default {
       .then(data => {
         if (!data) return;
         this.isOwner = data.is_owner;
+      }).finally(() => {
+        // Only if you're not the owner, then we check if we need to kick you out
+        if (!this.isOwner) {
+          ws.enterRoom(roomId);
+        }
       })
 
+      ws.onRoomClose(() => {
+        this.$swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Room has been closed by the owner!'
+        });
+        this.$router.push('.');
+      })
   },
   methods: {
     shuffle() {
@@ -130,7 +150,7 @@ export default {
       this.$refs.myCarousel.prev();
     },
     endGame() {
-      fireEndGameModal(this.$swal, this.$router, this.$route);
+      fireEndGameModal(this.$swal, this.$router, this.$route, this.ws);
     },
     copyToClipboard() {
       const { toClipboard } = useClipboard();
