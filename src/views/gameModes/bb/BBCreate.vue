@@ -5,13 +5,13 @@
     <NavBar backLink="/bb" text="Burning Bridges" ref="nav"/>
     <section id='browse-game-modes' class="px-10 py-10 rounded-t-3xl bg-lrt-background grid gap-5 place-content-center min-h-[84%]">
       <h1 class="font-bold text-3xl text-ns">Create Game</h1>
-      <span class="max-w-3xl">{{ createInstructions }}</span>
+      <span class="max-w-3xl">Based on how you answer these questions, we'll ask ChatGPT to craft an ice-breaker game for you! So feel free to be as detailed as possible!</span>
 
       <form class="bg-light shadow-md rounded-lg px-8 pt-6 pb-8 mb-4">
         <ContextForm ref="context"/>
         <BBForm ref="bb"/>
         <br/>
-        <OrangeButton :onClick="generateQuestions" text="Generate Prompts" class="mt-5"/>
+        <OrangeButton :onClick="generateQuestions" text="Generate Questions" class="mt-5"/>
       </form>
       
       <QuestionForm ref="questions"/>
@@ -38,13 +38,8 @@ export default {
   setup() {
     useMeta({
       title: 'Burning Bridges',
-      description: 'Burning Bridges is an activity that stirs up lively conversations with AI prompts that might even challenge friendships. Dive in and see if your bonds can withstand the heat!'
+      description: gameModeDict.bb.description
     })
-  },
-  data() {
-    return {
-      createInstructions: gameModeDict.bb.createInstructions,
-    };
   },
   components: { NavBar, ContextForm, BBForm, OrangeButton, QuestionForm },
   created() {
