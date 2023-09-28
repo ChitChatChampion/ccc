@@ -51,13 +51,14 @@ export default {
         this.hasSubmitted = data.hasSubmitted;
         if (!data.hasSubmitted) {
           const attemptsDict = JSON.parse(localStorage.getItem("attempts")) || {};
-          attemptsDict[roomId] = false;
-          localStorage.setItem("attempts", JSON.stringify(attemptsDict))
+          attemptsDict[roomId] = 5;
+          localStorage.setItem("attempts", JSON.stringify(attemptsDict));
         }
         this.$swal.close();
       })
       .catch(err => {
         console.log(err);
+        this.$swal.fire("Oops...", "Something went wrong when retrieving room information!", "error");
       });
     this.isLoading = false;
   },
