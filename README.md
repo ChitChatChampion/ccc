@@ -14,6 +14,7 @@ Contributions:
 * Design and engineer the Bingo game
 * Engineer the CSC and BB games
 * Integration
+* Product logo & themes
 * Styling
 * Set up SEO
 * Report (first draft)
