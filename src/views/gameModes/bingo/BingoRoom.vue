@@ -1,12 +1,14 @@
 <!-- /bingo/:id -->
 
 <template>
-  <main class="h-screen bg-gradient-to-b from-ne-light via-ne to-ne-dark">
+  <main class="h-screen bg-gradient-to-b from-ne-light via-ne to-ne-dark p-2">
     <NavBar backLink="/bingo" text="Social Bingo"/>
     <OwnerStarted v-if="isOwner && hasStarted"/>
     <OwnerNotStarted v-else-if="isOwner && !hasStarted"/>
     <PlayerStarted v-else-if="!isOwner && hasStarted"/>
     <PlayerNotStarted v-else :hasSubmitted="hasSubmitted"/>
+    <!-- <div class="background-circle-bingo bg-ne-v-light"></div>
+    <div class="background-diamond-bingo bg-ne-v-light"></div> -->
   </main>
 </template>
 
@@ -37,11 +39,15 @@ export default {
           throw new Error("Bad method!");
       }
     })
-      .then(data => {
-        console.log(data);
+    .then(data => {
       this.isOwner = data.isOwner;
       this.hasStarted = data.hasStarted;
       this.hasSubmitted = data.hasSubmitted;
+      if (!data.hasSubmitted) {
+        const attemptsDict = JSON.parse(localStorage.getItem("attempts")) || {};
+        attemptsDict[roomId] = false;
+        localStorage.setItem("attempts", JSON.stringify(attemptsDict))
+      }
     })
       .catch(err => {
       console.log(err);
@@ -59,3 +65,36 @@ export default {
   components: { OwnerStarted, OwnerNotStarted, PlayerStarted, PlayerNotStarted, NavBar }
 }
 </script>
+
+<style scoped>
+.background-circle-bingo {
+  position: absolute;
+  top: 65%;
+  left: 100%;
+  transform: translate(-100%, -50%);
+  width: 30vh;
+  /* Adjust the size of the circle as needed */
+  height: 60vh;
+  /* The width and height should be equal for a circle */
+  border-top-left-radius: 60vh;
+  border-bottom-left-radius: 60vh;
+  z-index: 0;
+  /* Place the circle behind other content */
+  opacity: 20%;
+}
+
+.background-diamond-bingo {
+  position: absolute;
+  top: 20%;
+  left: 0%;
+  transform: translate(-50%, -50%) rotate(45deg);
+  width: 50vmax;
+  /* Adjust the size of the circle as needed */
+  height: 50vmax;
+  /* The width and height should be equal for a circle */
+  border-radius: 4rem;
+  /* Creates a circle by setting border-radius to 50% */
+  z-index: 0;
+  /* Place the circle behind other content */
+  opacity: 20%;
+}</style>
