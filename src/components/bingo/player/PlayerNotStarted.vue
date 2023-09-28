@@ -1,5 +1,4 @@
 <template>
-  PlayerNotStarted
   <PlayerSubmitted v-if="hasSubmitted"/>
   <PlayerNotSubmitted v-else/>
 </template>
