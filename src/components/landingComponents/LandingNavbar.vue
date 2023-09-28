@@ -1,6 +1,6 @@
 <template>
     <header>
-        <nav class="bg-dt fixed top-0 w-full border-gray-200 px-4 lg:px-6 py-6 z-10">
+        <nav class="transition-all bg-dt bg-opacity-0 fixed top-0 w-full border-gray-200 px-4 lg:px-6 py-6 z-20 after:bg-opacity-100">
             <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
                 <button @click="scrollTo('hero')" class="flex items-center">
                     <img :src="ccclogo" class="mr-3 h-4 sm:h-9" alt="ChitChatChampion Logo" />

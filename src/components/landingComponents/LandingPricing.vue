@@ -1,5 +1,5 @@
 <template>
-    <section class="bg-white dark:bg-gray-900">
+    <section >
         <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6" id="pricing">
             <div class="mx-auto max-w-screen-md text-center mb-8 lg:mb-12 mt-14">
                 <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">Designed for Fun Teams
@@ -41,7 +41,7 @@
                             <span><b>5</b> Pro Games access per month</span>
                         </li>
                     </ul>
-                    <a href="#"
+                    <a href="/browse"
                         class="text-white bg-cc hover:bg-cc-light font-bold rounded-lg text-sm px-5 py-2.5 text-center">
                         Get started for Free
                     </a>

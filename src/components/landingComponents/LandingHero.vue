@@ -1,7 +1,7 @@
 <template>
-    <section class="bg-white dark:bg-gray-900" id="hero">
-        <div class="grid max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12 mt-16">
-            <div class="mr-auto place-self-center lg:col-span-7">
+    <section  id="hero">
+        <div class="grid max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12 mt-16 z-0">
+            <div class="mr-auto place-self-center lg:col-span-7 z-10">
                 <h1 class="max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl">
                     Break the Ice with Personalised Games</h1>
                 <p class="max-w-2xl mb-6 font-light opacity-90 lg:mb-8 md:text-lg lg:text-xl">
@@ -23,10 +23,10 @@
                             </svg>
                         </button>
                     </div>
-                    <button @click="scrollTo('contact')"
+                    <!-- <button @click="scrollTo('contact')"
                         class="inline-flex items-center justify-center px-5 py-3 my-1 text-base font-medium text-center border border-light rounded-lg hover:bg-dt-dark">
                         Contact Sales
-                    </button>
+                    </button> -->
                 </div>
             </div>
 
@@ -52,9 +52,42 @@
                 </svg>
             </a>
         </div>
+
+        <div class="background-circle-bb bg-dt-v-light z-0"></div>
+        <div class="background-diamond-bb bg-dt-v-light z-0"></div>
     </section>
 </template>
 
-<script setup>
-import { scrollTo } from "@/utils/utils.js"
-</script>
+<style scoped>
+.background-circle-bb {
+    position: absolute;
+    top: 65%;
+    left: 100%;
+    transform: translate(-100%, -50%);
+    width: 30vh;
+    /* Adjust the size of the circle as needed */
+    height: 60vh;
+    /* The width and height should be equal for a circle */
+    border-top-left-radius: 60vh;
+    border-bottom-left-radius: 60vh;
+    /* z-index: 0; */
+    /* Place the circle behind other content */
+    opacity: 20%;
+}
+
+.background-diamond-bb {
+    position: absolute;
+    top: 20%;
+    left: 0%;
+    transform: translate(-50%, -50%) rotate(45deg);
+    width: 50vmax;
+    /* Adjust the size of the circle as needed */
+    height: 50vmax;
+    /* The width and height should be equal for a circle */
+    border-radius: 4rem;
+    /* Creates a circle by setting border-radius to 50% */
+    /* z-index: 0; */
+    /* Place the circle behind other content */
+    opacity: 20%;
+}
+</style>
