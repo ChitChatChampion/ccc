@@ -29,7 +29,7 @@ Contributions:
 Name: [Kevin Chua Kian Chun](https://github.com/kevinchua6)<br/>
 Role: Backend Engineer<br/>
 Contributions:
-* Implement websockets for our game modes
+* Implement websockets for game modes
 * Backend routes
 * Prompt engineering
 ### AXXXXXXXX
