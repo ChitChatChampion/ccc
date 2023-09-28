@@ -49,9 +49,6 @@ npm run serve
 ### Set up backend
 Head to our [server](https://github.com/ChitChatChampion/chit-chat-champion-server/tree/master) and clone the repo. Then, follow the instructions on the README.
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
-
 ## Resources Used
 
 ### Frontend
