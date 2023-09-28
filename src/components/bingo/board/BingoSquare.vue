@@ -1,6 +1,6 @@
 <template>
   <button
-    class="bg-ne text-light w-40 h-40"
+    class="bg-ne-light text-light aspect-square p-2"
     @click="showPopup">
     <h1 class="bold">{{ title }}</h1>
     {{ guess }}
@@ -26,6 +26,10 @@ export default {
     allNames: {},
     index: {
       type: Number
+    },
+    isPlayer: {
+      type: Boolean,
+      required: true
     }
   },
   data() {
@@ -45,6 +49,9 @@ export default {
       for (let name of this.allNames) {
         options[name] = name;
       }
+
+      if (!this.isPlayer) return;
+
       this.$swal.fire({
         title: this.title,
         text: this.description,
