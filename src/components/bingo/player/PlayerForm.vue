@@ -36,6 +36,12 @@ export default {
   name: "PlayerForm",
   components: { TextInput, OrangeButton },
   mounted() {
+    this.$swal.fire({
+      title: "Retrieving Data...",
+      didOpen: () => {
+        this.$swal.showLoading();
+      }
+    });
     const roomId = this.$route.params.id;
     const url = getUrl(`bingo/${roomId}/fields`);
     fetch(url)
@@ -49,6 +55,7 @@ export default {
         }
       })
       .then(data => {
+        this.$swal.close();
         this.fields = data.fields.map(field => field.content);
       })
       .catch(err => {
@@ -78,6 +85,12 @@ export default {
       });
     },
     sendPayload() {
+      this.$swal.fire({
+        title: "Submitting Form...",
+        didOpen: () => {
+          this.$swal.showLoading();
+        }
+      });
       const payload = {};
       for (let field of this.fields) {
         payload[field] = this.$refs[field].value;
@@ -102,6 +115,7 @@ export default {
         })
         .then(() => {
           localStorage.setItem("player_name", this.$refs.name.value);
+          this.$swal.close();
           this.$forceUpdate();
         })
         .catch(err => {
