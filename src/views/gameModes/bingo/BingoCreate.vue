@@ -59,6 +59,12 @@ export default {
   },
   methods: {
     async populate({ url }) {
+      this.$swal.fire({
+        title: "Retrieving Data...",
+        didOpen: () => {
+          this.$swal.showLoading();
+        }
+      });
       const headers = getHeader();
       axios.get(url, { headers })
         .then(response => {
@@ -72,6 +78,7 @@ export default {
         })
         .then(data => {
           if (!data) return;
+          this.$swal.close();
           this.$refs.fields.setValues(data.fields);
         })
         .catch(err => {
@@ -79,6 +86,12 @@ export default {
         });
     },
     async createRoom() {
+      this.$swal.fire({
+        title: "Creating Room...",
+        didOpen: () => {
+          this.$swal.showLoading();
+        }
+      });
       const url = getUrl('room/bingo/create');
       const headers = getHeader();
       axios.post(url, {}, { headers })
@@ -92,6 +105,7 @@ export default {
           }
         })
         .then(data => {
+          this.$swal.close();
           this.$router.push(`${data.id}`);
         })
         .catch(err => {
