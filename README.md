@@ -44,6 +44,7 @@ Contributions:
 * BB, Bingo Backend routes
 * Prompt engineering
 * Report
+* Product Name
 
 ## Project setup
 
