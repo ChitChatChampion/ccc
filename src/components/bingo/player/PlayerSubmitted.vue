@@ -1,5 +1,12 @@
 <template>
-  PlayerSubmitted
+  <div class="w-full h-5/6 grid place-content-center text-center">
+    <div class="absolute z-10 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+      <h1 class="text-light font-bold text-3xl mb-4">Waiting for host to start the game...</h1>
+      <p class="text-light">Refresh when the game is ready!</p>
+    </div>
+  </div>
+  <div class="background-circle-bingo bg-ne-v-light"></div>
+  <div class="background-diamond-bingo bg-ne-v-light"></div>
 </template>
 
 <script>
@@ -7,3 +14,36 @@ export default {
   name: "PlayerSubmitted"
 }
 </script>
+
+<style scoped>
+.background-circle-bingo {
+  position: absolute;
+  top: 65%;
+  left: 100%;
+  transform: translate(-100%, -50%);
+  width: 30vh;
+  /* Adjust the size of the circle as needed */
+  height: 60vh;
+  /* The width and height should be equal for a circle */
+  border-top-left-radius: 60vh;
+  border-bottom-left-radius: 60vh;
+  /* z-index: 0; */
+  /* Place the circle behind other content */
+  opacity: 20%;
+}
+
+.background-diamond-bingo {
+  position: absolute;
+  top: 20%;
+  left: 0%;
+  transform: translate(-50%, -50%) rotate(45deg);
+  width: 50vmax;
+  /* Adjust the size of the circle as needed */
+  height: 50vmax;
+  /* The width and height should be equal for a circle */
+  border-radius: 4rem;
+  /* Creates a circle by setting border-radius to 50% */
+  /* z-index: 0; */
+  /* Place the circle behind other content */
+  opacity: 20%;
+}</style>
