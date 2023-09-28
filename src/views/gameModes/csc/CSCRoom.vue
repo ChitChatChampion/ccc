@@ -27,7 +27,7 @@
       <carousel ref="myCarousel" :items-to-show="1.3" model-value="1" class="mt-16" v-model="currentSlide">
         <slide key="$start$"></slide>
         <slide v-for="card in cards" :key="card">
-          <div class="bg-light w-full text-left p-8 h-[22rem] rounded-3xl text-jr-dark text-[20px] font-medium">
+          <div class="bg-light w-full text-left p-8 h-[22rem] rounded-3xl text-jr text-3xl font-bold grid place-content-center mx-auto max-w-lg">
             {{ card.content }}
           </div>
         </slide>
