@@ -1,7 +1,6 @@
 <template>
-  OwnerStarted
   <LeaderBoard/>
-  <BingoBoard/>
+  <BingoBoard :isPlayer="false"/>
 </template>
 
 <script>
