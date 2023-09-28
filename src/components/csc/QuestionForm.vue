@@ -1,6 +1,7 @@
 <template>
-  <h1 v-if="!!questions" class="font-bold text-3xl text-jr">Questions</h1>
-  <ul v-if="!!questions" class="bg-light shadow-md rounded-lg px-8 pt-6 pb-8 mb-4 grid gap-5 mt-5">
+  <h1 v-if="questions.length" class="font-bold text-3xl text-jr">Questions</h1>
+  <p v-if="questions.length" class="mt-5">Are these questions good enough as conversation starters? If not, you can edit or add your own. Make the best ice-breaker activity!</p>
+  <ul v-if="questions.length" class="bg-light shadow-md rounded-lg px-8 pt-6 pb-8 mb-4 grid gap-5 mt-5">
     <QuestionPreview
       v-for="(question, index) in questions"
       :key="question.id"
