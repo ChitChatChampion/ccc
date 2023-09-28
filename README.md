@@ -14,6 +14,7 @@ Contributions:
 * Design and engineer the Bingo game
 * Engineer the CSC and BB games
 * Integration
+* Styling
 * Set up SEO
 * Report (first draft)
 ### A0244120Y
@@ -25,6 +26,7 @@ Contributions:
 * Frontend design for CSC and BB
 * Product hunt
 * Google analytics
+* Landing page
 ### A0164584W
 Name: [Kevin Chua Kian Chun](https://github.com/kevinchua6)<br/>
 Role: Backend Engineer<br/>
