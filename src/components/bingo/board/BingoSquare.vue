@@ -4,7 +4,7 @@
     :class="{ 'border-ew': hasSubmitted && isCorrect, 'border-cc': !hasSubmitted, 'border-ns': hasSubmitted && !isCorrect }"
     @click="showPopup">
     <h1 class="font-bold">{{ title }}</h1>
-    Guess: {{ guess }}
+    <p v-if="isPlayer">Guess: {{ guess }}</p>
     <p>
       <span v-if="hasSubmitted && !isCorrect" class="text-ns font-bold">Wrong!</span>
       <span v-else-if="hasSubmitted && isCorrect" class="text-ew font-bold">Correct!</span>

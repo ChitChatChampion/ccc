@@ -12,6 +12,7 @@
             label="Your Name (for the leaderboard)"
             name="name"
             :isLight="true"
+            :max="50"
             ref="name"/>
         </div>
       </div>

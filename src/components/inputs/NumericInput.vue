@@ -14,7 +14,7 @@
 
 <script>
 export default {
-  name: 'TextInput',
+  name: 'NumericInput',
   data() {
     return {
       value: 10
