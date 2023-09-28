@@ -33,15 +33,15 @@ Name: [Kevin Chua Kian Chun](https://github.com/kevinchua6)<br/>
 Role: Backend Engineer<br/>
 Contributions:
 * Implement websockets for game modes
-* Backend routes
+* CSC Backend routes
 * Prompt engineering
 * Migration from Flask to Quart
 ### A0221849Y
 Name: [Neo Jing Xuan](https://github.com/neojxuan)<br/>
 Role: Integration<br/>
 Contributions:
-* Database setup and integration
-* Backend routes
+* Database schema design, setup and integration
+* BB, Bingo Backend routes
 * Prompt engineering
 * Report
 
