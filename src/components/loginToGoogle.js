@@ -11,6 +11,14 @@ const loginToGoogle = ({ redirect, router }) => {
         localStorage.setItem('name', data.name);
         localStorage.setItem('expiry', Date.now() + 3600000);
         router.push(redirect);
+        this.$swal.fire({
+          toast: true,
+          position: 'bottom',
+          icon: 'success',
+          title: 'Field has been deleted!',
+          showConfirmButton: false,
+          timer: 1500
+        });
       });
   });
 }
