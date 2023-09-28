@@ -1,5 +1,5 @@
 <template>
-  <section class="w-full max-w-3xl mx-auto p-4">
+  <section v-if="squares.length" class="w-full max-w-3xl mx-auto p-4 bg-ne-dark rounded-lg bg-opacity-50">
     <h1 class="text-3xl text-light font-bold">Bingo Board</h1>
     <ol class="grid gap-4 grid-cols-3 md:grid-cols-4 justify-items-center py-4">
       <BingoSquare
