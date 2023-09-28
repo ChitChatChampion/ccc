@@ -80,7 +80,7 @@ export default {
         })
         .then(() => {
           this.$swal.close();
-          this.$forceUpdate();
+          this.$router.push(`/bingo/${roomId}`);
         })
         .catch(err => {
           console.log(err);

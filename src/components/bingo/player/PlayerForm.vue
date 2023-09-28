@@ -116,7 +116,7 @@ export default {
         .then(() => {
           localStorage.setItem("player_name", this.$refs.name.value);
           this.$swal.close();
-          this.$forceUpdate();
+          this.$router.push(`/bingo/${roomId}`);
         })
         .catch(err => {
           console.log(err);
