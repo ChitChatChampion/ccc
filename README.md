@@ -1,7 +1,7 @@
 # ChitChatChampion
 ChitChatChampion aims to facilitate engaging ice-breaker games and conversation starters for various social settings, with a focus on customisation and user interaction. Its objectives include fostering connections, breaking the ice, and making social gatherings more enjoyable through tailored ice-breaker activities. They are meant to be played in-person, with a phone or laptop as a companion to the activity.
 
-URL: [Fill up here]()
+URL: [ChitChatChampion](https://chitchatchampion.netlify.app/)
 
 ## Group Members and Contribution
 
