@@ -69,6 +69,12 @@ export default {
   },
   methods: {
     async populate({ url }) {
+      this.$swal.fire({
+        title: "Retrieving data...",
+        didOpen: () => {
+          this.$swal.showLoading();
+        }
+      });
       const headers = getHeader();
       axios.get(url, { headers })
         .then(response => {
@@ -85,12 +91,19 @@ export default {
           this.$refs.context.setValues(data.baseContext);
           this.$refs.bb.setValues(data.bbContext);
           this.$refs.questions.setValues(data.questions);
+          this.$swal.close();
         })
         .catch(err => {
           console.log(err);
         });
     },
     async generateQuestions() {
+      this.$swal.fire({
+        title: "Generating Questions...",
+        didOpen: () => {
+          this.$swal.showLoading();
+        }
+      });
       const payload = {
         baseContext: this.$refs.context.getValues(),
         bbContext: this.$refs.bb.getValues()
@@ -109,6 +122,7 @@ export default {
         })
         .then(data => {
           this.$refs.questions.setValues(data.questions);
+          this.$swal.close();
         })
         .catch(err => {
           console.log(err);
@@ -117,6 +131,12 @@ export default {
         })
     },
     async createRoom() {
+      this.$swal.fire({
+        title: "Creating Room...",
+        didOpen: () => {
+          this.$swal.showLoading();
+        }
+      });
       const url = getUrl('room/bb/create');
       const headers = getHeader();
       axios.post(url, {}, { headers })
@@ -131,6 +151,7 @@ export default {
         })
         .then(data => {
           this.$router.push(`${data.id}`);
+          this.$swal.close();
         })
         .catch(err => {
           console.log(err);
