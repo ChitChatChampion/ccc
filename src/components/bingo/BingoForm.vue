@@ -2,7 +2,8 @@
 
 <template>
   <h1 class="font-bold text-3xl text-ne max-w-md my-5">Information</h1>
-  <ul class="bg-light shadow-md rounded-lg px-8 pt-6 pb-8 mb-4 grid gap-5 max-w-md">
+  <p class="mb-5">What information would you like to get from the players? Remember that these will all be text fields, so feel free to go wild with the details!</p>
+  <ul class="bg-light shadow-md rounded-lg px-8 pt-6 pb-8 mb-4 grid gap-5">
     <FieldPreview
       v-for="(field, index) in fields"
       :key="field.id"
