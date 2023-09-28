@@ -1,16 +1,19 @@
 <template>
-  BingoBoard
-  <ol class="grid gap-4 mx-auto">
-    <BingoSquare
-      v-for="(square, index) in squares"
-      :name="square.name"
-      :title="square.title"
-      :description="square.description"
-      :allNames="names"
-      :index="index"
-      :ref="square.name"
-      :key="square.name"/>
-  </ol>
+  <section class="w-full max-w-3xl mx-auto p-4">
+    <h1 class="text-3xl text-light font-bold">Bingo Board</h1>
+    <ol class="grid gap-4 grid-cols-3 md:grid-cols-4 justify-items-center py-4">
+      <BingoSquare
+        v-for="(square, index) in squares"
+        :name="square.name"
+        :title="square.title"
+        :description="square.description"
+        :allNames="names"
+        :index="index"
+        :ref="square.name"
+        :isPlayer="isPlayer"
+        :key="square.name"/>
+    </ol>
+  </section>
 </template>
 
 <script>
@@ -19,6 +22,11 @@ import BingoSquare from "./BingoSquare.vue";
 
 export default {
   name: "BingoBoard",
+  props: {
+    isPlayer: {
+      type: Boolean
+    }
+  },
   mounted() {
     this.getSquares();
   },
