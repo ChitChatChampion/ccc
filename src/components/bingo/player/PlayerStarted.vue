@@ -2,24 +2,33 @@
   PlayerStarted
   <TextInput
     label="Name"
+    name="name"
     ref="name"/>
   <BingoBoard ref="board"/>
-  <OrangeButton :onClick="submit"/>
+  <OrangeButton text="Submit" :onClick="submit"/>
+  {{ attempts }}
 </template>
 
 <script>
 import BingoBoard from '../board/BingoBoard.vue';
 import OrangeButton from "@/components/buttons/OrangeButton";
+import TextInput from "@/components/inputs/TextInput.vue";
 import { getUrl } from "@/services";
 import axios from 'axios';
 
 export default {
   name: "PlayerStarted",
-  components: { BingoBoard, OrangeButton },
+  components: { BingoBoard, OrangeButton, TextInput },
   data() {
     return {
       attempts: 5
     }
+  },
+  mounted() {
+    const roomId = this.$route.params.id;
+    const attemptsDict = JSON.parse(localStorage.getItem("attempts")) || {};
+    const attempts = attemptsDict[roomId];
+    this.attempts = attempts === undefined ? 5 : attempts;
   },
   methods: {
     submit() {
@@ -28,7 +37,6 @@ export default {
         return;
       }
 
-      let isDone = false;
       this.$swal.fire({
         title: "Are you sure?",
         text: `You have ${this.attempts} attempt${this.attempts === 1 ? '' : 's'} remaining.`,
@@ -38,13 +46,12 @@ export default {
         cancelButtonColor: '#D42E12',
         confirmButtonText: "Yes, I'm sure!"
       }).then(result => {
-        isDone = result.isConfirmed;
+        if (result.isConfirmed) {
+          this.sendPayload();
+        }
       });
-
-      if (!isDone) {
-        return;
-      }
-
+    },
+    sendPayload() {
       const name = this.$refs.name.value;
       if (!name) {
         this.$swal.fire("Oops...", "Please add a valid name!", "error");
@@ -55,6 +62,7 @@ export default {
       const timestamp = Date.now();
 
       const payload = { name, score, total_score, timestamp };
+      console.log(payload);
 
       const roomId = this.$route.params.id;
       const url = getUrl(`bingo/${roomId}/submit`);
@@ -63,14 +71,20 @@ export default {
           switch (response.status) {
             case 200:
             case 201:
-              return response.json();
+              return response.data;
             default:
               throw new Error("Bad method!");
           }
         })
+        .then(() => {
+          const attempts = JSON.parse(localStorage.getItem("attempts")) || {};
+          attempts[roomId] = this.attempts - 1;
+          localStorage.setItem("attempts", JSON.stringify(attempts));
+          this.attempts -= 1;
+        })
         .catch(err => {
           console.log(err);
-          this.$swal.fire("Oops...", "There was something wrong when submitting your results!", "error");
+          this.$swal.fire("Oops...", "There was something wrong when submitting your guesses!", "error");
         })
     }
   }
