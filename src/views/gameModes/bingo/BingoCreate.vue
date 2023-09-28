@@ -1,17 +1,22 @@
 <!-- /bingo/create -->
 
 <template>
-  <div class="h-screen bg-ne">
-    <NavBar backLink="/bingo" text="Social Bingo" ref="nav"/>
-    <section id='browse-game-modes' class="px-10 py-10 rounded-t-3xl bg-lrt-background grid gap-5 place-content-center mx-auto min-h-[84%]">
-      <h1 class="font-bold text-3xl text-ne">Create Game</h1>
-      <span class="max-w-3xl">Craft your custom Social Bingo board right here! Before gathering input from your participants, begin by selecting the type of information you'd like to gather from them. Whether it's hobbies, interests, favorite movies, or even political ideologies, we'll collect your players' responses and curate an engaging Bingo board tailored to your preferences!</span>
-      
-      <BingoForm ref="fields"/>
+  <div class="fixed h-screen bg-gradient-to-b from-ne-light via-ne to-ne-dark w-full bg-ne -z-1"></div>
+  <div class="min-h-screen">
+    <div class="absolute w-full h-screen z-10 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-2">
+      <NavBar backLink="/bingo" text="Social Bingo" ref="nav"/>
+      <section id='browse-game-modes' class="md:px-10 px-5 py-10 rounded-t-3xl bg-lrt-background place-content-center mx-auto min-h-[84%] max-w-3xl">
+        <h1 class="font-bold text-3xl text-ne mb-5">Create Game</h1>
+        <span class="max-w-3xl">Craft your custom Social Bingo board right here! Before gathering input from your participants, begin by selecting the type of information you'd like to gather from them. Whether it's hobbies, interests, favorite movies, or even political ideologies, we'll collect your players' responses and curate an engaging Bingo board tailored to your preferences!</span>
+        <BingoForm ref="fields"/>
 
-      <OrangeButton :onClick="createRoom" text="Create Room"/>
-    </section>
+        <OrangeButton :onClick="createRoom" text="Create Room" class="mt-5"/>
+      </section>
+    </div>
   </div>
+
+  <div class="background-circle-bingo bg-ne-v-light"></div>
+  <div class="background-diamond-bingo bg-ne-v-light"></div>
 </template>
 
 <script>
@@ -101,3 +106,36 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.background-circle-bingo {
+  position: absolute;
+  top: 65%;
+  left: 100%;
+  transform: translate(-100%, -50%);
+  width: 30vh;
+  /* Adjust the size of the circle as needed */
+  height: 60vh;
+  /* The width and height should be equal for a circle */
+  border-top-left-radius: 60vh;
+  border-bottom-left-radius: 60vh;
+  /* z-index: 0; */
+  /* Place the circle behind other content */
+  opacity: 20%;
+}
+
+.background-diamond-bingo {
+  position: absolute;
+  top: 20%;
+  left: 0%;
+  transform: translate(-50%, -50%) rotate(45deg);
+  width: 50vmax;
+  /* Adjust the size of the circle as needed */
+  height: 50vmax;
+  /* The width and height should be equal for a circle */
+  border-radius: 4rem;
+  /* Creates a circle by setting border-radius to 50% */
+  /* z-index: 0; */
+  /* Place the circle behind other content */
+  opacity: 20%;
+}</style>
