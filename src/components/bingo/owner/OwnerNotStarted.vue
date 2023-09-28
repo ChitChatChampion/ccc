@@ -1,6 +1,6 @@
 <template>
   OwnerNotStarted
-  <BingoBoard ref="board"/>
+  <BingoBoard ref="board" :isPlayer="false"/>
   <PlayersComponent/>
   <OrangeButton
     text="Generate Bingo Board"
