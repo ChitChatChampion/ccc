@@ -52,10 +52,9 @@ export default {
         }
         loginToGoogle({ redirect: '/bingo/create', router: this.$router });
       });
+    } else {
+      this.populate({ url: getUrl('bingo/context') });
     }
-  },
-  mounted() {
-    this.populate({ url: getUrl('bingo/context') });
   },
   methods: {
     populate({ url }) {
@@ -83,6 +82,7 @@ export default {
         })
         .catch(err => {
           console.log(err);
+          this.$swal.close();
         });
     },
     async createRoom() {
