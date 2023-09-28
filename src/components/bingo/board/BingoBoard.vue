@@ -51,7 +51,7 @@ export default {
   methods: {
     evaluate() {
       let score = 0;
-      for (square of this.squares) {
+      for (let square of this.squares) {
         const name = square.name;
         score += this.$refs[name].evaluate();
       }
