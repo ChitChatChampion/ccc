@@ -15,24 +15,31 @@ Contributions:
 * Engineer the CSC and BB games
 * Integration
 * Set up SEO
-* Report
+* Report (first draft)
 ### A0244120Y
 Name: [Jason Christopher](https://github.com/jasonchristopher21)<br/>
 Role: Frontend Designer<br/>
 Contributions:
 * Design UI on Figma
 * Set up Tailwind CSS styling
-* Gameplay mechanics for CSC and BB
+* Frontend design for CSC and BB
+* Product hunt
+* Google analytics
 ### A0164584W
 Name: [Kevin Chua Kian Chun](https://github.com/kevinchua6)<br/>
 Role: Backend Engineer<br/>
 Contributions:
-* TODO
+* Implement websockets for our game modes
+* Backend routes
+* Prompt engineering
 ### AXXXXXXXX
 Name: [Neo Jing Xuan](https://github.com/neojxuan)<br/>
 Role: Integration<br/>
 Contributions:
-* TODO
+* Database setup and integration
+* Backend routes
+* Prompt engineering
+* Report
 
 ## Project setup
 
