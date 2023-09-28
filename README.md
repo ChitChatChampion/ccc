@@ -56,6 +56,11 @@ npm install
 npm run serve
 ```
 
+### Environment Variables
+```
+VUE_APP_BASE_URL: For the server.
+```
+
 ### Set up backend
 Head to our [server](https://github.com/ChitChatChampion/chit-chat-champion-server/tree/master) and clone the repo. Then, follow the instructions on the README.
 
