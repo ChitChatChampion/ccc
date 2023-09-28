@@ -1,11 +1,15 @@
 <template>
-  LeaderBoard
-  <LeaderBoardEntry
-    v-for="player in players"
-    :key="player.name"
-    :name="player.name"
-    :score="player.score"/>
-  <OrangeButton :onClick="refreshLeaderboard" text="Refresh Leaderboard"/>
+  <section class="w-1/2 max-w-sm mx-auto">
+    <h1 class="text-light text-3xl font-bold">Leaderboard</h1>
+    <ol class="flex flex-col my-5 border-light border-2">
+      <LeaderBoardEntry
+        v-for="player in players"
+        :key="player.name"
+        :name="player.name"
+        :score="player.score"/>
+    </ol>
+    <OrangeButton :onClick="refreshLeaderboard" text="Refresh Leaderboard"/>
+  </section>
 </template>
 
 <script>
