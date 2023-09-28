@@ -5,7 +5,7 @@
     label="What's the purpose of the ice-breaker?"
     placeholder="e.g. Freshman orientation, First date etc."
     :min=3
-    :max=20
+    :max=200
   />
     
   <TextInput
@@ -14,7 +14,7 @@
     label="Briefly describe the group of participants."
     placeholder="e.g. University computing students from Singapore."
     :min=3
-    :max=20
+    :max=200
   />
   <SelectInput
     name="relationship"

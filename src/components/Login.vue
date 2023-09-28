@@ -18,6 +18,7 @@ export default {
   },
   methods: {
     login() {
+      this.$gtag.event('login', { method: 'google' });
       loginToGoogle({ redirect: this.redirect, router: this.$router });
     }
   },

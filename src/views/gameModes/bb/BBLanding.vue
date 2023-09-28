@@ -2,15 +2,21 @@
 
 <template>
   <div class="h-screen bg-gradient-to-b from-ns-light via-ns to-ns-dark z-0">
-    <NavBar backLink="/browse" />
-
-    <section class="h-2/3 w-screen z-10 grid place-content-center">
-      <div class="bg-light rounded-3xl max-w-lg p-5 z-10 grid gap-5 m-10">
-        <h1 class="text-3xl font-bold text-ns">Burning Bridges</h1>
-        {{ instructions }}
-        <PINInput :withBackground="false" :limitWidth="false" />
-        <OrangeButton :onClick="e => this.$router.push('/bb/create')" text="Create Game" />
+    <NavBar backLink="/browse" text="Burning Bridges"/>
+    <section class="min-h-[76%] w-screen z-10 grid place-content-center">
+      <div class="bg-light rounded-3xl max-w-lg p-5 z-10 grid gap-5 m-5">
+        <h1 class="text-3xl font-bold text-ns">How to Play</h1>
+        <ol>
+          <li><b class="text-ns">Step 1</b>. Have someone <router-link to="bb/create" class="text-ns underline hover:text-ns-light">create a game</router-link>.</li>
+          <li><b class="text-ns">Step 2</b>. Join the game on any device, preferably a phone.</li>
+          <li><b class="text-ns">Step 3</b>. Sit in a circle and pass the device between players in a clockwise manner.</li>
+          <li><b class="text-ns">Step 4</b>. Without revealing to the others, each player should press and hold a button to reveal the card's description.</li>
+          <li><b class="text-ns">Step 5</b>. Point to the player who fits the description. The two will then engage in a game of scissors-paper-stone until someone wins.</li>
+          <li><b class="text-ns">Step 6</b>. If the player with the device loses, they will have to reveal the description to everyone.</li>
+          <li><b class="text-ns">Step 7</b>. Pass the device to the next person and continue at step 4.</li>
+        </ol>
       </div>
+      <PINInput/>
     </section>
 
     <div class="background-circle-bb bg-ns-v-light"></div>
@@ -23,7 +29,6 @@ import { useMeta } from 'vue-meta';
 import NavBar from '@/components/NavBar.vue';
 import { gameModeDict } from '../gameModes';
 import PINInput from '@/components/inputs/PINInput.vue';
-import OrangeButton from '@/components/buttons/OrangeButton.vue';
 
 export default {
   name: 'BBLanding',
@@ -42,7 +47,6 @@ export default {
   components: {
     NavBar,
     PINInput,
-    OrangeButton,
   }
 }
 </script>
