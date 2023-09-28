@@ -1,9 +1,14 @@
 <template>
   <button
-    class="bg-ne-light text-light aspect-square p-2"
+    class="bg-ne-light text-light aspect-square p-2 border-4"
+    :class="{ 'border-ew': hasSubmitted && isCorrect, 'border-cc': !hasSubmitted, 'border-ns': hasSubmitted && !isCorrect }"
     @click="showPopup">
-    <h1 class="bold">{{ title }}</h1>
-    {{ guess }}
+    <h1 class="font-bold">{{ title }}</h1>
+    Guess: {{ guess }}
+    <p>
+      <span v-if="hasSubmitted && !isCorrect" class="text-ns font-bold">Wrong!</span>
+      <span v-else-if="hasSubmitted && isCorrect" class="text-ew font-bold">Correct!</span>
+    </p>
   </button>
 </template>
 
@@ -30,16 +35,20 @@ export default {
     isPlayer: {
       type: Boolean,
       required: true
-    }
+    },
   },
   data() {
     return {
-      guess: ""
+      guess: "??",
+      isCorrect: false,
+      hasSubmitted: false
     }
   },
   methods: {
     evaluate() {
+      this.hasSubmitted = true;
       if (this.guess === this.name) {
+        this.isCorrect = true;
         return 1;
       }
       return 0;
