@@ -1,14 +1,14 @@
 <template>
-  <section class="w-1/2 max-w-sm mx-auto">
+  <section class="w-1/2 max-w-sm mx-auto p-4 bg-ne-dark rounded-lg bg-opacity-50">
     <h1 class="text-light text-3xl font-bold">Leaderboard</h1>
-    <ol class="flex flex-col my-5 border-light border-2">
+    <ol v-if="players.length" class="flex flex-col mt-5">
       <LeaderBoardEntry
         v-for="player in players"
         :key="player.name"
         :name="player.name"
         :score="player.score"/>
     </ol>
-    <OrangeButton :onClick="refreshLeaderboard" text="Refresh Leaderboard"/>
+    <OrangeButton :onClick="refreshLeaderboard" text="Refresh Leaderboard" class="mt-5"/>
   </section>
 </template>
 
