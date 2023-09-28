@@ -68,7 +68,7 @@ export default {
     this.populate({ url: getUrl('bb/context') });
   },
   methods: {
-    async populate({ url }) {
+    populate({ url }) {
       this.$swal.fire({
         title: "Retrieving data...",
         didOpen: () => {
