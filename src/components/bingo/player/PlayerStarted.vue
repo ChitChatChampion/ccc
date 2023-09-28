@@ -1,12 +1,18 @@
 <template>
-  PlayerStarted
-  <TextInput
-    label="Name"
-    name="name"
-    ref="name"/>
-  <BingoBoard ref="board"/>
-  <OrangeButton text="Submit" :onClick="submit"/>
-  {{ attempts }}
+  <section>
+    <BingoBoard ref="board" :isPlayer="true"/>
+    <div class="w-full max-w-3xl mx-auto p-4 text-light">
+      <TextInput
+        label="Your Name"
+        name="name"
+        ref="name"/>
+    </div>
+    <div class="flex flex-row items-center justify-between p-4 max-w-3xl mx-auto">
+      <div class="text-light">Score: <span class="text-cc font-bold text-xl">{{ score }}<span v-if="total_score">/{{ total_score }}</span></span></div>
+      <div class="text-light">Remaining Attempts: <span class="text-cc font-bold text-xl">{{ attempts }}</span></div>
+      <OrangeButton text="Submit Guesses" :onClick="submit"/>
+    </div>
+  </section>
 </template>
 
 <script>
@@ -21,7 +27,9 @@ export default {
   components: { BingoBoard, OrangeButton, TextInput },
   data() {
     return {
-      attempts: 5
+      attempts: 5,
+      score: 0,
+      total_score: 0
     }
   },
   mounted() {
@@ -58,7 +66,9 @@ export default {
       }
 
       const score = this.$refs.board.evaluate();
+      this.score = score;
       const total_score = this.$refs.board.getTotal();
+      this.total_score = total_score;
       const timestamp = Date.now();
 
       const payload = { name, score, total_score, timestamp };
