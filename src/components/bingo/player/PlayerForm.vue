@@ -6,7 +6,7 @@
       name="name"
       label="Name"
       :isLight="true"
-      :max="20"
+      :max="50"
       ref="name"/>
     <TextInput
       v-for="field in fields"
