@@ -62,13 +62,12 @@ export default {
         }
         loginToGoogle({ redirect: '/csc/create', router: this.$router });
       });
+    } else {
+      this.populate({ url: getUrl('bb/context') });
     }
   },
-  mounted() {
-    this.populate({ url: getUrl('csc/context') });
-  },
   methods: {
-    populate({ url }) {
+    async populate({ url }) {
       this.$swal.fire({
         title: "Retrieving Data...",
         didOpen: () => {
@@ -95,6 +94,7 @@ export default {
         })
         .catch(err => {
           console.log(err);
+          this.$swal.close();
         });
     },
     async generateQuestions() {
