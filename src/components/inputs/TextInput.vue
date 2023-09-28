@@ -1,5 +1,10 @@
 <template>
-  <label v-if="!!label" :for="name" class="block text-gray-700 text-sm font-bold mb-2"><br/>{{ label }}<br/></label>
+  <label
+    v-if="!!label"
+    :for="name"
+    class="block text-gray-700 text-sm font-bold mb-2"
+    :class="{ 'text-light': isLight }"
+    ><br/>{{ label }}<br/></label>
   <input
     :name="name"
     v-model="value"
@@ -36,6 +41,10 @@ export default {
       default: false
     },
     isCenter: {
+      type: Boolean,
+      default: false
+    },
+    isLight: {
       type: Boolean,
       default: false
     },
