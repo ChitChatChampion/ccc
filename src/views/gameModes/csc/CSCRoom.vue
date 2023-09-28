@@ -31,6 +31,11 @@
       <slide key="$end$"></slide>
     </carousel>
 
+    <!-- End Game button -->
+    <div v-if="isOwner" class="flex justify-center mt-10">
+      <OrangeButton @click="endGame" text="End Game" class="w-[15rem]" />
+    </div>
+
     <!-- Bottom Navigation -->
     <div class="fixed bottom-0 w-full flex justify-between px-10 pb-9 text-light">
       <button @click="prev" :class="currentSlide <= 1 ? 'opacity-0' : 'block'" :disabled="currentSlide <= 1">
@@ -48,12 +53,14 @@
 <script>
 import { useMeta } from 'vue-meta';
 import NavBarBackOnly from "@/components/NavBarBackOnly.vue"
+import OrangeButton from "@/components/buttons/OrangeButton.vue"
 import useClipboard from "vue-clipboard3"
 import ProgressBar from '@/components/ProgressBar.vue';
 import 'vue3-carousel/dist/carousel.css'
 import { Carousel, Slide } from 'vue3-carousel'
-import { getUrl } from '@/services';
+import { getHeader, getUrl } from '@/services';
 import { gameModeDict } from '../gameModes';
+import { fireEndGameModal } from '@/utils/endGameModal';
 
 export default {
   name: 'CSCRoom',
@@ -69,12 +76,14 @@ export default {
       cards: [],
       instructions: gameModeDict.csc.instructions,
       currentSlide: 1,
+      isOwner: false,
     }
   },
   created() {
     const roomId = this.$route.params.id;
-    const url = getUrl(`room/${roomId}`);
-    fetch(url)
+    const roomUrl = getUrl(`room/${roomId}`);
+
+    fetch(roomUrl)
       .then(response => {
         switch (response.status) {
           case 200:
@@ -93,6 +102,22 @@ export default {
         if (!data) return;
         this.cards = data.questions;
       })
+
+      const userRoomUrl = getUrl(`user/room/${roomId}`);
+      const headers = getHeader();
+      fetch(userRoomUrl, {headers})
+        .then(response => {
+          switch (response.status) {
+            case 200:
+            case 201:
+              return response.json();
+          }
+        })
+      .then(data => {
+        if (!data) return;
+        this.isOwner = data.is_owner;
+      })
+
   },
   methods: {
     shuffle() {
@@ -103,6 +128,9 @@ export default {
     },
     prev() {
       this.$refs.myCarousel.prev();
+    },
+    endGame() {
+      fireEndGameModal(this.$swal, this.$router, this.$route);
     },
     copyToClipboard() {
       const { toClipboard } = useClipboard();
@@ -145,6 +173,7 @@ export default {
     Carousel,
     Slide,
     ProgressBar,
+    OrangeButton
   }
 }
 </script>

@@ -14,7 +14,7 @@
         <span>Room ID:</span>
         <span class="font-bold">{{ this.$route.params.id }}</span>
         <button class="ml-2" @click="copyToClipboard">
-          <v-icon><font-awesome-icon icon="fa-regular fa-clipboard" /></v-icon>
+          <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 384 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path fill="#FFF" d="M280 64h40c35.3 0 64 28.7 64 64V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V128C0 92.7 28.7 64 64 64h40 9.6C121 27.5 153.3 0 192 0s71 27.5 78.4 64H280zM64 112c-8.8 0-16 7.2-16 16V448c0 8.8 7.2 16 16 16H320c8.8 0 16-7.2 16-16V128c0-8.8-7.2-16-16-16H304v24c0 13.3-10.7 24-24 24H192 104c-13.3 0-24-10.7-24-24V112H64zm128-8a24 24 0 1 0 0-48 24 24 0 1 0 0 48z"/></svg>
         </button>
       </div>
 
@@ -71,6 +71,7 @@
         text="I am the next player" class="w-full" />
       <OrangeButton v-if="playerState == PLAYER_STATES.PLAYING && hasFlipped" :onClick="passToNextPlayer" text="I am done"
         class="w-full" />
+      <OrangeButton v-if="gameState == GAME_STATES.TERMINATED" :onClick="endGame" text="End Game" class="w-full" />
     </div>
 
   </div>
@@ -102,6 +103,7 @@ import NavBarBackOnly from '@/components/NavBarBackOnly.vue';
 import ProgressBar from '@/components/ProgressBar.vue';
 import OrangeButton from '@/components/buttons/OrangeButton.vue';
 import { VueFlip } from 'vue-flip';
+import { fireEndGameModal } from '@/utils/endGameModal';
 
 export default {
   name: 'BBRoom',
@@ -183,6 +185,10 @@ export default {
       this.gameState = this.GAME_STATES.RUNNING;
       this.playerState = this.PLAYER_STATES.FIRST_PLAYER_READY;
       this.cardIndex = 0;
+    },
+    endGame() {
+      // TODO: change confirm button to red
+      fireEndGameModal(this.$swal, this.$router, this.$route);
     },
     copyToClipboard() {
       const { toClipboard } = useClipboard();
