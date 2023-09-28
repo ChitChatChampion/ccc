@@ -51,6 +51,12 @@ export default {
       return this.totalScore;
     },
     getSquares() {
+      this.$swal.fire({
+        title: "Retrieving Bingo Information...",
+        didOpen: () => {
+          this.$swal.showLoading();
+        }
+      });
       const roomId = this.$route.params.id;
       const url = getUrl(`/bingo/${roomId}/squares`);
       fetch(url)
@@ -64,13 +70,13 @@ export default {
         }
       })
       .then(data => {
-        console.log(data);
+        this.$swal.close();
         this.squares = data.squares;
         // this.squares = [...this.squares, ...this.squares, ...this.squares, ...this.squares]
         this.totalScore = data.squares.length;
         this.names = data.squares.map(square => square.name);
       })
-        .catch(err => {
+      .catch(err => {
         this.$swal.fire('Oops...', 'Something went wrong went retrieving your Bingo!', 'error');
         console.log(err);
       });

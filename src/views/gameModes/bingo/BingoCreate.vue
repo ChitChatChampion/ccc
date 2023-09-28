@@ -52,13 +52,18 @@ export default {
         }
         loginToGoogle({ redirect: '/bingo/create', router: this.$router });
       });
+    } else {
+      this.populate({ url: getUrl('bingo/context') });
     }
   },
-  mounted() {
-    this.populate({ url: getUrl('bingo/context') });
-  },
   methods: {
-    async populate({ url }) {
+    populate({ url }) {
+      this.$swal.fire({
+        title: "Retrieving Data...",
+        didOpen: () => {
+          this.$swal.showLoading();
+        }
+      });
       const headers = getHeader();
       axios.get(url, { headers })
         .then(response => {
@@ -72,13 +77,21 @@ export default {
         })
         .then(data => {
           if (!data) return;
+          this.$swal.close();
           this.$refs.fields.setValues(data.fields);
         })
         .catch(err => {
           console.log(err);
+          this.$swal.close();
         });
     },
     async createRoom() {
+      this.$swal.fire({
+        title: "Creating Room...",
+        didOpen: () => {
+          this.$swal.showLoading();
+        }
+      });
       const url = getUrl('room/bingo/create');
       const headers = getHeader();
       axios.post(url, {}, { headers })
@@ -92,6 +105,7 @@ export default {
           }
         })
         .then(data => {
+          this.$swal.close();
           this.$router.push(`${data.id}`);
         })
         .catch(err => {

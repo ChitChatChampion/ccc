@@ -31,6 +31,12 @@ export default {
   components: { PlayerPreview, OrangeButton },
   methods: {
     getPlayers() {
+      this.$swal.fire({
+        title: "Retrieiving Player Information...",
+        didOpen: () => {
+          this.$swal.showLoading();
+        }
+      });
       const roomId = this.$route.params.id;
       const headers = getHeader();
       const url = getUrl(`bingo/${roomId}/players`);
@@ -44,10 +50,11 @@ export default {
             throw new Error("Bad method!");
         }
       })
-        .then(data => {
+      .then(data => {
+        this.$swal.close();
         this.players = data.players;
       })
-        .catch(err => {
+      .catch(err => {
         console.log(err);
         this.$swal.fire("Oops...", "Could not retrieve player data!", "error");
       });

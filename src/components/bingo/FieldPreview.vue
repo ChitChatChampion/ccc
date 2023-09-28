@@ -47,6 +47,12 @@ export default {
   components: { DeleteButton },
   methods: {
     saveField() {
+      this.$swal.fire({
+        title: "Saving Field...",
+        didOpen: () => {
+          this.$swal.showLoading();
+        }
+      });
       const headers = getHeader();
       const url = getUrl(`bingo/fields/${this.id}`);
       axios.put(url, { content: this.value }, { headers })
@@ -61,6 +67,15 @@ export default {
         })
         .then(() => {
           // this.$swal.fire('Success!', 'Field has been saved!', 'success');
+          this.$swal.close();
+          this.$swal.fire({
+            toast: true,
+            position: 'bottom',
+            icon: 'success',
+            title: 'Field has been saved!',
+            showConfirmButton: false,
+            timer: 1500
+          });
         })
         .catch(err => {
           console.log(err);
@@ -68,6 +83,12 @@ export default {
         });
     },
     deleteField() {
+      this.$swal.fire({
+        title: "Deleting Field...",
+        didOpen: () => {
+          this.$swal.showLoading();
+        }
+      });
       const headers = getHeader();
       const url = getUrl(`bingo/fields/${this.id}`);
       axios.delete(url, { headers })
@@ -82,6 +103,15 @@ export default {
         })
         .then(() => {
           // this.$swal.fire('Success!', 'Field has been deleted!', 'success');
+          this.$swal.close();
+          this.$swal.fire({
+            toast: true,
+            position: 'bottom',
+            icon: 'success',
+            title: 'Field has been deleted!',
+            showConfirmButton: false,
+            timer: 1500
+          });
           this.hidden = true;
         })
         .catch(err => {

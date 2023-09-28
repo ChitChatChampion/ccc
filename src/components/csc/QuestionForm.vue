@@ -30,6 +30,12 @@ export default {
       this.questions = questions;
     },
     addQuestion() {
+      this.$swal.fire({
+        title: "Adding Question...",
+        didOpen: () => {
+          this.$swal.showLoading();
+        }
+      });
       const headers = getHeader();
       const url = getUrl('csc/questions/create');
       axios.post(url, {}, { headers })
@@ -44,6 +50,7 @@ export default {
           }
         })
         .then(data => {
+          this.$swal.close();
           this.questions = [...this.questions, { id: data.id, content: '' }];
         })
         .catch(err => {

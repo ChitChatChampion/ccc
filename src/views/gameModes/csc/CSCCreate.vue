@@ -62,13 +62,18 @@ export default {
         }
         loginToGoogle({ redirect: '/csc/create', router: this.$router });
       });
+    } else {
+      this.populate({ url: getUrl('bb/context') });
     }
-  },
-  mounted() {
-    this.populate({ url: getUrl('csc/context') });
   },
   methods: {
     async populate({ url }) {
+      this.$swal.fire({
+        title: "Retrieving Data...",
+        didOpen: () => {
+          this.$swal.showLoading();
+        }
+      });
       const headers = getHeader();
       axios.get(url, { headers })
         .then(response => {
@@ -85,12 +90,20 @@ export default {
           this.$refs.context.setValues(data.baseContext);
           this.$refs.csc.setValues(data.cscContext);
           this.$refs.questions.setValues(data.questions);
+          this.$swal.close();
         })
         .catch(err => {
           console.log(err);
+          this.$swal.close();
         });
     },
     async generateQuestions() {
+      this.$swal.fire({
+        title: "Generating Questions...",
+        didOpen: () => {
+          this.$swal.showLoading();
+        }
+      });
       const payload = {
         baseContext: this.$refs.context.getValues(),
         cscContext: this.$refs.csc.getValues()
@@ -108,6 +121,7 @@ export default {
           }
         })
         .then(data => {
+          this.$swal.close();
           this.$refs.questions.setValues(data.questions);
         })
         .catch(err => {
@@ -117,6 +131,12 @@ export default {
         })
     },
     async createRoom() {
+      this.$swal.fire({
+        title: "Creating Room...",
+        didOpen: () => {
+          this.$swal.showLoading();
+        }
+      });
       const url = getUrl('room/csc/create');
       const headers = getHeader();
       axios.post(url, {}, { headers })
@@ -130,6 +150,7 @@ export default {
           }
         })
         .then(data => {
+          this.$swal.close();
           this.$router.push(`${data.id}`);
         })
         .catch(err => {

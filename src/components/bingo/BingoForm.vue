@@ -32,6 +32,12 @@ export default {
       this.fields = fields;
     },
     addField() {
+      this.$swal.fire({
+        title: "Adding Field...",
+        didOpen: () => {
+          this.$swal.showLoading();
+        }
+      });
       const headers = getHeader();
       const url = getUrl('bingo/fields/create');
       axios.post(url, {}, { headers })
@@ -45,6 +51,7 @@ export default {
           }
         })
         .then(data => {
+          this.$swal.close();
           this.fields = [...this.fields, { id: data.id, content: '' }];
         })
         .catch(err => {

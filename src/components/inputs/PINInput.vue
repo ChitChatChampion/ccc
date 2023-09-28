@@ -33,6 +33,12 @@ export default {
 },
   methods: {
     async submitPIN() {
+      this.$swal.fire({
+        title: "Finding Your Room...",
+        didOpen: () => {
+          this.$swal.showLoading();
+        }
+      });
       const roomId = this.$refs.roomId.value;
       const url = getUrl(`room/${roomId}`);
       console.log(url);
@@ -55,6 +61,7 @@ export default {
           if (!data) return;
           const gameMode = data.game_type;
           this.$router.push(`${gameMode}/${roomId}`);
+          this.$swal.close();
         })
         .catch(() => {
           this.$swal.fire({
