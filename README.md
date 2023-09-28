@@ -12,6 +12,7 @@ Contributions:
 * Set up Vue project components
 * Set up Google authentication and client-side caching
 * Design and enginerr the Bingo game
+* Integration
 * Report
 ### A0244120Y
 Name: [Jason Christopher](https://github.com/jasonchristopher21)<br/>
