@@ -1,10 +1,13 @@
 <!-- /bingo/:id -->
 
 <template>
-  <OwnerStarted v-if="isOwner && hasStarted"/>
-  <OwnerNotStarted v-else-if="isOwner && !hasStarted"/>
-  <PlayerStarted v-else-if="!isOwner && hasStarted"/>
-  <PlayerNotStarted v-else :hasSubmitted="hasSubmitted"/>
+  <main class="h-screen bg-gradient-to-b from-ne-light via-ne to-ne-dark">
+    <NavBar backLink="/bingo" text="Social Bingo"/>
+    <OwnerStarted v-if="isOwner && hasStarted"/>
+    <OwnerNotStarted v-else-if="isOwner && !hasStarted"/>
+    <PlayerStarted v-else-if="!isOwner && hasStarted"/>
+    <PlayerNotStarted v-else :hasSubmitted="hasSubmitted"/>
+  </main>
 </template>
 
 <script>
@@ -14,6 +17,7 @@ import OwnerStarted from '@/components/bingo/owner/OwnerStarted.vue';
 import OwnerNotStarted from '@/components/bingo/owner/OwnerNotStarted.vue';
 import PlayerStarted from '@/components/bingo/player/PlayerStarted.vue';
 import PlayerNotStarted from '@/components/bingo/player/PlayerNotStarted.vue';
+import NavBar from "@/components/NavBar.vue";
 
 export default {
   name: "BingoRoom",
@@ -52,6 +56,6 @@ export default {
       hasSubmitted: false
     };
   },
-  components: { OwnerStarted, OwnerNotStarted, PlayerStarted, PlayerNotStarted }
+  components: { OwnerStarted, OwnerNotStarted, PlayerStarted, PlayerNotStarted, NavBar }
 }
 </script>
