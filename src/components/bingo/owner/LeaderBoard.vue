@@ -31,6 +31,12 @@ export default {
   components: { LeaderBoardEntry, OrangeButton },
   methods: {
     refreshLeaderboard() {
+      this.$swal.fire({
+        title: "Retrieving Leaderboard...",
+        didOpen: () => {
+          this.$swal.showLoading();
+        }
+      });
       const roomId = this.$route.params.id;
       const url = getUrl(`bingo/${roomId}/leaderboard`);
       const headers = getHeader();
@@ -45,6 +51,7 @@ export default {
         }
       })
       .then(data => {
+        this.$swal.close();
         this.players = data.players;
       })
         .catch(err => {
