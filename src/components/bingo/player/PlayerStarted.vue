@@ -73,6 +73,12 @@ export default {
       });
     },
     sendPayload() {
+      this.$swal.fire({
+        title: "Submitting Guesses...",
+        didOpen: () => {
+          this.$swal.showLoading();
+        }
+      });
       const name = this.$refs.name.value;
       if (!name) {
         this.$swal.fire("Oops...", "Please add a valid name!", "error");
@@ -85,7 +91,6 @@ export default {
       const timestamp = Date.now();
 
       const payload = { name, score, total_score, timestamp };
-      console.log(payload);
 
       const roomId = this.$route.params.id;
       const url = getUrl(`bingo/${roomId}/submit`);
@@ -104,6 +109,7 @@ export default {
           attempts[roomId] = this.attempts - 1;
           localStorage.setItem("attempts", JSON.stringify(attempts));
           this.attempts -= 1;
+          this.$swal.close();
         })
         .catch(err => {
           console.log(err);
