@@ -18,6 +18,7 @@ import axios from "axios";
 import LeaderBoardEntry from "./LeaderBoardEntry.vue";
 import { BingoWebSocket } from '@/services/websockets';
 import OrangeButton from "@/components/buttons/OrangeButton.vue";
+import loginToGoogle from "@/components/loginToGoogle";
 
 export default {
   name: "LeaderBoard",
@@ -36,6 +37,23 @@ export default {
   components: { LeaderBoardEntry, OrangeButton },
   methods: {
     refreshLeaderboard() {
+      if (localStorage.getItem('expiry') < Date.now()) {
+        this.$swal.fire({
+          icon: 'warning',
+          title: 'Please log in to Google to check the leaderboard!',
+          showCancelButton: true,
+          confirmButtonText: 'Log In'
+        }).then(result => {
+          if (result.isDismissed) {
+            return;
+          }
+          loginToGoogle({ fn: this.refreshLeaderboardProcess });
+        });
+      } else {
+        this.refreshLeaderboardProcess();
+      }
+    },
+    refreshLeaderboardProcess() {
       this.$swal.fire({
         title: "Retrieving Leaderboard...",
         didOpen: () => {
