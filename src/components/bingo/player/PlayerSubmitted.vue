@@ -1,6 +1,7 @@
 <template>
   <div class="w-full h-5/6 grid place-content-center text-center">
     <div class="absolute z-10 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+      <NavBar backLink="/bingo" text="Social Bingo"/>
       <h1 class="text-light font-bold text-3xl mb-4">Waiting for host to start the game...</h1>
       <p class="text-light">Refresh when the game is ready!</p>
     </div>
@@ -10,8 +11,11 @@
 </template>
 
 <script>
+import NavBar from "@/components/NavBar.vue";
+
 export default {
-  name: "PlayerSubmitted"
+  name: "PlayerSubmitted",
+  components: { NavBar }
 }
 </script>
 
