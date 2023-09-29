@@ -18,6 +18,7 @@
 import { getHeader, getUrl } from '@/services';
 import DeleteButton from '@/components/buttons/DeleteButton.vue';
 import axios from 'axios';
+import { googleHelper } from '@/components/loginToGoogle';
 
 export default {
   name: 'QuestionPreview',
@@ -48,6 +49,9 @@ export default {
   components: { DeleteButton },
   methods: {
     saveQuestion() {
+      googleHelper({ fn: this.saveQuestionProcess, msg: 'save a question' });
+    },
+    saveQuestionProcess() {
       this.isTouched = true;
       if (!this.value) {
         return;
@@ -80,6 +84,9 @@ export default {
         });
     },
     deleteQuestion() {
+      googleHelper({ fn: this.deleteQuestionProcess, msg: 'delete a question' });
+    },
+    deleteQuestionProcess() {
       const headers = getHeader();
       const url = getUrl(`csc/questions/${this.id}`);
       axios.delete(url, { headers })
