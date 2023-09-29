@@ -2,13 +2,11 @@
 
 <template>
   <div class="fixed h-screen bg-gradient-to-b from-ne-light via-ne to-ne-dark w-full bg-ne -z-1"></div>
-  <main class="h-screen bg-gradient-to-b from-ne-light via-ne to-ne-dark p-2">
+  <main class="h-screen bg-gradient-to-b from-ne-light via-ne to-ne-dark p-2 mb-10">
     <OwnerStarted v-if="isOwner && hasStarted"/>
     <OwnerNotStarted :ws="bingoWs" v-else-if="isOwner && !hasStarted"/>
     <PlayerStarted v-else-if="!isOwner && hasStarted"/>
-    <PlayerNotStarted v-else :hasSubmitted="hasSubmitted"/>
-    <!-- <div class="background-circle-bingo bg-ne-v-light"></div>
-    <div class="background-diamond-bingo bg-ne-v-light"></div> -->
+    <PlayerNotStarted v-else :hasSubmittedProp="hasSubmitted"/>
   </main>
 </template>
 
@@ -78,6 +76,15 @@ export default {
         this.isOwner = data.isOwner;
         this.hasStarted = data.hasStarted;
         this.hasSubmitted = data.hasSubmitted;
+
+        const gameStateStore = useGameStateStore();
+
+        if (data.hasStarted) {
+          gameStateStore.setGameState("STARTED");
+        } else if (data.hasSubmitted) {
+          gameStateStore.setGameState("SUBMITTED");
+        }
+
         if (!data.hasSubmitted) {
           const attemptsDict = JSON.parse(localStorage.getItem("attempts")) || {};
           attemptsDict[roomId] = 5;
