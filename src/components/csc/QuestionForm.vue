@@ -30,12 +30,6 @@ export default {
       this.questions = questions;
     },
     addQuestion() {
-      this.$swal.fire({
-        title: "Adding Question...",
-        didOpen: () => {
-          this.$swal.showLoading();
-        }
-      });
       const headers = getHeader();
       const url = getUrl('csc/questions/create');
       axios.post(url, {}, { headers })
@@ -50,7 +44,14 @@ export default {
           }
         })
         .then(data => {
-          this.$swal.close();
+          this.$swal.fire({
+            toast: true,
+            position: 'bottom',
+            icon: 'success',
+            title: 'Question has been added!',
+            showConfirmButton: false,
+            timer: 1500
+          });
           this.questions = [...this.questions, { id: data.id, content: '' }];
         })
         .catch(err => {
