@@ -13,7 +13,7 @@
     :placeholder="placeholder"
     @input="validateInput"
     />
-  <p v-if="inputError" class="text-ns">{{ inputError }}</p>
+  <p v-if="inputError && isTouched" class="text-ns">{{ inputError }}</p>
 </template>
 
 <script>
@@ -23,6 +23,7 @@ export default {
     return {
       value: '',
       inputError: "",
+      isTouched: false
     }
   },
   props: {
@@ -61,6 +62,8 @@ export default {
       } else {
         this.inputError = "";
       }
+
+      this.isTouched = true;
     },
   }
 }
