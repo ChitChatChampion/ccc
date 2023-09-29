@@ -9,7 +9,7 @@
         @blur="saveQuestion" />
       <DeleteButton :onClick="deleteQuestion" />
     </div>
-    <p class="text-ns" v-if="!this.value">Question cannot be left blank!</p>
+    <p class="text-ns" v-if="!this.value && isTouched">Question cannot be left blank!</p>
   </li>
 </template>
 
@@ -23,7 +23,8 @@ export default {
   data() {
     return {
       value: '',
-      hidden: false
+      hidden: false,
+      isTouched: false
     };
   },
   props: {
@@ -32,7 +33,7 @@ export default {
       required: true
     },
     id: {
-      type: Number,
+      type: String,
       required: true
     },
     content: {
@@ -46,6 +47,10 @@ export default {
   components: { DeleteButton },
   methods: {
     saveQuestion() {
+      this.isTouched = true;
+      if (!this.value) {
+        return;
+      }
       const headers = getHeader();
       const url = getUrl(`bb/questions/${this.id}`);
       axios.put(url, { content: this.value }, { headers })
@@ -59,7 +64,6 @@ export default {
           }
         })
         .then(() => {
-          // this.$swal.fire('Success!', 'Question has been saved!', 'success');
           this.$swal.fire({
             toast: true,
             position: 'bottom',
@@ -88,7 +92,6 @@ export default {
           }
         })
         .then(() => {
-          // this.$swal.fire('Success!', 'Question has been deleted!', 'success');
           this.$swal.fire({
             toast: true,
             position: 'bottom',
