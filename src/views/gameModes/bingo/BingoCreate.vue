@@ -27,7 +27,7 @@ import { gameModeDict } from '../gameModes';
 import { getHeader, getUrl } from '@/services';
 import BingoForm from '@/components/bingo/BingoForm.vue';
 import OrangeButton from '@/components/buttons/OrangeButton.vue';
-import loginToGoogle from '@/components/loginToGoogle';
+import loginToGoogle, { googleHelper } from '@/components/loginToGoogle';
 
 export default {
   name: 'BingoCreate',
@@ -86,6 +86,9 @@ export default {
         });
     },
     async createRoom() {
+      googleHelper({ fn: this.createRoomProcess, msg: 'create a room' });
+    },
+    createRoomProcess() {
       if (!this.$refs.fields.validate()) {
         this.$swal.fire("Oops...", "Please make sure you don't leave any fields blank!", "error");
         return;
