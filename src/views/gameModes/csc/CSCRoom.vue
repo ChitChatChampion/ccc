@@ -68,7 +68,7 @@ import { Carousel, Slide } from 'vue3-carousel'
 import { getHeader, getUrl } from '@/services';
 import { gameModeDict } from '../gameModes';
 import { fireEndGameModal } from '@/utils/endGameModal';
-import {WebSocketClient} from '@/services/websockets';
+import { WebSocketClient } from '@/services/websockets';
 
 export default {
   name: 'CSCRoom',
@@ -90,7 +90,7 @@ export default {
     }
   },
   created() {
-    const ws = new WebSocketClient();
+    const ws = new WebSocketClient("room/ws");
     this.ws = ws
     
     this.$swal.fire({
@@ -141,16 +141,15 @@ export default {
         // Only if you're not the owner, then we check if we need to kick you out
         if (!this.isOwner) {
           ws.enterRoom(roomId);
+          ws.onRoomClose(() => {
+            this.$swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Room has been closed by the owner!'
+            });
+            this.$router.push('.');
+          })
         }
-      })
-
-      ws.onRoomClose(() => {
-        this.$swal.fire({
-          icon: 'error',
-          title: 'Oops...',
-          text: 'Room has been closed by the owner!'
-        });
-        this.$router.push('.');
       })
   },
   methods: {

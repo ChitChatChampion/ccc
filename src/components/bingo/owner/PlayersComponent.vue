@@ -22,11 +22,18 @@ export default {
   name: "PlayersComponent",
   data() {
     return {
-      players: []
+      players: [],
+      bingoWs: null
     };
+  },
+  props: {
+    ws: Object
   },
   mounted() {
     this.getPlayers();
+    this.ws.onPlayerJoin(() => {
+      this.getPlayers();
+    });
   },
   components: { PlayerPreview, OrangeButton },
   methods: {

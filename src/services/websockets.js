@@ -1,9 +1,10 @@
 import { getUrl } from "../services";
 
+// TODO: separate out different ws into different files
 export class WebSocketClient {
-  constructor() {
+  constructor(path) {
     // We slice away the https
-    this.socket = new WebSocket(`ws://${getUrl("csc/ws").slice(7)}`);
+    this.socket = new WebSocket(`ws://${getUrl(path).slice(7)}`);
     this.setupWebSocket();
   }
 
@@ -15,6 +16,31 @@ export class WebSocketClient {
         });
       } else {
         resolve();
+      }
+    });
+  }
+
+  bingoEnterRoom(roomId, isOwner) {
+    this.waitForOpenSocket().then(() =>
+      this.socket.send(
+        JSON.stringify({
+          is_owner: isOwner,
+          type: "enter_room",
+          room_id: roomId,
+        })
+      )
+    );
+  }
+
+  onPlayerJoin(callback) {
+    this.socket.addEventListener("message", (event) => {
+      try {
+        const message = JSON.parse(event.data);
+        if (message.type === "player_join") {
+          callback(message);
+        }
+      } catch (err) {
+        console.error(err);
       }
     });
   }

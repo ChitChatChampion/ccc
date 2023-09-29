@@ -4,7 +4,7 @@
   <main class="h-screen bg-gradient-to-b from-ne-light via-ne to-ne-dark p-2">
     <NavBar backLink="/bingo" text="Social Bingo"/>
     <OwnerStarted v-if="isOwner && hasStarted"/>
-    <OwnerNotStarted v-else-if="isOwner && !hasStarted"/>
+    <OwnerNotStarted :ws="bingoWs" v-else-if="isOwner && !hasStarted"/>
     <PlayerStarted v-else-if="!isOwner && hasStarted"/>
     <PlayerNotStarted v-else :hasSubmitted="hasSubmitted"/>
     <!-- <div class="background-circle-bingo bg-ne-v-light"></div>
@@ -20,10 +20,16 @@ import OwnerNotStarted from '@/components/bingo/owner/OwnerNotStarted.vue';
 import PlayerStarted from '@/components/bingo/player/PlayerStarted.vue';
 import PlayerNotStarted from '@/components/bingo/player/PlayerNotStarted.vue';
 import NavBar from "@/components/NavBar.vue";
+import { WebSocketClient } from '@/services/websockets';
 
 export default {
   name: "BingoRoom",
   created() {
+    const ws = new WebSocketClient("room/ws");
+    const bingoWs = new WebSocketClient("bingo/ws");
+    
+    this.bingoWs = bingoWs;
+    this.ws = ws
     this.$swal.fire({
       title: "Retrieving Room Information...",
       didOpen: () => {
@@ -46,6 +52,22 @@ export default {
         }
       })
       .then(data => {
+        // Notify owner when room joined
+        bingoWs.bingoEnterRoom(roomId, data.isOwner);
+
+        // Kicking out players when room close
+        if (!data.isOwner) {
+          ws.enterRoom(roomId);
+          ws.onRoomClose(() => {
+            this.$swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Room has been closed by the owner!'
+            });
+            this.$router.push('.');
+          })
+        }
+
         this.isOwner = data.isOwner;
         this.hasStarted = data.hasStarted;
         this.hasSubmitted = data.hasSubmitted;
@@ -67,7 +89,9 @@ export default {
       isLoading: true,
       isOwner: false,
       hasStarted: false,
-      hasSubmitted: false
+      hasSubmitted: false,
+      ws: null,
+      bingoWs: null
     };
   },
   components: { OwnerStarted, OwnerNotStarted, PlayerStarted, PlayerNotStarted, NavBar }

@@ -1,7 +1,7 @@
 <template>
   <div class="w-full">
     <div class="absolute w-full z-10 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-2">
-      <PlayersComponent/>
+      <PlayersComponent :ws="ws"/>
       <div class="max-w-3xl mx-auto p-4">
         <OrangeButton
           class="me-5"
@@ -28,6 +28,10 @@ import { getHeader, getUrl } from "@/services";
 export default {
   name: "OwnerNotStarted",
   components: { BingoBoard, PlayersComponent, OrangeButton },
+  props: {
+    ws: Object
+  },
+
   methods: {
     generate() {
       this.$swal.fire({
