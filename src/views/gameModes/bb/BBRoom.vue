@@ -67,7 +67,7 @@
       </section>
 
       <!-- Bottom Buttons -->
-      <div class="fixed bottom-0 w-full flex justify-between px-10 pb-9 text-light">
+      <div class="fixed bottom-0 w-full flex gap-4 justify-between px-10 pb-9 text-light">
         <OrangeButton v-if="gameState == GAME_STATES.TERMINATED" :onClick="restartGame" text="Play Again" class="w-full max-w-sm mx-auto" />
         <OrangeButton v-if="playerState == PLAYER_STATES.FIRST_PLAYER_READY" :onClick="showNextPlayerCard"
           text="I am the first player" class="w-full max-w-sm mx-auto" />
@@ -75,7 +75,7 @@
           text="I am the next player" class="w-full max-w-sm mx-auto" />
         <OrangeButton v-if="playerState == PLAYER_STATES.PLAYING && hasFlipped" :onClick="passToNextPlayer" text="I am done"
           class="w-full max-w-sm mx-auto" />
-      <OrangeButton v-if="gameState == GAME_STATES.TERMINATED" :onClick="endGame" text="End Game" class="w-full" />
+        <OrangeButton class=" bg-ns-light hover:bg-ns-v-light w-full max-w-sm mx-auto " v-if="isOwner && gameState == GAME_STATES.TERMINATED" :onClick="endGame" text="End Game" />
       </div>
     </div>
   </div>
@@ -103,7 +103,7 @@
 
 <script>
 import { useMeta } from 'vue-meta';
-import { getUrl } from '@/services';
+import { getUrl, getHeader } from '@/services';
 import { gameModeDict } from '../gameModes';
 import useClipboard from "vue-clipboard3"
 import NavBarBackOnly from '@/components/NavBarBackOnly.vue';
@@ -111,6 +111,7 @@ import ProgressBar from '@/components/ProgressBar.vue';
 import OrangeButton from '@/components/buttons/OrangeButton.vue';
 import { VueFlip } from 'vue-flip';
 import { fireEndGameModal } from '@/utils/endGameModal';
+import { WebSocketClient } from '@/services/websockets';
 
 export default {
   name: 'BBRoom',
@@ -140,9 +141,13 @@ export default {
       instructions: gameModeDict.bb.instructions,
       hasFlipped: false,
       isCardFlipped: false,
+      isOwner: false,
+      ws: null
     }
   },
   created() {
+    const ws = new WebSocketClient("room/ws");
+    this.ws = ws
     this.$swal.fire({
       title: "Retrieving Room Information...",
       didOpen: () => {
@@ -170,6 +175,34 @@ export default {
         if (!data) return;
         this.cards = data.questions;
         this.$swal.close();
+      })
+
+      const userRoomUrl = getUrl(`user/room/${roomId}`);
+      const headers = getHeader();
+      fetch(userRoomUrl, {headers})
+        .then(response => {
+          switch (response.status) {
+            case 200:
+            case 201:
+              return response.json();
+          }
+        })
+      .then(data => {
+        if (!data) return;
+        this.isOwner = data.is_owner;
+      }).finally(() => {
+        // Only if you're not the owner, then we check if we need to kick you out
+        if (!this.isOwner) {
+          ws.enterRoom(roomId);
+          ws.onRoomClose(() => {
+            this.$swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Room has been closed by the owner!'
+            });
+            this.$router.push('.');
+          })
+        }
       })
   },
   methods: {
@@ -201,7 +234,7 @@ export default {
     },
     endGame() {
       // TODO: change confirm button to red
-      fireEndGameModal(this.$swal, this.$router, this.$route);
+      fireEndGameModal(this.$swal, this.$router, this.$route, this.ws);
     },
     copyToClipboard() {
       const { toClipboard } = useClipboard();
