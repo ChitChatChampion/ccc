@@ -86,19 +86,31 @@ export default {
       });
     },
     sendPayload() {
+      const payload = {};
+      payload.other_information = this.$refs.other_information.value;
+
+      for (let field of this.fields) {
+        const value = this.$refs[field][0].value;
+        if (!value) {
+          this.$swal.fire("Oops...", `Please fill up the ${field} field!`, "error");
+          return;
+        }
+        payload[field] = value;
+      }
+
+      const name = this.$refs.name.value;
+      if (!name) {
+        this.$swal.fire("Oops...", `Please fill up your name!`, "error");
+        return;
+      }
+      payload.name = name;
+
       this.$swal.fire({
         title: "Submitting Form...",
         didOpen: () => {
           this.$swal.showLoading();
         }
       });
-      const payload = {};
-      for (let field of this.fields) {
-        payload[field] = this.$refs[field][0].value;
-      }
-      payload.name = this.$refs.name.value;
-      payload.other_information = this.$refs.other_information.value;
-
       const roomId = this.$route.params.id;
       const url = getUrl(`bingo/${roomId}/join`);
       axios.post(url, payload, {})
