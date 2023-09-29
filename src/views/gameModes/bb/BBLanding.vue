@@ -1,7 +1,8 @@
 <!-- /bb -->
 
 <template>
-  <div class="h-screen bg-gradient-to-b from-ns-light via-ns to-ns-dark z-0">
+  <div class="fixed h-screen bg-gradient-to-b from-ns-light via-ns to-ns-dark w-full bg-ns -z-1"></div>
+  <div class="h-screen z-0">
     <NavBar backLink="/browse" text="Burning Bridges"/>
     <section class="min-h-[76%] w-screen z-10 grid place-content-center">
       <div class="bg-light rounded-3xl max-w-lg p-5 z-10 grid gap-5 m-5">

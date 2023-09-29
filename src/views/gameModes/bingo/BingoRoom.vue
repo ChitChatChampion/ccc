@@ -87,6 +87,7 @@ export default {
               this.$router.push('.');
             })
           }
+          console.log(data);
 
           this.isOwner = data.isOwner;
           this.hasStarted = data.hasStarted;
