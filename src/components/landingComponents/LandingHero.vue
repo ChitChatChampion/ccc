@@ -7,7 +7,7 @@
                     Break the Ice with Personalised Games</h1>
                 <p class="max-w-2xl mb-6 font-light opacity-90 lg:mb-8 md:text-lg lg:text-xl">
                     ChitChatChampion leverages Generative AI technology to create personalised games that suits every team
-                    occassion.
+                    occasion.
                 </p>
                 <div class="flex flex-col sm:flex-row gap-4">
                     <div class="flex mx-auto sm:ml-0">
