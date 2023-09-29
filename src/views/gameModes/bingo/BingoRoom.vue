@@ -21,9 +21,17 @@ import PlayerStarted from '@/components/bingo/player/PlayerStarted.vue';
 import PlayerNotStarted from '@/components/bingo/player/PlayerNotStarted.vue';
 import NavBar from "@/components/NavBar.vue";
 import { RoomWebSocket, BingoWebSocket } from '@/services/websockets';
+import { useGameStateStore } from '../../../store'; // Import the store
+import { computed } from 'vue';
 
 export default {
   name: "BingoRoom",
+  setup() {
+          const gameStateStore = useGameStateStore(); // Use the store
+          const storeHasStarted = computed(() => gameStateStore.getGameState);
+          console.log(storeHasStarted)
+          // this.hasStarted = storeHasStarted;
+  },
   created() {
     const ws = new RoomWebSocket();
     const bingoWs = new BingoWebSocket();
@@ -81,7 +89,17 @@ export default {
       .catch(err => {
         console.log(err);
         this.$swal.fire("Oops...", "Something went wrong when retrieving room information!", "error");
-      });
+      })
+      // .finally(() => {
+      //   if (!this.hasStarted) {
+      //     const gameStateStore = useGameStateStore(); // Use the store
+      //     const storeHasStarted = computed(() => gameStateStore.getGameState);
+      //     console.log(storeHasStarted)
+      //     // this.hasStarted = storeHasStarted;
+      //   }
+      // });
+
+
     this.isLoading = false;
   },
   data() {

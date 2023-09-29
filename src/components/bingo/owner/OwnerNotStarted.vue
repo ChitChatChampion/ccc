@@ -24,6 +24,7 @@ import BingoBoard from '../board/BingoBoard.vue';
 import PlayersComponent from './PlayersComponent.vue';
 import OrangeButton from "@/components/buttons/OrangeButton.vue";
 import { getHeader, getUrl } from "@/services";
+import { useGameStateStore } from '../../../store'; // Import the store
 
 export default {
   name: "OwnerNotStarted",
@@ -85,6 +86,8 @@ export default {
         .then(() => {
           this.$swal.close();
           this.$router.push(`/bingo/${roomId}`);
+          const gameStateStore = useGameStateStore();
+          gameStateStore.setGameState("STARTED");
         })
         .catch(err => {
           console.log(err);
