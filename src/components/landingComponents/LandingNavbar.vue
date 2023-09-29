@@ -6,7 +6,7 @@
                     <img :src="ccclogo" class="mr-3 h-4 sm:h-9" alt="ChitChatChampion Logo" />
                 </button>
                 <div class="flex items-center lg:order-2">
-                    <router-link to="/">
+                    <router-link to="/browse">
                         <button
                             class="text-white bg-cc hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-1 lg:py-2.5 mr-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">Create Game</button>
                     </router-link>
