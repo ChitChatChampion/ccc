@@ -5,11 +5,11 @@
   <div class="min-h-screen">
     <div class="absolute w-full h-screen z-10 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-2">
       <NavBar backLink="/bb" text="Burning Bridges" ref="nav"/>
-      <section id='browse-game-modes' class="md:px-10 px-5 py-10 rounded-t-3xl bg-lrt-background place-content-center mx-auto min-h-[84%] max-w-3xl">
+      <section id='browse-game-modes' class="md:px-10 px-2 py-10 rounded-t-3xl bg-lrt-background place-content-center mx-auto min-h-[84%] max-w-3xl">
         <h1 class="font-bold text-3xl text-ns mb-5">Create Game</h1>
         <span class="max-w-3xl mb-5">Based on how you answer these questions, we'll ask ChatGPT to craft an ice-breaker game for you! So feel free to be as detailed as possible!</span>
 
-        <form class="bg-light shadow-md rounded-lg px-8 pt-6 pb-8 mb-4 mt-5">
+        <form class="bg-light shadow-md rounded-lg md:px-8 px-2 pt-6 pb-8 mb-4 mt-5">
           <ContextForm ref="context"/>
           <BBForm ref="bb"/>
           <br/>
@@ -18,7 +18,7 @@
         
         <QuestionForm ref="questions"/>
 
-        <OrangeButton :onClick="createRoom" text="Create Room" class="mt-5"/>
+        <OrangeButton v-if="hasGenerated" :onClick="createRoom" text="Create Room" class="mt-5"/>
       </section>
     </div>
   </div>
@@ -46,6 +46,11 @@ export default {
       title: 'Burning Bridges',
       description: gameModeDict.bb.description
     })
+  },
+  data() {
+    return {
+      hasGenerated: false
+    }
   },
   components: { NavBar, ContextForm, BBForm, OrangeButton, QuestionForm },
   created() {
@@ -90,6 +95,9 @@ export default {
           this.$refs.context.setValues(data.baseContext);
           this.$refs.bb.setValues(data.bbContext);
           this.$refs.questions.setValues(data.questions);
+          if (data.questions) {
+            this.hasGenerated = true;
+          }
           this.$swal.close();
         })
         .catch(err => {
@@ -98,16 +106,23 @@ export default {
         });
     },
     async generateQuestions() {
+      let baseContext;
+      let bbContext;
+      try {
+        baseContext = this.$refs.context.getValues();
+        bbContext = this.$refs.bb.getValues();
+      } catch (e) {
+        return;
+      }
+
       this.$swal.fire({
         title: "Generating Questions...",
         didOpen: () => {
           this.$swal.showLoading();
         }
       });
-      const payload = {
-        baseContext: this.$refs.context.getValues(),
-        bbContext: this.$refs.bb.getValues()
-      };
+
+      const payload = { baseContext, bbContext };
       const url = getUrl('bb/questions/generate');
       const headers = getHeader();
       axios.post(url, payload, { headers })
@@ -123,13 +138,17 @@ export default {
         .then(data => {
           this.$refs.questions.setValues(data.questions);
           this.$swal.close();
+          this.hasGenerated = true;
         })
         .catch(err => {
           this.$swal.fire('Oops...', `Generate questions failed! ${err?.response?.data?.message ?? ""}`, 'error');
-          // this.$refs.questions.setValues({ questions: [{ id: 12345, content: "Who are you" }, { id: 12345, content: "Who are you" }] })
         })
     },
     async createRoom() {
+      if (!this.$refs.questions.validate()) {
+        this.$swal.fire("Oops...", "Please make sure you don't leave any questions blank!", "error");
+        return;
+      }
       this.$swal.fire({
         title: "Creating Room...",
         didOpen: () => {

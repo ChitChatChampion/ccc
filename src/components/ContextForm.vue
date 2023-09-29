@@ -26,6 +26,7 @@
       { label: 'Acquaintances', value: 'ACQUAINTANCES' },
       { label: 'Friends', value: 'FRIENDS' },
       { label: 'Close Friends', value: 'CLOSE FRIENDS' },
+      { label: 'Family', value: 'FAMILY' }
     ]"/>
 </template>
 
@@ -38,11 +39,16 @@ export default {
   components: { TextInput, SelectInput },
   methods: {
     getValues() {
-      return {
-        purpose: this.$refs.purpose.value,
-        description: this.$refs.description.value,
-        relationship: this.$refs.relationship.value
+      const purpose = this.$refs.purpose.value;
+      const description = this.$refs.description.value;
+      const relationship = this.$refs.relationship.value;
+
+      if (!purpose || !description || !relationship) {
+        this.$swal.fire("Oops...", "You left a field blank!", "error");
+        throw new Error("A field was left blank")
       }
+
+      return { purpose, description, relationship };
     },
     setValues({ purpose, description, relationship }) {
       this.$refs.purpose.value = purpose;

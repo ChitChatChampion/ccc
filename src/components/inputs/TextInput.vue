@@ -8,12 +8,12 @@
   <input
     :name="name"
     v-model="value"
-    class="shadow appearance-none border rounded-xl w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+    class="resize-none shadow appearance-none border rounded-xl w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
     :class="{ 'text-center': isCenter }"
     :placeholder="placeholder"
     @input="validateInput"
     />
-  <p v-if="inputError" class="text-ns">{{ inputError }}</p>
+  <p v-if="inputError && isTouched" class="text-ns">{{ inputError }}</p>
 </template>
 
 <script>
@@ -23,6 +23,7 @@ export default {
     return {
       value: '',
       inputError: "",
+      isTouched: false
     }
   },
   props: {
@@ -61,6 +62,8 @@ export default {
       } else {
         this.inputError = "";
       }
+
+      this.isTouched = true;
     },
   }
 }

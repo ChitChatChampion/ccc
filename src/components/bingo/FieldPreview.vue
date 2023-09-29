@@ -5,12 +5,12 @@
     </label>
     <div class="flex">
       <input v-model="value"
-        class="shadow appearance-none border rounded-l-xl w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        class="resize-none shadow appearance-none border rounded-l-xl w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
         placeholder="e.g. Gender, Hobbies, Favourite Chocolate"
-        @blur="saveField" />
+        @blur="saveField"/>
       <DeleteButton :onClick="deleteField" />
     </div>
-    <p class="text-ns" v-if="!this.value">Cannot be left blank!</p>
+    <p class="text-ns" v-if="!this.value && isTouched">Cannot be left blank!</p>
   </li>
 </template>
 
@@ -24,7 +24,8 @@ export default {
   data() {
     return {
       value: '',
-      hidden: false
+      hidden: false,
+      isTouched: false
     };
   },
   props: {
@@ -33,7 +34,7 @@ export default {
       required: true
     },
     id: {
-      type: Number,
+      type: String,
       required: true
     },
     content: {
@@ -47,12 +48,10 @@ export default {
   components: { DeleteButton },
   methods: {
     saveField() {
-      this.$swal.fire({
-        title: "Saving Field...",
-        didOpen: () => {
-          this.$swal.showLoading();
-        }
-      });
+      this.isTouched = true;
+      if (!this.value) {
+        return;
+      }
       const headers = getHeader();
       const url = getUrl(`bingo/fields/${this.id}`);
       axios.put(url, { content: this.value }, { headers })
@@ -66,8 +65,6 @@ export default {
           }
         })
         .then(() => {
-          // this.$swal.fire('Success!', 'Field has been saved!', 'success');
-          this.$swal.close();
           this.$swal.fire({
             toast: true,
             position: 'bottom',
@@ -83,12 +80,6 @@ export default {
         });
     },
     deleteField() {
-      this.$swal.fire({
-        title: "Deleting Field...",
-        didOpen: () => {
-          this.$swal.showLoading();
-        }
-      });
       const headers = getHeader();
       const url = getUrl(`bingo/fields/${this.id}`);
       axios.delete(url, { headers })
@@ -102,8 +93,6 @@ export default {
           }
         })
         .then(() => {
-          // this.$swal.fire('Success!', 'Field has been deleted!', 'success');
-          this.$swal.close();
           this.$swal.fire({
             toast: true,
             position: 'bottom',

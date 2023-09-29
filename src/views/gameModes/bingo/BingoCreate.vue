@@ -5,7 +5,7 @@
   <div class="min-h-screen">
     <div class="absolute w-full h-screen z-10 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-2">
       <NavBar backLink="/bingo" text="Social Bingo" ref="nav"/>
-      <section id='browse-game-modes' class="md:px-10 px-5 py-10 rounded-t-3xl bg-lrt-background place-content-center mx-auto min-h-[84%] max-w-3xl">
+      <section id='browse-game-modes' class="md:px-10 px-2 py-10 rounded-t-3xl bg-lrt-background place-content-center mx-auto min-h-[84%] max-w-3xl">
         <h1 class="font-bold text-3xl text-ne mb-5">Create Game</h1>
         <span class="max-w-3xl">Craft your custom Social Bingo board right here! Before gathering input from your participants, begin by selecting the type of information you'd like to gather from them. Whether it's hobbies, interests, favorite movies, or even political ideologies, we'll collect your players' responses and curate an engaging Bingo board tailored to your preferences!</span>
         <BingoForm ref="fields"/>
@@ -86,6 +86,10 @@ export default {
         });
     },
     async createRoom() {
+      if (!this.$refs.fields.validate()) {
+        this.$swal.fire("Oops...", "Please make sure you don't leave any fields blank!", "error");
+        return;
+      }
       this.$swal.fire({
         title: "Creating Room...",
         didOpen: () => {

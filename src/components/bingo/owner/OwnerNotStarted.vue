@@ -9,6 +9,7 @@
           text="Generate Bingo Board"
           :onClick="generate"/>
         <OrangeButton
+          v-if="hasGenerated"
           text="Start Game"
           :onClick="startGame"/>
       </div>
@@ -31,10 +32,14 @@ import NavBar from "@/components/NavBar.vue";
 export default {
   name: "OwnerNotStarted",
   components: { BingoBoard, PlayersComponent, OrangeButton, NavBar },
+  data() {
+    return {
+      hasGenerated: false
+    }
+  },
   props: {
     ws: Object
   },
-
   methods: {
     generate() {
       this.$swal.fire({
@@ -59,6 +64,7 @@ export default {
         .then(() => {
           this.$swal.close();
           this.$refs.board.getSquares();
+          this.hasGenerated = true;
         })
         .catch(err => {
           console.log(err);
