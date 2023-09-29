@@ -8,7 +8,7 @@
       <div class="bg-light rounded-3xl max-w-lg p-5 z-10 grid gap-5 m-5">
         <h1 class="text-3xl font-bold text-ne">How to Play</h1>
         <ol>
-          <li><b class="text-ne">Step 1</b>. Have someone <router-link to="bingo/create" class="text-ne underline hover:text-ne-light">create a game</router-link>.</li>
+          <li><b class="text-ne">Step 1</b>. Have someone <router-link :to="{ path: '/bingo/create' }" class="text-ne underline hover:text-ne-light">create a game</router-link>.</li>
           <li><b class="text-ne">Step 2</b>. Join the game on any device, preferably a phone. This game is best played in person.</li>
           <li><b class="text-ne">Step 3</b>. Fill up the form with whatever fun facts you want to include. Feel free to be as funny and creative as you want, as this will help the AI create an engaging experience!</li>
           <li><b class="text-ne">Step 4</b>. Have the game host start the game.</li>
