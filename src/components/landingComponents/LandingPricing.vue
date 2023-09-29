@@ -1,5 +1,5 @@
 <template>
-    <section class="bg-white dark:bg-gray-900">
+    <section class="relative px-5">
         <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6" id="pricing">
             <div class="mx-auto max-w-screen-md text-center mb-8 lg:mb-12 mt-14">
                 <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">Designed for Fun Teams
@@ -41,7 +41,7 @@
                             <span><b>5</b> Pro Games access per month</span>
                         </li>
                     </ul>
-                    <a href="#"
+                    <a href="/browse"
                         class="text-white bg-cc hover:bg-cc-light font-bold rounded-lg text-sm px-5 py-2.5 text-center">
                         Get started for Free
                     </a>
@@ -79,16 +79,17 @@
                             <span><b>Unlimited</b> access to Pro games</span>
                         </li>
                     </ul>
-                    <a href="#"
+                    <button @click="scrollTo('contact')"
                         class="text-white bg-cc hover:bg-cc-light font-bold rounded-lg text-sm px-5 py-2.5 text-center">
-                        Subscribe to Pro
-                    </a>
+                        Contact Sales
+                    </button>
                 </div>
                 <!-- Pricing Card -->
                 <div
                     class="flex flex-col p-6 mx-auto max-w-lg text-center text-gray-900 bg-white rounded-lg border border-gray-100 shadow dark:border-gray-600 xl:p-8 dark:bg-gray-800 dark:text-white">
                     <h3 class="mb-4 text-2xl font-semibold">Teams</h3>
-                    <p class="font-light text-gray-500 sm:text-lg dark:text-gray-400">Best for corporate and team-building occassions</p>
+                    <p class="font-light text-gray-500 sm:text-lg dark:text-gray-400">Best for corporate and team-building
+                        occasions</p>
                     <div class="flex justify-center items-baseline my-8">
                         <span class="mr-2 text-5xl font-extrabold">$49.99</span>
                         <span class="text-gray-500 dark:text-gray-400">/month</span>
@@ -116,12 +117,16 @@
                             <span>Up to <b>20</b> users</span>
                         </li>
                     </ul>
-                    <a href="#"
+                    <button @click="scrollTo('contact')"
                         class="text-white bg-cc hover:bg-cc-light font-bold rounded-lg text-sm px-5 py-2.5 text-center">
                         Contact Sales
-                    </a>
+                    </button>
                 </div>
             </div>
         </div>
     </section>
 </template>
+
+<script setup>
+import { scrollTo } from '@/utils/utils';
+</script>
