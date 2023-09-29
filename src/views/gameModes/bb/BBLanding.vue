@@ -8,7 +8,7 @@
       <div class="bg-light rounded-3xl max-w-lg p-5 z-10 grid gap-5 m-5">
         <h1 class="text-3xl font-bold text-ns">How to Play</h1>
         <ol>
-          <li><b class="text-ns">Step 1</b>. Have someone <router-link to="bb/create" class="text-ns underline hover:text-ns-light">create a game</router-link>.</li>
+          <li><b class="text-ns">Step 1</b>. Have someone <router-link :to="{ path: '/bb/create' }" class="text-ns underline hover:text-ns-light">create a game</router-link>.</li>
           <li><b class="text-ns">Step 2</b>. Join the game on any device, preferably a phone.</li>
           <li><b class="text-ns">Step 3</b>. Sit in a circle and pass the device between players in a clockwise manner.</li>
           <li><b class="text-ns">Step 4</b>. Without revealing to the others, each player should press and hold a button to reveal the card's description.</li>
