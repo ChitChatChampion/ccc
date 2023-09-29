@@ -27,6 +27,7 @@ import OrangeButton from "@/components/buttons/OrangeButton.vue";
 import { getHeader, getUrl } from "@/services";
 import { useGameStateStore } from '../../../store'; // Import the store
 import NavBar from "@/components/NavBar.vue";
+import loginToGoogle from "@/components/loginToGoogle";
 
 export default {
   name: "OwnerNotStarted",
@@ -36,6 +37,23 @@ export default {
   },
   methods: {
     generate() {
+      if (localStorage.getItem('expiry') < Date.now()) {
+        this.$swal.fire({
+          icon: 'warning',
+          title: 'Please log in to Google to check the leaderboard!',
+          showCancelButton: true,
+          confirmButtonText: 'Log In'
+        }).then(result => {
+          if (result.isDismissed) {
+            return;
+          }
+          loginToGoogle({ fn: this.generateProcess });
+        });
+      } else {
+        this.generateProcess();
+      }
+    },
+    generateProcess() {
       if (this.$refs.players.getTotal() === 0) {
         this.$swal.fire("Oops...", "You need players to generate a bingo board! Refresh if necessary!", "info");
         return;
@@ -69,6 +87,23 @@ export default {
         })
     },
     startGame() {
+      if (localStorage.getItem('expiry') < Date.now()) {
+        this.$swal.fire({
+          icon: 'warning',
+          title: 'Please log in to Google to check the leaderboard!',
+          showCancelButton: true,
+          confirmButtonText: 'Log In'
+        }).then(result => {
+          if (result.isDismissed) {
+            return;
+          }
+          loginToGoogle({ fn: this.startGameProcess });
+        });
+      } else {
+        this.startGameProcess();
+      }
+    },
+    startGameProcess() {
       if (this.$refs.board.getTotal() === 0) {
         this.$swal.fire("Oops...", "You need to generate a bingo board before you can create a game!", "info");
         return;
