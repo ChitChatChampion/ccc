@@ -6,7 +6,6 @@
         <h1 class="w-full max-w-3xl mx-auto text-light text-3xl font-bold mb-2">How to play</h1>
         <p class="w-full max-w-3xl mx-auto text-light">Each tile in the bingo board contains the description of a particular player. Your goal is to go around and figure out who that player is! Note that sometimes, there are descriptions that can apply to several players. However, based on what your responses were for the form, there is only one perfect answer!</p>
       </div>
-      <BingoBoard ref="board" :isPlayer="true"/>
       <div class="w-full max-w-3xl mx-auto p-4">
         <div class="w-full max-w-xs text-light">
           Name: <span class="font-bold text-xl text-cc">{{ player_name }}</span>
@@ -17,6 +16,7 @@
         <div class="text-light">Remaining Attempts: <span class="text-cc font-bold text-xl">{{ attempts }}</span></div>
         <OrangeButton text="Submit Guesses" :onClick="submit"/>
       </div>
+      <BingoBoard ref="board" :isPlayer="true"/>
     </div>
   </div>
 
@@ -78,7 +78,7 @@ export default {
           this.$swal.showLoading();
         }
       });
-      const name = this.$refs.name.value;
+      const name = this.player_name;
       if (!name) {
         this.$swal.fire("Oops...", "Please add a valid name!", "error");
       }
