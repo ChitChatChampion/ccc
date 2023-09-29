@@ -34,7 +34,8 @@
             </div>
 
             <div class="hidden lg:mt-0 lg:col-span-5 lg:flex z-10">
-                <img src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/hero/phone-mockup.png" alt="mockup">
+                <img :src="mockup" alt="mockup" />
+                <!-- <img src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/hero/phone-mockup.png" alt="mockup"> -->
             </div>
         </div>
         </div>
@@ -61,6 +62,10 @@
         <div class="background-diamond-bb bg-dt-v-light z-0"></div>
     </section>
 </template>
+
+<script setup>
+import mockup from "../../../public/mockup.png"
+</script>
 
 <style scoped>
 .background-circle-bb {

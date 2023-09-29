@@ -19,7 +19,7 @@
                         party
                         with exciting prompts that ignite conversations!
                     </p>
-                    <img :src="cscsample" class="mx-auto" alt="Conversation Starter Cards" />
+                    <img :src="cscsample" class="mx-auto mt-10" alt="Conversation Starter Cards" />
                 </div>
             </div>
             <div class="mx-auto text-center">
@@ -33,7 +33,7 @@
                         Sparks will fly as you discover how well you really know your friends!
                     </p>
 
-                    <img :src="cscsample" class="mx-auto" alt="Conversation Starter Cards" />
+                    <img :src="bbsample" class="mx-auto mt-10" alt="Burning Bridges" />
                 </div>
             </div>
             <div class="mx-auto text-center">
@@ -47,12 +47,12 @@
                         description. The twist? There is only one unique answer!
                     </p>
 
-                    <img :src="cscsample" class="mx-auto" alt="Conversation Starter Cards" />
+                    <img :src="cscsample" class="mx-auto mt-10" alt="Conversation Starter Cards" />
                 </div>
             </div>
         </div>
 
-        <div class="hidden lg:flex flex-col mb-16 gap-20 max-w-screen-lg mx-auto px-10">
+        <div class="hidden lg:flex flex-col mb-16 gap-40 max-w-screen-lg mx-auto px-10">
             <div class="grid grid-cols-2 mx-auto text-center">
                 <div class="col-span-1 text-left flex flex-col justify-center gap-10">
                     <div class="flex flex-col gap-4">
@@ -72,7 +72,7 @@
                         </router-link>
                     </div>
                 </div>
-                <img :src="cscsample" class="mx-auto" alt="Conversation Starter Cards" />
+                <img :src="cscsample" class="mx-auto px-10" alt="Conversation Starter Cards" />
             </div>
 
             <div class="grid grid-cols-2 mx-auto text-center">
@@ -93,7 +93,7 @@
                         </router-link>
                     </div>
                 </div>
-                <img :src="cscsample" class="mx-auto" alt="Conversation Starter Cards" />
+                <img :src="bbsample" class="mx-auto px-10" alt="Burning Bridges" />
             </div>
 
             <div class="grid grid-cols-2 mx-auto text-center">
@@ -114,13 +114,14 @@
                         </router-link>
                     </div>
                 </div>
-                <img :src="cscsample" class="mx-auto" alt="Conversation Starter Cards" />
+                <img :src="cscsample" class="mx-auto px-10" alt="Conversation Starter Cards" />
             </div>
         </div>
     </section>
 </template>
 
 <script setup>
-import cscsample from "../../../public/cscsample.png"
+import cscsample from "../../../public/csc.gif"
+import bbsample from "../../../public/bb.gif"
 import OrangeButton from "../buttons/OrangeButton.vue";
 </script>
