@@ -11,20 +11,15 @@
                 </p>
                 <div class="flex flex-col sm:flex-row gap-4">
                     <div class="flex mx-auto sm:ml-0">
-                        <div class="relative flex bg-light rounded-xl p-2 gap-2 w-full">
-                            <input
-                                class="text-black rounded-lg border-2 border-[#dedede] py-2 px-4 bg-light font-medium active:border-dt"
-                                placeholder="Game ID">
-                            <button class="flex gap-2 bg-cc rounded-lg px-4 py-2 font-bold">
-                                <span class="my-auto">Play</span>
-                                <svg class="w-5 h-5 my-auto" fill="currentColor" viewBox="0 0 20 20"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd"
-                                        d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                                        clip-rule="evenodd"></path>
-                                </svg>
-                            </button>
-                        </div>
+                        <button @click="redirectToPlay" class="flex gap-2 bg-cc rounded-lg px-4 py-2 font-bold hover:bg-cc-light">
+                            <span class="my-auto">Play</span>
+                            <svg class="w-5 h-5 my-auto" fill="currentColor" viewBox="0 0 20 20"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                    d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                                    clip-rule="evenodd"></path>
+                            </svg>
+                        </button>
                     </div>
                     <!-- <button @click="scrollTo('contact')"
                         class="inline-flex items-center justify-center px-5 py-3 my-1 text-base font-medium text-center border border-light rounded-lg hover:bg-dt-dark">
@@ -65,6 +60,17 @@
 
 <script setup>
 import mockup from "../../../public/mockup.png"
+</script>
+
+<script>
+export default {
+    name: "LandingHero",
+    methods: {
+        redirectToPlay() {
+            this.$router.push("/");
+        }
+    }
+}
 </script>
 
 <style scoped>
