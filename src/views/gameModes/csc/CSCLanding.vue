@@ -1,9 +1,9 @@
 <!-- /csc -->
 
 <template>
-  <div class="h-screen bg-gradient-to-b from-jr-light via-jr to-jr-dark z-0">
+  <div class="fixed h-screen bg-gradient-to-b from-jr-light via-jr to-jr-dark w-full bg-jr -z-1"></div>
+  <div class="h-screen z-0">
     <NavBar backLink="/browse" text="Conversation Starter Cards"/>
-
     <section class="min-h-[76%] w-screen z-10 grid place-content-center">
       <div class="bg-light rounded-3xl max-w-lg p-5 z-10 grid gap-5 m-5">
         <h1 class="text-3xl font-bold text-jr">How to Play</h1>
