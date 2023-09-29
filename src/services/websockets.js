@@ -7,7 +7,7 @@ export class BingoWebSocket {
     BingoWebSocket._instance = this;
 
     // We slice away the https
-    this.socket = new WebSocket(`ws://${getUrl("bingo/ws").slice(7)}`);
+    this.socket = new WebSocket(`wss://${getUrl("bingo/ws").slice(7)}`);
     this.setupWebSocket();
   }
 
@@ -99,7 +99,7 @@ export class RoomWebSocket {
     RoomWebSocket._instance = this;
 
     // We slice away the https
-    this.socket = new WebSocket(`ws://${getUrl("room/ws").slice(7)}`);
+    this.socket = new WebSocket(`wss://${getUrl("room/ws").slice(7)}`);
     this.setupWebSocket();
   }
 
