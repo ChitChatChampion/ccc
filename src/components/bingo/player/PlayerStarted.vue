@@ -27,6 +27,7 @@
 <script>
 import BingoBoard from '../board/BingoBoard.vue';
 import OrangeButton from "@/components/buttons/OrangeButton";
+import { BingoWebSocket } from '@/services/websockets';
 import { getUrl } from "@/services";
 import axios from 'axios';
 import NavBar from "@/components/NavBar.vue";
@@ -107,6 +108,7 @@ export default {
           attempts[roomId] = this.attempts - 1;
           localStorage.setItem("attempts", JSON.stringify(attempts));
           this.attempts -= 1;
+          this.bingoWs = new BingoWebSocket().gainPoints(roomId);
           this.$swal.close();
         })
         .catch(err => {

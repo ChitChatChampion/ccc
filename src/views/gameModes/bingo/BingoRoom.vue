@@ -4,7 +4,7 @@
   <div class="fixed h-screen bg-gradient-to-b from-ne-light via-ne to-ne-dark w-full bg-ne -z-1"></div>
   <main class="h-screen bg-gradient-to-b from-ne-light via-ne to-ne-dark p-2">
     <OwnerStarted v-if="isOwner && hasStarted"/>
-    <OwnerNotStarted v-else-if="isOwner && !hasStarted"/>
+    <OwnerNotStarted :ws="bingoWs" v-else-if="isOwner && !hasStarted"/>
     <PlayerStarted v-else-if="!isOwner && hasStarted"/>
     <PlayerNotStarted v-else :hasSubmitted="hasSubmitted"/>
     <!-- <div class="background-circle-bingo bg-ne-v-light"></div>
@@ -19,10 +19,24 @@ import OwnerStarted from '@/components/bingo/owner/OwnerStarted.vue';
 import OwnerNotStarted from '@/components/bingo/owner/OwnerNotStarted.vue';
 import PlayerStarted from '@/components/bingo/player/PlayerStarted.vue';
 import PlayerNotStarted from '@/components/bingo/player/PlayerNotStarted.vue';
+import { RoomWebSocket, BingoWebSocket } from '@/services/websockets';
+import { useGameStateStore } from '../../../store'; // Import the store
+import { computed } from 'vue';
 
 export default {
   name: "BingoRoom",
+  setup() {
+          const gameStateStore = useGameStateStore(); // Use the store
+          const storeHasStarted = computed(() => gameStateStore.getGameState);
+          console.log(storeHasStarted)
+          // this.hasStarted = storeHasStarted;
+  },
   created() {
+    const ws = new RoomWebSocket();
+    const bingoWs = new BingoWebSocket();
+
+    this.bingoWs = bingoWs;
+    this.ws = ws
     this.$swal.fire({
       title: "Retrieving Room Information...",
       didOpen: () => {
@@ -45,6 +59,22 @@ export default {
         }
       })
       .then(data => {
+        // Notify owner when room joined
+        bingoWs.bingoEnterRoom(roomId, data.isOwner);
+
+        // Kicking out players when room close
+        if (!data.isOwner) {
+          ws.enterRoom(roomId);
+          ws.onRoomClose(() => {
+            this.$swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Room has been closed by the owner!'
+            });
+            this.$router.push('.');
+          })
+        }
+
         this.isOwner = data.isOwner;
         this.hasStarted = data.hasStarted;
         this.hasSubmitted = data.hasSubmitted;
@@ -58,7 +88,17 @@ export default {
       .catch(err => {
         console.log(err);
         this.$swal.fire("Oops...", "Something went wrong when retrieving room information!", "error");
-      });
+      })
+      // .finally(() => {
+      //   if (!this.hasStarted) {
+      //     const gameStateStore = useGameStateStore(); // Use the store
+      //     const storeHasStarted = computed(() => gameStateStore.getGameState);
+      //     console.log(storeHasStarted)
+      //     // this.hasStarted = storeHasStarted;
+      //   }
+      // });
+
+
     this.isLoading = false;
   },
   data() {
@@ -66,7 +106,9 @@ export default {
       isLoading: true,
       isOwner: false,
       hasStarted: false,
-      hasSubmitted: false
+      hasSubmitted: false,
+      ws: null,
+      bingoWs: null
     };
   },
   components: { OwnerStarted, OwnerNotStarted, PlayerStarted, PlayerNotStarted }

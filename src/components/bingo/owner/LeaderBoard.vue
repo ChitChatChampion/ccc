@@ -16,6 +16,7 @@
 import { getHeader, getUrl } from "@/services";
 import axios from "axios";
 import LeaderBoardEntry from "./LeaderBoardEntry.vue";
+import { BingoWebSocket } from '@/services/websockets';
 import OrangeButton from "@/components/buttons/OrangeButton.vue";
 
 export default {
@@ -27,6 +28,10 @@ export default {
   },
   mounted() {
     this.refreshLeaderboard();
+    // TODO: remove event listeners on unmount
+    this.bingoWs = new BingoWebSocket().onPlayerGainPoints(() => {
+      this.refreshLeaderboard();
+    });
   },
   components: { LeaderBoardEntry, OrangeButton },
   methods: {

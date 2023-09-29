@@ -1,6 +1,6 @@
 <template>
   <button
-    class="bg-ne-light text-light aspect-square p-2 border-4"
+    class="bg-ne-light hover:bg-ne-v-light h-full w-full text-light aspect-square p-2 border-4"
     :class="{ 'border-ew': hasSubmitted && isCorrect, 'border-cc': !hasSubmitted, 'border-ns': hasSubmitted && !isCorrect }"
     @click="showPopup">
     <h1 class="font-bold">{{ title }}</h1>

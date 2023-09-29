@@ -1,8 +1,8 @@
 <template>
-  <div class="w-full min-h-screen">
+    <div class="w-full min-h-screen">
     <div class="absolute w-full h-screen z-10 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-2">
       <NavBar backLink="/bingo" text="Social Bingo"/>
-      <PlayersComponent/>
+      <PlayersComponent :ws="ws"/>
       <div class="max-w-3xl mx-auto p-4">
         <OrangeButton
           class="me-5"
@@ -25,11 +25,16 @@ import BingoBoard from '../board/BingoBoard.vue';
 import PlayersComponent from './PlayersComponent.vue';
 import OrangeButton from "@/components/buttons/OrangeButton.vue";
 import { getHeader, getUrl } from "@/services";
+import { useGameStateStore } from '../../../store'; // Import the store
 import NavBar from "@/components/NavBar.vue";
 
 export default {
   name: "OwnerNotStarted",
   components: { BingoBoard, PlayersComponent, OrangeButton, NavBar },
+  props: {
+    ws: Object
+  },
+
   methods: {
     generate() {
       this.$swal.fire({
@@ -83,6 +88,8 @@ export default {
         .then(() => {
           this.$swal.close();
           this.$router.push(`/bingo/${roomId}`);
+          const gameStateStore = useGameStateStore();
+          gameStateStore.setGameState("STARTED");
         })
         .catch(err => {
           console.log(err);

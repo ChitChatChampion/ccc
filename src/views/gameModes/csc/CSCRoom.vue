@@ -34,6 +34,11 @@
         <slide key="$end$"></slide>
       </carousel>
 
+      <!-- End Game button -->
+      <div v-if="isOwner" class="flex justify-center mt-10">
+        <OrangeButton @click="endGame" text="End Game" class="w-[15rem]" />
+      </div>
+
       <!-- Bottom Navigation -->
       <div class="fixed bottom-0 w-full flex justify-between px-10 pb-9 text-light">
         <button @click="prev" :class="currentSlide <= 1 ? 'opacity-0' : 'block'" :disabled="currentSlide <= 1">
@@ -55,12 +60,15 @@
 <script>
 import { useMeta } from 'vue-meta';
 import NavBarBackOnly from "@/components/NavBarBackOnly.vue"
+import OrangeButton from "@/components/buttons/OrangeButton.vue"
 import useClipboard from "vue-clipboard3"
 import ProgressBar from '@/components/ProgressBar.vue';
 import 'vue3-carousel/dist/carousel.css'
 import { Carousel, Slide } from 'vue3-carousel'
-import { getUrl } from '@/services';
+import { getHeader, getUrl } from '@/services';
 import { gameModeDict } from '../gameModes';
+import { fireEndGameModal } from '@/utils/endGameModal';
+import { RoomWebSocket } from '@/services/websockets';
 
 export default {
   name: 'CSCRoom',
@@ -69,6 +77,7 @@ export default {
       title: 'Conversation Starter Cards',
       description: 'Take turns reading out and share your experiences about the prompt given on the card. Feel free to keep it lighthearted and fun, and encourage open and honest sharing!'
     })
+
   },
   data() {
     return {
@@ -76,9 +85,14 @@ export default {
       cards: [],
       instructions: gameModeDict.csc.instructions,
       currentSlide: 1,
+      isOwner: false,
+      ws: null
     }
   },
   created() {
+    const ws = new RoomWebSocket();
+    this.ws = ws
+    
     this.$swal.fire({
       title: "Retrieving Room Information...",
       didOpen: () => {
@@ -86,8 +100,10 @@ export default {
       }
     });
     const roomId = this.$route.params.id;
-    const url = getUrl(`room/${roomId}`);
-    fetch(url)
+
+    const roomUrl = getUrl(`room/${roomId}`);
+
+    fetch(roomUrl)
       .then(response => {
         switch (response.status) {
           case 200:
@@ -106,7 +122,35 @@ export default {
         if (!data) return;
         this.$swal.close();
         this.cards = data.questions;
-      });
+      })
+
+      const userRoomUrl = getUrl(`user/room/${roomId}`);
+      const headers = getHeader();
+      fetch(userRoomUrl, {headers})
+        .then(response => {
+          switch (response.status) {
+            case 200:
+            case 201:
+              return response.json();
+          }
+        })
+      .then(data => {
+        if (!data) return;
+        this.isOwner = data.is_owner;
+      }).finally(() => {
+        // Only if you're not the owner, then we check if we need to kick you out
+        if (!this.isOwner) {
+          ws.enterRoom(roomId);
+          ws.onRoomClose(() => {
+            this.$swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Room has been closed by the owner!'
+            });
+            this.$router.push('.');
+          })
+        }
+      })
   },
   methods: {
     shuffle() {
@@ -117,6 +161,9 @@ export default {
     },
     prev() {
       this.$refs.myCarousel.prev();
+    },
+    endGame() {
+      fireEndGameModal(this.$swal, this.$router, this.$route, this.ws);
     },
     copyToClipboard() {
       const { toClipboard } = useClipboard();
@@ -159,6 +206,7 @@ export default {
     Carousel,
     Slide,
     ProgressBar,
+    OrangeButton
   }
 }
 </script>

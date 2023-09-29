@@ -125,8 +125,7 @@ export default {
           this.$swal.close();
         })
         .catch(err => {
-          console.log(err);
-          this.$swal.fire('Oops...', `Generate questions failed! ${err}`, 'error');
+          this.$swal.fire('Oops...', `Generate questions failed! ${err?.response?.data?.message ?? ""}`, 'error');
           // this.$refs.questions.setValues({ questions: [{ id: 12345, content: "Who are you" }, { id: 12345, content: "Who are you" }] })
         })
     },
@@ -154,11 +153,10 @@ export default {
           this.$swal.close();
         })
         .catch(err => {
-          console.log(err);
           this.$swal.fire({
             icon: 'error',
             title: 'Oops...',
-            text: 'Something went wrong when creating your room!'
+            text: `Something went wrong when creating your room! ${err?.response?.data?.message ?? ""}`
           });
         });
     }
