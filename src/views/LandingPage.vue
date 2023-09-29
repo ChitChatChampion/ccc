@@ -8,7 +8,8 @@ import LandingFeatures from '@/components/landingComponents/LandingFeatures.vue'
 </script>
 
 <template>
-  <div class="bg-gradient-to-b from-dt via-dt to-dt-dark text-light">
+  <div class="fixed bg-gradient-to-b from-dt to-dt-dark -z-10 h-screen w-screen"></div>
+  <div class="text-light">
   <LandingNavbar />
   <div class="flex flex-col font-sans">
     <LandingHero />
