@@ -17,6 +17,7 @@ import { getHeader, getUrl } from "@/services";
 import axios from "axios";
 import PlayerPreview from "./PlayerPreview.vue";
 import OrangeButton from "@/components/buttons/OrangeButton.vue";
+import loginToGoogle from "@/components/loginToGoogle";
 
 export default {
   name: "PlayersComponent",
@@ -41,6 +42,23 @@ export default {
       return this.players.length;
     },
     getPlayers() {
+      if (localStorage.getItem('expiry') < Date.now()) {
+        this.$swal.fire({
+          icon: 'warning',
+          title: 'Please log in to Google to check the leaderboard!',
+          showCancelButton: true,
+          confirmButtonText: 'Log In'
+        }).then(result => {
+          if (result.isDismissed) {
+            return;
+          }
+          loginToGoogle({ fn: this.getPlayersProcess });
+        });
+      } else {
+        this.getPlayersProcess();
+      }
+    },
+    getPlayersProcess() {
       this.$swal.fire({
         title: "Retrieiving Player Information...",
         didOpen: () => {
