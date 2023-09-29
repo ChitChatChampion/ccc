@@ -67,7 +67,7 @@
                         </p>
                     </div>
                     <div class="flex">
-                        <router-link to="/csc/create">
+                        <router-link :to="{ path: '/csc/create' }">
                             <OrangeButton text="Create This Game" class="px-10" />
                         </router-link>
                     </div>
@@ -88,7 +88,7 @@
                         </p>
                     </div>
                     <div class="flex">
-                        <router-link to="/bb/create">
+                        <router-link :to="{ path: '/bb/create' }">
                             <OrangeButton text="Create This Game" class="px-10" />
                         </router-link>
                     </div>
@@ -109,7 +109,7 @@
                         </p>
                     </div>
                     <div class="flex">
-                        <router-link to="/bingo/create">
+                        <router-link :to="{ path: '/bingo/create' }">
                             <OrangeButton text="Create This Game" class="px-10" />
                         </router-link>
                     </div>

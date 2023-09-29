@@ -10,7 +10,7 @@
 
     <footer class="absolute bottom-0 p-5 w-full grid place-content-center z-10">
       <p class="font-medium text-light text-center">
-        Start your own game or browse our exciting game modes <router-link to="/browse" class="underline hover:text-cc">here</router-link>!
+        Start your own game or browse our exciting game modes <router-link :to="{ path: '/browse' }" class="underline hover:text-cc">here</router-link>!
       </p>
     </footer>
 
