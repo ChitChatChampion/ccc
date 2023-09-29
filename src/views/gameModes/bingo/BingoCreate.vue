@@ -89,10 +89,6 @@ export default {
       googleHelper({ fn: this.createRoomProcess, msg: 'create a room' });
     },
     createRoomProcess() {
-      if (!this.$refs.fields.validate()) {
-        this.$swal.fire("Oops...", "Please make sure you don't leave any fields blank!", "error");
-        return;
-      }
       this.$swal.fire({
         title: "Creating Room...",
         didOpen: () => {
