@@ -22,4 +22,22 @@ const loginToGoogle = ({ redirect, router, fn }) => {
   });
 }
 
+export const googleHelper = ({ fn, msg }) => {
+  if (localStorage.getItem('expiry') < Date.now()) {
+    this.$swal.fire({
+      icon: 'warning',
+      title: `Please log in to Google to ${msg}!`,
+      showCancelButton: true,
+      confirmButtonText: 'Log In'
+    }).then(result => {
+      if (result.isDismissed) {
+        return;
+      }
+      loginToGoogle({ fn });
+    });
+  } else {
+    fn();
+  }
+}
+
 export default loginToGoogle;
