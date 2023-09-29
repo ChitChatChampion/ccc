@@ -1,5 +1,5 @@
 <template>
-    <section class="relative min-h-screen items-center" id="hero">
+    <section class="relative min-h-screen items-center bg-gradient-to-b from-dt to-dt-dark" id="hero">
         <div class="absolute w-full top-[15%] lg:top-[6%] z-10">
         <div class="grid xl:max-w-screen-xl px-5 py-8 mx-auto my-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12 mt-16">
             <div class="mr-auto place-self-center lg:col-span-7 z-10">
