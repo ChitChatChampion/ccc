@@ -47,12 +47,6 @@ export default {
   components: { DeleteButton },
   methods: {
     saveField() {
-      this.$swal.fire({
-        title: "Saving Field...",
-        didOpen: () => {
-          this.$swal.showLoading();
-        }
-      });
       const headers = getHeader();
       const url = getUrl(`bingo/fields/${this.id}`);
       axios.put(url, { content: this.value }, { headers })
@@ -66,8 +60,6 @@ export default {
           }
         })
         .then(() => {
-          // this.$swal.fire('Success!', 'Field has been saved!', 'success');
-          this.$swal.close();
           this.$swal.fire({
             toast: true,
             position: 'bottom',
@@ -83,12 +75,6 @@ export default {
         });
     },
     deleteField() {
-      this.$swal.fire({
-        title: "Deleting Field...",
-        didOpen: () => {
-          this.$swal.showLoading();
-        }
-      });
       const headers = getHeader();
       const url = getUrl(`bingo/fields/${this.id}`);
       axios.delete(url, { headers })
@@ -102,8 +88,6 @@ export default {
           }
         })
         .then(() => {
-          // this.$swal.fire('Success!', 'Field has been deleted!', 'success');
-          this.$swal.close();
           this.$swal.fire({
             toast: true,
             position: 'bottom',
