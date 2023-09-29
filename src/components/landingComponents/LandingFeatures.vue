@@ -1,5 +1,5 @@
 <template>
-    <section class="relative">
+    <section class="relative bg-dt">
         <div class="py-8 px-10 mx-auto max-w-screen-xl lg:py-16 lg:px-6 " id="features">
             <div class="mx-auto max-w-screen-md text-center mb-8 lg:mb-12 mt-14">
                 <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">Features</h2>
@@ -19,7 +19,7 @@
                         party
                         with exciting prompts that ignite conversations!
                     </p>
-                    <img :src="cscsample" class="mx-auto mt-10" alt="Conversation Starter Cards" />
+                    <img :src="cscsample" class="mx-auto mt-10 max-h-80" alt="Conversation Starter Cards" />
                 </div>
             </div>
             <div class="mx-auto text-center">
@@ -33,7 +33,7 @@
                         Sparks will fly as you discover how well you really know your friends!
                     </p>
 
-                    <img :src="bbsample" class="mx-auto mt-10" alt="Burning Bridges" />
+                    <img :src="bbsample" class="mx-auto mt-10 max-h-80" alt="Burning Bridges" />
                 </div>
             </div>
             <div class="mx-auto text-center">
@@ -47,7 +47,7 @@
                         description. The twist? There is only one unique answer!
                     </p>
 
-                    <img :src="cscsample" class="mx-auto mt-10" alt="Conversation Starter Cards" />
+                    <img :src="cscsample" class="mx-auto mt-10 max-h-80" alt="Social Bingo" />
                 </div>
             </div>
         </div>
@@ -114,7 +114,7 @@
                         </router-link>
                     </div>
                 </div>
-                <img :src="cscsample" class="mx-auto px-10" alt="Conversation Starter Cards" />
+                <img :src="cscsample" class="mx-auto px-10" alt="Social Bingo" />
             </div>
         </div>
     </section>
