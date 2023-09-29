@@ -47,7 +47,7 @@
                         description. The twist? There is only one unique answer!
                     </p>
 
-                    <img :src="cscsample" class="mx-auto mt-10 max-h-80" alt="Social Bingo" />
+                    <img :src="bingosample" class="mx-auto mt-10" alt="Social Bingo" />
                 </div>
             </div>
         </div>
@@ -114,7 +114,7 @@
                         </router-link>
                     </div>
                 </div>
-                <img :src="cscsample" class="mx-auto px-10" alt="Social Bingo" />
+                <img :src="bingosample" class="mx-auto px-10" alt="Social Bingo" />
             </div>
         </div>
     </section>
@@ -123,5 +123,6 @@
 <script setup>
 import cscsample from "../../../public/csc.gif"
 import bbsample from "../../../public/bb.gif"
+import bingosample from "../../../public/bingo.gif"
 import OrangeButton from "../buttons/OrangeButton.vue";
 </script>
