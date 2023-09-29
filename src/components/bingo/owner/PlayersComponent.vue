@@ -1,7 +1,7 @@
 <template>
   <section class="w-1/2 max-w-3xl mx-auto w-full p-4 z-10 bg-ne-dark bg-opacity-50 rounded-lg">
     <h1 class="text-light text-3xl font-bold">Waiting for players...</h1>
-    <ol v-if="players.length" class="flex flex-row mt-5 gap-4">
+    <ol v-if="players.length" class="flex flex-wrap mt-5 gap-4 w-xl">
       <PlayerPreview
         v-for="(player, index) in players"
         :key="player"
