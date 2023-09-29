@@ -24,89 +24,13 @@ import { computed } from 'vue';
 export default {
   name: "BingoRoom",
   setup() {
-          const gameStateStore = useGameStateStore(); // Use the store
-          const storeHasStarted = computed(() => gameStateStore.getGameState);
-          console.log(storeHasStarted)
-          // this.hasStarted = storeHasStarted;
+    const gameStateStore = useGameStateStore(); // Use the store
+    const storeHasStarted = computed(() => gameStateStore.getGameState);
+    console.log(storeHasStarted)
+    // this.hasStarted = storeHasStarted;
   },
   created() {
-    const ws = new RoomWebSocket();
-    const bingoWs = new BingoWebSocket();
-
-    this.bingoWs = bingoWs;
-    this.ws = ws
-    this.$swal.fire({
-      title: "Retrieving Room Information...",
-      didOpen: () => {
-        this.$swal.showLoading();
-      }
-    });
-    const roomId = this.$route.params.id;
-    const url = getUrl(`bingo/${roomId}`);
-    const headers = getHeader();
-    const player_name = localStorage.getItem("player_name") || "";
-    headers.player_name = player_name;
-    axios.get(url, { headers })
-      .then(response => {
-        switch (response.status) {
-          case 200:
-          case 201:
-            return response.data;
-          default:
-            throw new Error("Bad method!");
-        }
-      })
-      .then(data => {
-        // Notify owner when room joined
-        bingoWs.bingoEnterRoom(roomId, data.isOwner);
-
-        // Kicking out players when room close
-        if (!data.isOwner) {
-          ws.enterRoom(roomId);
-          ws.onRoomClose(() => {
-            this.$swal.fire({
-              icon: 'error',
-              title: 'Oops...',
-              text: 'Room has been closed by the owner!'
-            });
-            this.$router.push('.');
-          })
-        }
-
-        this.isOwner = data.isOwner;
-        this.hasStarted = data.hasStarted;
-        this.hasSubmitted = data.hasSubmitted;
-
-        const gameStateStore = useGameStateStore();
-
-        if (data.hasStarted) {
-          gameStateStore.setGameState("STARTED");
-        } else if (data.hasSubmitted) {
-          gameStateStore.setGameState("SUBMITTED");
-        }
-
-        if (!data.hasSubmitted) {
-          const attemptsDict = JSON.parse(localStorage.getItem("attempts")) || {};
-          attemptsDict[roomId] = 5;
-          localStorage.setItem("attempts", JSON.stringify(attemptsDict));
-        }
-        this.$swal.close();
-      })
-      .catch(err => {
-        console.log(err);
-        this.$swal.fire("Oops...", "Something went wrong when retrieving room information!", "error");
-      })
-      // .finally(() => {
-      //   if (!this.hasStarted) {
-      //     const gameStateStore = useGameStateStore(); // Use the store
-      //     const storeHasStarted = computed(() => gameStateStore.getGameState);
-      //     console.log(storeHasStarted)
-      //     // this.hasStarted = storeHasStarted;
-      //   }
-      // });
-
-
-    this.isLoading = false;
+    this.createProcess();
   },
   data() {
     return {
@@ -118,7 +42,88 @@ export default {
       bingoWs: null
     };
   },
-  components: { OwnerStarted, OwnerNotStarted, PlayerStarted, PlayerNotStarted }
+  components: { OwnerStarted, OwnerNotStarted, PlayerStarted, PlayerNotStarted },
+  methods: {
+    createProcess() {
+      const ws = new RoomWebSocket();
+      const bingoWs = new BingoWebSocket();
+
+      this.bingoWs = bingoWs;
+      this.ws = ws
+      this.$swal.fire({
+        title: "Retrieving Room Information...",
+        didOpen: () => {
+          this.$swal.showLoading();
+        }
+      });
+      const roomId = this.$route.params.id;
+      const url = getUrl(`bingo/${roomId}`);
+      const headers = getHeader();
+      const player_name = localStorage.getItem("player_name") || "";
+      headers.player_name = player_name;
+      axios.get(url, { headers })
+        .then(response => {
+          switch (response.status) {
+            case 200:
+            case 201:
+              return response.data;
+            default:
+              throw new Error("Bad method!");
+          }
+        })
+        .then(data => {
+          // Notify owner when room joined
+          bingoWs.bingoEnterRoom(roomId, data.isOwner);
+
+          // Kicking out players when room close
+          if (!data.isOwner) {
+            ws.enterRoom(roomId);
+            ws.onRoomClose(() => {
+              this.$swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Room has been closed by the owner!'
+              });
+              this.$router.push('.');
+            })
+          }
+
+          this.isOwner = data.isOwner;
+          this.hasStarted = data.hasStarted;
+          this.hasSubmitted = data.hasSubmitted;
+
+          const gameStateStore = useGameStateStore();
+
+          if (data.hasStarted) {
+            gameStateStore.setGameState("STARTED");
+          } else if (data.hasSubmitted) {
+            gameStateStore.setGameState("SUBMITTED");
+          }
+
+          if (!data.hasSubmitted) {
+            const attemptsDict = JSON.parse(localStorage.getItem("attempts")) || {};
+            attemptsDict[roomId] = 5;
+            localStorage.setItem("attempts", JSON.stringify(attemptsDict));
+          }
+          this.$swal.close();
+        })
+        .catch(err => {
+          console.log(err);
+          this.$swal.fire("Oops...", "Something went wrong when retrieving room information!", "error");
+        })
+        // .finally(() => {
+        //   if (!this.hasStarted) {
+        //     const gameStateStore = useGameStateStore(); // Use the store
+        //     const storeHasStarted = computed(() => gameStateStore.getGameState);
+        //     console.log(storeHasStarted)
+        //     // this.hasStarted = storeHasStarted;
+        //   }
+        // });
+
+
+      this.isLoading = false;
+    }
+  }
 }
 </script>
 
