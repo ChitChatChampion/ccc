@@ -38,7 +38,7 @@ export default {
     abbr: {
       type: String,
       required: true,
-      validator: val => val.length <= 3
+      validator: val => val.length <= 10
     },
     shortDescription: {
       type: String,
