@@ -36,7 +36,7 @@ import { getHeader, getUrl } from '@/services';
 import ContextForm from '@/components/ContextForm.vue';
 import CSCForm from '@/components/csc/CSCForm.vue';
 import OrangeButton from '@/components/buttons/OrangeButton.vue';
-import loginToGoogle from '@/components/loginToGoogle';
+import loginToGoogle, { googleHelper } from '@/components/loginToGoogle';
 import QuestionForm from '@/components/csc/QuestionForm.vue';
 
 export default {
@@ -106,6 +106,9 @@ export default {
         });
     },
     async generateQuestions() {
+      googleHelper({ fn: this.generateQuestionsProcess, msg: 'generate questions' });
+    },
+    generateQuestionsProcess() {
       let baseContext;
       let cscContext;
       try {
@@ -145,10 +148,9 @@ export default {
         })
     },
     async createRoom() {
-      if (!this.$refs.questions.validate()) {
-        this.$swal.fire("Oops...", "Please make sure you don't leave any questions blank!", "error");
-        return;
-      }
+      googleHelper({ fn: this.createRoomProcess, msg: 'create a room' });
+    },
+    createRoomProcess() {
       this.$swal.fire({
         title: "Creating Room...",
         didOpen: () => {

@@ -18,6 +18,7 @@ import axios from "axios";
 import LeaderBoardEntry from "./LeaderBoardEntry.vue";
 import { BingoWebSocket } from '@/services/websockets';
 import OrangeButton from "@/components/buttons/OrangeButton.vue";
+import { googleHelper } from "@/components/loginToGoogle";
 
 export default {
   name: "LeaderBoard",
@@ -36,6 +37,9 @@ export default {
   components: { LeaderBoardEntry, OrangeButton },
   methods: {
     refreshLeaderboard() {
+      googleHelper({ fn: this.refreshLeaderboardProcess, msg: 'check the leaderboard' });
+    },
+    refreshLeaderboardProcess() {
       this.$swal.fire({
         title: "Retrieving Leaderboard...",
         didOpen: () => {

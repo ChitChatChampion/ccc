@@ -19,6 +19,7 @@ import axios from 'axios';
 import OrangeButton from '@/components/buttons/OrangeButton.vue';
 import FieldPreview from "./FieldPreview.vue";
 import { getHeader, getUrl } from '@/services';
+import { googleHelper } from "@/components/loginToGoogle";
 
 export default {
   name: "BingoForm",
@@ -32,6 +33,9 @@ export default {
       this.fields = fields;
     },
     addField() {
+      googleHelper({ fn: this.addFieldProcess, msg: 'add a field' })
+    },
+    addFieldProcess() {
       const headers = getHeader();
       const url = getUrl('bingo/fields/create');
       axios.post(url, {}, { headers })
@@ -59,15 +63,6 @@ export default {
           console.log(err);
           this.$swal.fire('Oops...', 'Add field failed!', 'error');
         });
-    },
-    validate() {
-      for (let field of this.fields) {
-        if (!field.content) {
-          return false;
-        }
-      }
-
-      return true;
     }
   },
   components: { FieldPreview, OrangeButton }

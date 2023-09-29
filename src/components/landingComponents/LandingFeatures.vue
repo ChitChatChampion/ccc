@@ -1,5 +1,5 @@
 <template>
-    <section class="relative">
+    <section class="relative bg-dt">
         <div class="py-8 px-10 mx-auto max-w-screen-xl lg:py-16 lg:px-6 " id="features">
             <div class="mx-auto max-w-screen-md text-center mb-8 lg:mb-12 mt-14">
                 <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">Features</h2>
@@ -19,7 +19,7 @@
                         party
                         with exciting prompts that ignite conversations!
                     </p>
-                    <img :src="cscsample" class="mx-auto mt-10" alt="Conversation Starter Cards" />
+                    <img :src="cscsample" class="mx-auto mt-10 max-h-80" alt="Conversation Starter Cards" />
                 </div>
             </div>
             <div class="mx-auto text-center">
@@ -33,7 +33,7 @@
                         Sparks will fly as you discover how well you really know your friends!
                     </p>
 
-                    <img :src="bbsample" class="mx-auto mt-10" alt="Burning Bridges" />
+                    <img :src="bbsample" class="mx-auto mt-10 max-h-80" alt="Burning Bridges" />
                 </div>
             </div>
             <div class="mx-auto text-center">
@@ -42,7 +42,7 @@
                         Social Bingo
                     </h2>
                     <p class="mb-5 font-light text-gray-500 sm:text-xl dark:text-gray-400">
-                        Social Bingo" turns every social gathering into a hilarious competition.
+                        Social Bingo turns every social gathering into a hilarious competition.
                         Race to complete your bingo card by entering details of the person that matches the
                         description. The twist? There is only one unique answer!
                     </p>
@@ -67,7 +67,7 @@
                         </p>
                     </div>
                     <div class="flex">
-                        <router-link to="/csc/create">
+                        <router-link :to="{ path: '/csc/create' }">
                             <OrangeButton text="Create This Game" class="px-10" />
                         </router-link>
                     </div>
@@ -88,7 +88,7 @@
                         </p>
                     </div>
                     <div class="flex">
-                        <router-link to="/bb/create">
+                        <router-link :to="{ path: '/bb/create' }">
                             <OrangeButton text="Create This Game" class="px-10" />
                         </router-link>
                     </div>
@@ -109,7 +109,7 @@
                         </p>
                     </div>
                     <div class="flex">
-                        <router-link to="/bingo/create">
+                        <router-link :to="{ path: '/bingo/create' }">
                             <OrangeButton text="Create This Game" class="px-10" />
                         </router-link>
                     </div>

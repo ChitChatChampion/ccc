@@ -1,14 +1,14 @@
 <!-- /csc -->
 
 <template>
-  <div class="h-screen bg-gradient-to-b from-jr-light via-jr to-jr-dark z-0">
+  <div class="fixed h-screen bg-gradient-to-b from-jr-light via-jr to-jr-dark w-full bg-jr -z-1"></div>
+  <div class="h-screen z-0">
     <NavBar backLink="/browse" text="Conversation Starter Cards"/>
-
     <section class="min-h-[76%] w-screen z-10 grid place-content-center">
       <div class="bg-light rounded-3xl max-w-lg p-5 z-10 grid gap-5 m-5">
         <h1 class="text-3xl font-bold text-jr">How to Play</h1>
         <ol>
-          <li><b class="text-jr">Step 1</b>. Have someone <router-link to="csc/create" class="text-jr underline hover:text-jr-light">create a game</router-link>.</li>
+          <li><b class="text-jr">Step 1</b>. Have someone <router-link :to="{ path: '/csc/create' }" class="text-jr underline hover:text-jr-light">create a game</router-link>.</li>
           <li><b class="text-jr">Step 2</b>. Join the game on any device, preferably a phone.</li>
           <li><b class="text-jr">Step 3</b>. Pick a topic to talk about and share your experiences. Feel free to keep it lightheated and fun, and encourage open and honest sharing!</li>
         </ol>

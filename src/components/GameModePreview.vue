@@ -6,7 +6,7 @@
       <h2 class="font-bold text-xl text-black py-2">{{ shortDescription }}</h2>
       <p class="text-lrt py-2">{{ description }}</p>
       <menu class="flex gap-2">
-        <router-link :to="abbr">
+        <router-link :to="{ path: `/${abbr}` }">
           <button
             :class="bgColor"
             class="btn my-2 py-2 px-4 rounded-md text-light hover:underline"
@@ -14,7 +14,7 @@
             Play Now
           </button>
         </router-link>
-        <router-link :to="`${abbr}/create`">
+        <router-link :to="{ path: `/${abbr}/create` }">
           <button
             :class="bgColor"
             class="btn my-2 py-2 px-4 rounded-md text-light hover:underline"

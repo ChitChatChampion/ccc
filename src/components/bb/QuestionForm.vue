@@ -17,6 +17,7 @@ import axios from 'axios';
 import OrangeButton from '@/components/buttons/OrangeButton.vue';
 import QuestionPreview from './QuestionPreview.vue';
 import { getHeader, getUrl } from '@/services';
+import { googleHelper } from '@/components/loginToGoogle';
 
 export default {
   name: 'QuestionForm',
@@ -30,6 +31,9 @@ export default {
       this.questions = questions;
     },
     addQuestion() {
+      googleHelper({ fn: this.addQuestionProcess, msg: 'add a question' })
+    },
+    addQuestionProcess() {
       const headers = getHeader();
       const url = getUrl('bb/questions/create');
       axios.post(url, {}, { headers })
@@ -57,15 +61,6 @@ export default {
           console.log(err);
           this.$swal.fire('Oops...', 'Add question failed!', 'error');
         });
-    },
-    validate() {
-      for (let question of this.questions) {
-        if (!question.content) {
-          return false;
-        }
-      }
-
-      return true;
     }
   },
   components: { QuestionPreview, OrangeButton }

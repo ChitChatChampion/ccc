@@ -17,6 +17,7 @@ import { getHeader, getUrl } from "@/services";
 import axios from "axios";
 import PlayerPreview from "./PlayerPreview.vue";
 import OrangeButton from "@/components/buttons/OrangeButton.vue";
+import { googleHelper } from "@/components/loginToGoogle";
 
 export default {
   name: "PlayersComponent",
@@ -37,7 +38,13 @@ export default {
   },
   components: { PlayerPreview, OrangeButton },
   methods: {
+    getTotal() {
+      return this.players.length;
+    },
     getPlayers() {
+      googleHelper({ fn: this.getPlayersProcess, msg: 'get players' });
+    },
+    getPlayersProcess() {
       this.$swal.fire({
         title: "Retrieiving Player Information...",
         didOpen: () => {

@@ -16,6 +16,12 @@ export default {
     const hasSubmitted = computed(() => gameStateStore.getGameState === "SUBMITTED"); // Get the value from the store
     return { hasSubmitted };
   },
+  props: {
+    hasSubmittedProp: {
+      type: Boolean,
+      default: false
+    }
+  },
   components: { PlayerSubmitted, PlayerNotSubmitted }
 }
 </script>

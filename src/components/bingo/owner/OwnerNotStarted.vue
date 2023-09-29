@@ -2,14 +2,13 @@
     <div class="w-full min-h-screen">
     <div class="absolute w-full h-screen z-10 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-2">
       <NavBar backLink="/bingo" text="Social Bingo"/>
-      <PlayersComponent :ws="ws"/>
+      <PlayersComponent ref="players" :ws="ws"/>
       <div class="max-w-3xl mx-auto p-4">
         <OrangeButton
           class="me-5"
           text="Generate Bingo Board"
           :onClick="generate"/>
         <OrangeButton
-          v-if="hasGenerated"
           text="Start Game"
           :onClick="startGame"/>
       </div>
@@ -28,20 +27,23 @@ import OrangeButton from "@/components/buttons/OrangeButton.vue";
 import { getHeader, getUrl } from "@/services";
 import { useGameStateStore } from '../../../store'; // Import the store
 import NavBar from "@/components/NavBar.vue";
+import { googleHelper } from "@/components/loginToGoogle";
 
 export default {
   name: "OwnerNotStarted",
   components: { BingoBoard, PlayersComponent, OrangeButton, NavBar },
-  data() {
-    return {
-      hasGenerated: false
-    }
-  },
   props: {
     ws: Object
   },
   methods: {
     generate() {
+      googleHelper({ fn: this.generateProcess, msg: 'generate a bingo board' })
+    },
+    generateProcess() {
+      if (this.$refs.players.getTotal() === 0) {
+        this.$swal.fire("Oops...", "You need players to generate a bingo board! Refresh if necessary!", "info");
+        return;
+      }
       this.$swal.fire({
         title: "Generating Bingo Board...",
         didOpen: () => {
@@ -64,7 +66,6 @@ export default {
         .then(() => {
           this.$swal.close();
           this.$refs.board.getSquares();
-          this.hasGenerated = true;
         })
         .catch(err => {
           console.log(err);
@@ -72,6 +73,13 @@ export default {
         })
     },
     startGame() {
+      googleHelper({ fn: this.startGameProcess, msg: 'start the game' })
+    },
+    startGameProcess() {
+      if (this.$refs.board.getTotal() === 0) {
+        this.$swal.fire("Oops...", "You need to generate a bingo board before you can create a game!", "info");
+        return;
+      }
       this.$swal.fire({
         title: "Starting Game...",
         didOpen: () => {
@@ -93,9 +101,9 @@ export default {
         })
         .then(() => {
           this.$swal.close();
-          this.$router.push(`/bingo/${roomId}`);
           const gameStateStore = useGameStateStore();
           gameStateStore.setGameState("STARTED");
+          location.reload();
         })
         .catch(err => {
           console.log(err);
