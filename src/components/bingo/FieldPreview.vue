@@ -10,7 +10,7 @@
         @blur="saveField" />
       <DeleteButton :onClick="deleteField" />
     </div>
-    <p class="text-ns" v-if="!this.value">Cannot be left blank!</p>
+    <p class="text-ns" v-if="!this.value && isTouched">Cannot be left blank!</p>
   </li>
 </template>
 
@@ -24,7 +24,8 @@ export default {
   data() {
     return {
       value: '',
-      hidden: false
+      hidden: false,
+      isTouched: false
     };
   },
   props: {
@@ -33,7 +34,7 @@ export default {
       required: true
     },
     id: {
-      type: Number,
+      type: String,
       required: true
     },
     content: {
@@ -47,6 +48,10 @@ export default {
   components: { DeleteButton },
   methods: {
     saveField() {
+      this.isTouched = true;
+      if (!this.value) {
+        return;
+      }
       const headers = getHeader();
       const url = getUrl(`bingo/fields/${this.id}`);
       axios.put(url, { content: this.value }, { headers })
