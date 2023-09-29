@@ -18,6 +18,7 @@
 import { getHeader, getUrl } from '@/services';
 import DeleteButton from '@/components/buttons/DeleteButton.vue';
 import axios from 'axios';
+import { googleHelper } from "@/components/loginToGoogle";
 
 export default {
   name: 'FieldPreview',
@@ -48,6 +49,9 @@ export default {
   components: { DeleteButton },
   methods: {
     saveField() {
+      googleHelper({ fn: this.saveFieldProcess, msg: 'save a field' });
+    },
+    saveFieldProcess() {
       this.isTouched = true;
       if (!this.value) {
         return;
@@ -80,6 +84,9 @@ export default {
         });
     },
     deleteField() {
+      googleHelper({ fn: this.deleteFieldProcess, msg: 'delete a field' })
+    },
+    deleteFieldProcess() {
       const headers = getHeader();
       const url = getUrl(`bingo/fields/${this.id}`);
       axios.delete(url, { headers })
