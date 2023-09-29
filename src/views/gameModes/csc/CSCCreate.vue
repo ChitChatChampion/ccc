@@ -18,7 +18,7 @@
         
         <QuestionForm ref="questions"/>
 
-        <OrangeButton :onClick="createRoom" text="Create Room" class="mt-5"/>
+        <OrangeButton v-if="hasGenerated" :onClick="createRoom" text="Create Room" class="mt-5"/>
       </section>
     </div>
   </div>
@@ -46,6 +46,11 @@ export default {
       title: 'Conversation Starter Cards',
       description: gameModeDict.csc.description
     })
+  },
+  data() {
+    return {
+      hasGenerated: false
+    }
   },
   components: { NavBar, ContextForm, CSCForm, OrangeButton, QuestionForm },
   created() {
@@ -90,6 +95,9 @@ export default {
           this.$refs.context.setValues(data.baseContext);
           this.$refs.csc.setValues(data.cscContext);
           this.$refs.questions.setValues(data.questions);
+          if (data.questions) {
+            this.hasGenerated = true;
+          }
           this.$swal.close();
         })
         .catch(err => {
@@ -98,16 +106,22 @@ export default {
         });
     },
     async generateQuestions() {
+      let baseContext;
+      let cscContext;
+      try {
+        baseContext = this.$refs.context.getValues();
+        cscContext = this.$refs.csc.getValues();
+      } catch (e) {
+        return;
+      }
+
       this.$swal.fire({
         title: "Generating Questions...",
         didOpen: () => {
           this.$swal.showLoading();
         }
       });
-      const payload = {
-        baseContext: this.$refs.context.getValues(),
-        cscContext: this.$refs.csc.getValues()
-      };
+      const payload = { baseContext, cscContext };
       const url = getUrl('csc/questions/generate');
       const headers = getHeader();
       axios.post(url, payload, { headers })
@@ -123,6 +137,7 @@ export default {
         .then(data => {
           this.$swal.close();
           this.$refs.questions.setValues(data.questions);
+          this.hasGenerated = true;
         })
         .catch(err => {
           console.log(err);
@@ -131,6 +146,10 @@ export default {
         })
     },
     async createRoom() {
+      if (!this.$refs.questions.validate()) {
+        this.$swal.fire("Oops...", "Please make sure you don't leave any questions blank!", "error");
+        return;
+      }
       this.$swal.fire({
         title: "Creating Room...",
         didOpen: () => {
