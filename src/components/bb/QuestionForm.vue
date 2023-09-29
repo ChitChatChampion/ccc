@@ -56,8 +56,16 @@ export default {
         .catch(err => {
           console.log(err);
           this.$swal.fire('Oops...', 'Add question failed!', 'error');
-          // this.questions = [...this.questions, { id: data.id, content: '' }];
         });
+    },
+    validate() {
+      for (let question of this.questions) {
+        if (!question.content) {
+          return false;
+        }
+      }
+
+      return true;
     }
   },
   components: { QuestionPreview, OrangeButton }
