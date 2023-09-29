@@ -47,12 +47,6 @@ export default {
   components: { DeleteButton },
   methods: {
     saveQuestion() {
-      this.$swal.fire({
-        title: "Saving Question...",
-        didOpen: () => {
-          this.$swal.showLoading();
-        }
-      });
       const headers = getHeader();
       const url = getUrl(`csc/questions/${this.id}`);
       axios.put(url, { content: this.value }, { headers })
@@ -66,8 +60,6 @@ export default {
           }
         })
         .then(() => {
-          // this.$swal.fire('Success!', 'Question has been saved!', 'success');
-          this.$swal.close();
           this.$swal.fire({
             toast: true,
             position: 'bottom',
@@ -83,12 +75,6 @@ export default {
         });
     },
     deleteQuestion() {
-      this.$swal.fire({
-        title: "Deleting Question...",
-        didOpen: () => {
-          this.$swal.showLoading();
-        }
-      });
       const headers = getHeader();
       const url = getUrl(`csc/questions/${this.id}`);
       axios.delete(url, { headers })
@@ -102,8 +88,6 @@ export default {
           }
         })
         .then(() => {
-          // this.$swal.fire('Success!', 'Question has been deleted!', 'success');
-          this.$swal.close();
           this.$swal.fire({
             toast: true,
             position: 'bottom',
