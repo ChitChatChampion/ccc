@@ -63,7 +63,7 @@ export default {
         loginToGoogle({ redirect: '/csc/create', router: this.$router });
       });
     } else {
-      this.populate({ url: getUrl('bb/context') });
+      this.populate({ url: getUrl('csc/context') });
     }
   },
   methods: {
