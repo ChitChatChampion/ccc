@@ -141,8 +141,7 @@ export default {
           this.hasGenerated = true;
         })
         .catch(err => {
-          console.log(err);
-          this.$swal.fire('Oops...', `Generate questions failed! ${err}`, 'error');
+          this.$swal.fire('Oops...', `Generate questions failed! ${err?.response?.data?.message ?? ""}`, 'error');
         })
     },
     async createRoom() {
@@ -173,11 +172,10 @@ export default {
           this.$swal.close();
         })
         .catch(err => {
-          console.log(err);
           this.$swal.fire({
             icon: 'error',
             title: 'Oops...',
-            text: 'Something went wrong when creating your room!'
+            text: `Something went wrong when creating your room! ${err?.response?.data?.message ?? ""}`
           });
         });
     }

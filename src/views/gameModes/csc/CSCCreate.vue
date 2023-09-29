@@ -68,7 +68,7 @@ export default {
         loginToGoogle({ redirect: '/csc/create', router: this.$router });
       });
     } else {
-      this.populate({ url: getUrl('bb/context') });
+      this.populate({ url: getUrl('csc/context') });
     }
   },
   methods: {
@@ -140,8 +140,7 @@ export default {
           this.hasGenerated = true;
         })
         .catch(err => {
-          console.log(err);
-          this.$swal.fire('Oops...', `Generate questions failed! ${err}`, 'error');
+          this.$swal.fire('Oops...', `Generate questions failed! ${err?.response?.data?.message ?? ""}`, 'error');
           // this.$refs.questions.setValues({ questions: [{ id: 12345, text: "Who are you" }, { id: 12345, text: "Who are you" }] })
         })
     },
@@ -165,7 +164,7 @@ export default {
             case 201:
               return response.data;
             default:
-              throw new Error('Bad method!');
+              throw new Error(response?.message ?? 'Bad method!');
           }
         })
         .then(data => {
@@ -173,11 +172,10 @@ export default {
           this.$router.push(`${data.id}`);
         })
         .catch(err => {
-          console.log(err);
           this.$swal.fire({
             icon: 'error',
             title: 'Oops...',
-            text: 'Something went wrong when creating your room!'
+            text: `Something went wrong when creating your room! ${err?.response?.data?.message ?? ""}`
           });
         });
     }

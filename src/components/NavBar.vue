@@ -10,8 +10,18 @@
 </template>
 
 <script>
+// import { useGameStateStore } from '../store'; // Import the store
+// import { useRouter } from 'vue-router';
+
 export default {
   name: 'NavBarComponent',
+  // mount() {
+  //     const router = useRouter();
+  //     router.beforeEach(() => {
+  //       const gameStateStore = useGameStateStore();
+  //       gameStateStore.setGameState("NOT_SUBMITTED");
+  //     })
+  // },
   props: {
     backLink: {
       type: String,

@@ -31,6 +31,7 @@ import TextInput from "@/components/inputs/TextInput.vue";
 import OrangeButton from "@/components/buttons/OrangeButton.vue";
 import { getUrl } from "@/services";
 import axios from "axios";
+import { useGameStateStore } from '../../../store'; // Import the store
 
 export default {
   name: "PlayerForm",
@@ -116,7 +117,8 @@ export default {
         .then(() => {
           localStorage.setItem("player_name", this.$refs.name.value);
           this.$swal.close();
-          this.$router.push(`/bingo/${roomId}`);
+          const gameStateStore = useGameStateStore();
+          gameStateStore.setGameState("SUBMITTED");
         })
         .catch(err => {
           console.log(err);
