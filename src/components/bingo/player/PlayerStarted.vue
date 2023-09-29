@@ -79,9 +79,6 @@ export default {
         }
       });
       const name = this.player_name;
-      if (!name) {
-        this.$swal.fire("Oops...", "Please add a valid name!", "error");
-      }
 
       const score = this.$refs.board.evaluate();
       this.score = score;
