@@ -5,11 +5,11 @@
   <div class="min-h-screen">
     <div class="absolute w-full h-screen z-10 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-2">
       <NavBar backLink="/bb" text="Burning Bridges" ref="nav"/>
-      <section id='browse-game-modes' class="md:px-10 px-5 py-10 rounded-t-3xl bg-lrt-background place-content-center mx-auto min-h-[84%] max-w-3xl">
+      <section id='browse-game-modes' class="md:px-10 px-2 py-10 rounded-t-3xl bg-lrt-background place-content-center mx-auto min-h-[84%] max-w-3xl">
         <h1 class="font-bold text-3xl text-ns mb-5">Create Game</h1>
         <span class="max-w-3xl mb-5">Based on how you answer these questions, we'll ask ChatGPT to craft an ice-breaker game for you! So feel free to be as detailed as possible!</span>
 
-        <form class="bg-light shadow-md rounded-lg px-8 pt-6 pb-8 mb-4 mt-5">
+        <form class="bg-light shadow-md rounded-lg md:px-8 px-2 pt-6 pb-8 mb-4 mt-5">
           <ContextForm ref="context"/>
           <BBForm ref="bb"/>
           <br/>
