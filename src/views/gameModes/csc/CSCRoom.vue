@@ -68,7 +68,7 @@ import { Carousel, Slide } from 'vue3-carousel'
 import { getHeader, getUrl } from '@/services';
 import { gameModeDict } from '../gameModes';
 import { fireEndGameModal } from '@/utils/endGameModal';
-import { WebSocketClient } from '@/services/websockets';
+import { RoomWebSocket } from '@/services/websockets';
 
 export default {
   name: 'CSCRoom',
@@ -90,7 +90,7 @@ export default {
     }
   },
   created() {
-    const ws = new WebSocketClient("room/ws");
+    const ws = new RoomWebSocket();
     this.ws = ws
     
     this.$swal.fire({

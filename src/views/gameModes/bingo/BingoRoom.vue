@@ -20,14 +20,14 @@ import OwnerNotStarted from '@/components/bingo/owner/OwnerNotStarted.vue';
 import PlayerStarted from '@/components/bingo/player/PlayerStarted.vue';
 import PlayerNotStarted from '@/components/bingo/player/PlayerNotStarted.vue';
 import NavBar from "@/components/NavBar.vue";
-import { WebSocketClient } from '@/services/websockets';
+import { RoomWebSocket, BingoWebSocket } from '@/services/websockets';
 
 export default {
   name: "BingoRoom",
   created() {
-    const ws = new WebSocketClient("room/ws");
-    const bingoWs = new WebSocketClient("bingo/ws");
-    
+    const ws = new RoomWebSocket();
+    const bingoWs = new BingoWebSocket();
+
     this.bingoWs = bingoWs;
     this.ws = ws
     this.$swal.fire({

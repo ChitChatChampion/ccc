@@ -111,7 +111,7 @@ import ProgressBar from '@/components/ProgressBar.vue';
 import OrangeButton from '@/components/buttons/OrangeButton.vue';
 import { VueFlip } from 'vue-flip';
 import { fireEndGameModal } from '@/utils/endGameModal';
-import { WebSocketClient } from '@/services/websockets';
+import { RoomWebSocket } from '@/services/websockets';
 
 export default {
   name: 'BBRoom',
@@ -146,7 +146,7 @@ export default {
     }
   },
   created() {
-    const ws = new WebSocketClient("room/ws");
+    const ws = new RoomWebSocket();
     this.ws = ws
     this.$swal.fire({
       title: "Retrieving Room Information...",
