@@ -4,10 +4,10 @@
       Question {{ index+1 }}
     </label>
     <div class="flex">
-      <input
+      <textarea
         v-model="value"
-        class="shadow appearance-none border rounded-l-xl w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-        @blur="saveQuestion"/>
+        class="resize-none shadow appearance-none border rounded-l-xl w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        @blur="saveQuestion"></textarea>
       <DeleteButton :onClick="deleteQuestion"/>
     </div>
     <p class="text-ns" v-if="!this.value && isTouched">Question cannot be left blank!</p>
