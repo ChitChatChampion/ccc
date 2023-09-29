@@ -1,6 +1,7 @@
 <template>
   <div class="w-full">
     <div class="absolute w-full z-10 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-2">
+      <NavBar backLink="/bingo" text="Social Bingo"/>
       <div class="flex gap-2 text-light max-w-sm mx-auto mb-5">
         <span>Room ID:</span>
         <span class="font-bold">{{ this.$route.params.id }}</span>
@@ -20,11 +21,12 @@
 <script>
 import BingoBoard from '../board/BingoBoard.vue';
 import LeaderBoard from './LeaderBoard.vue';
-import useClipboard from "vue-clipboard3"
+import useClipboard from "vue-clipboard3";
+import NavBar from "@/components/NavBar.vue";
 
 export default {
   name: "OwnerStarted",
-  components: { LeaderBoard, BingoBoard },
+  components: { LeaderBoard, BingoBoard, NavBar },
   methods: {
     copyToClipboard() {
       const { toClipboard } = useClipboard();
