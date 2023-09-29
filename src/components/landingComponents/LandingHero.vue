@@ -1,6 +1,7 @@
 <template>
-    <section  id="hero">
-        <div class="grid max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12 mt-16 z-0">
+    <section class="relative min-h-screen items-center" id="hero">
+        <div class="absolute w-full top-[15%] lg:top-[6%] z-10">
+        <div class="grid xl:max-w-screen-xl px-5 py-8 mx-auto my-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12 mt-16">
             <div class="mr-auto place-self-center lg:col-span-7 z-10">
                 <h1 class="max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl">
                     Break the Ice with Personalised Games</h1>
@@ -9,19 +10,21 @@
                     occassion.
                 </p>
                 <div class="flex flex-col sm:flex-row gap-4">
-                    <div class="flex bg-light rounded-xl p-2 gap-2">
-                        <input
-                            class="text-black rounded-lg border-2 border-[#dedede] py-2 px-4 bg-light font-medium active:border-dt"
-                            placeholder="Game ID">
-                        <button class="flex gap-2 bg-cc rounded-lg px-4 py-2 font-bold">
-                            <span class="my-auto">Play</span>
-                            <svg class="w-5 h-5 my-auto" fill="currentColor" viewBox="0 0 20 20"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd"
-                                    d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                                    clip-rule="evenodd"></path>
-                            </svg>
-                        </button>
+                    <div class="flex mx-auto sm:ml-0">
+                        <div class="relative flex bg-light rounded-xl p-2 gap-2 w-full">
+                            <input
+                                class="text-black rounded-lg border-2 border-[#dedede] py-2 px-4 bg-light font-medium active:border-dt"
+                                placeholder="Game ID">
+                            <button class="flex gap-2 bg-cc rounded-lg px-4 py-2 font-bold">
+                                <span class="my-auto">Play</span>
+                                <svg class="w-5 h-5 my-auto" fill="currentColor" viewBox="0 0 20 20"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                        d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                                        clip-rule="evenodd"></path>
+                                </svg>
+                            </button>
+                        </div>
                     </div>
                     <!-- <button @click="scrollTo('contact')"
                         class="inline-flex items-center justify-center px-5 py-3 my-1 text-base font-medium text-center border border-light rounded-lg hover:bg-dt-dark">
@@ -30,13 +33,14 @@
                 </div>
             </div>
 
-            <div class="hidden lg:mt-0 lg:col-span-5 lg:flex">
+            <div class="hidden lg:mt-0 lg:col-span-5 lg:flex z-10">
                 <img src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/hero/phone-mockup.png" alt="mockup">
             </div>
         </div>
+        </div>
 
         <div
-            class="flex flex-col sm:flex-row gap-5 justify-center px-4 mx-auto text-center md:max-w-screen-md lg:max-w-screen-lg lg:px-36 mb-20 items-center">
+            class="flex flex-col sm:flex-row gap-5 justify-center px-4 mx-auto text-center lg:px-36 mb-20 items-center z-10 absolute bottom-0 w-full ">
             <span class="font-semibold text-gray-400 uppercase">FEATURED IN</span>
             <a href="#" class="mr-5 mb-5 lg:mb-0 hover:text-gray-800 dark:hover:text-gray-400">
                 <svg class="h-11" viewBox="0 0 208 42" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -61,7 +65,7 @@
 <style scoped>
 .background-circle-bb {
     position: absolute;
-    top: 65%;
+    top: 70%;
     left: 100%;
     transform: translate(-100%, -50%);
     width: 30vh;
