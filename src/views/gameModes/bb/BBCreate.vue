@@ -38,6 +38,7 @@ import BBForm from '@/components/bb/BBForm.vue';
 import OrangeButton from '@/components/buttons/OrangeButton.vue';
 import loginToGoogle from '@/components/loginToGoogle';
 import QuestionForm from '@/components/bb/QuestionForm.vue';
+import { googleHelper } from '@/components/loginToGoogle';
 
 export default {
   name: 'BBCreate',
@@ -106,6 +107,9 @@ export default {
         });
     },
     async generateQuestions() {
+      googleHelper({ fn: this.generateQuestionsProcess, msg: 'generate questions' });
+    },
+    generateQuestionsProcess() {
       let baseContext;
       let bbContext;
       try {
@@ -145,6 +149,9 @@ export default {
         })
     },
     async createRoom() {
+      googleHelper({ fn: this.createRoomProcess, msg: 'create a room' });
+    },
+    createRoomProcess() {
       if (!this.$refs.questions.validate()) {
         this.$swal.fire("Oops...", "Please make sure you don't leave any questions blank!", "error");
         return;

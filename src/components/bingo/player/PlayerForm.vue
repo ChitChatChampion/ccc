@@ -1,6 +1,6 @@
 <template>
   <h1 class="text-3xl text-light max-w-3xl mx-auto font-bold">Player Form</h1>
-  <p class="max-w-3xl mx-auto text-light mt-4">The game hasn't started yet! In the meantime, fill up this form and tell us about yourself. Feel free to be as funny and descriptive as you'd like, as we can get ChatGPT to create an awesome game!</p>
+  <p class="max-w-3xl mx-auto text-light mt-4">The game hasn't started yet! In the meantime, fill up this form and tell us about yourself. Feel free to be as funny and descriptive as you'd like, as we can get ChatGPT to create an awesome game! If you are the game host, <a class="underline text-cc font-bold hover:text-cc-light" @click="login">sign in here</a>!</p>
   <div class="bg-ne-dark bg-opacity-50 rounded-lg md:px-4 px-2 py-4 max-w-3xl mx-auto mt-4">
     <TextInput
       name="name"
@@ -32,6 +32,7 @@ import OrangeButton from "@/components/buttons/OrangeButton.vue";
 import { getUrl } from "@/services";
 import axios from "axios";
 import { useGameStateStore } from '../../../store'; // Import the store
+import loginToGoogle from "@/components/loginToGoogle";
 
 export default {
   name: "PlayerForm",
@@ -70,6 +71,9 @@ export default {
     }
   },
   methods: {
+    login() {
+      loginToGoogle({});
+    },
     submitForm() {
       this.$swal.fire({
         title: "Are you done filling up the form?",
@@ -131,6 +135,7 @@ export default {
           this.$swal.close();
           const gameStateStore = useGameStateStore();
           gameStateStore.setGameState("SUBMITTED");
+          location.reload();
         })
         .catch(err => {
           console.log(err);

@@ -7,7 +7,7 @@
       <NavBar backLink="/" text="Chit Chat Champion"/>
       <section id='browse-game-modes' class="md:px-10 px-5 py-10 rounded-t-3xl bg-lrt-background place-content-center mx-auto min-h-[84%] max-w-3xl">
         <h1 class="font-bold text-3xl text-dt">Game Modes</h1>
-        <p class="my-5">Welcome to ChitChatChampion! Here you'll find some of our game modes. Note that you will have to sign in with Google to create any game.<br/><br/>If you want to learn more about us, do check out <router-link to="/pricing" class="underline text-dt hover:text-dt-light">this page</router-link>!</p>
+        <p class="my-5">Welcome to ChitChatChampion! Here you'll find some of our game modes. Note that you will have to sign in with Google to create any game.<br/><br/>If you want to learn more about us, do check out <router-link to="/landing" class="underline text-dt hover:text-dt-light">this page</router-link>!</p>
         <ul id="game-modes" class="grid md:grid-cols-2 grid-cols-1 gap-5 items-stretch">
           <li v-for="gameMode in gameModes" :key="gameMode.key">
             <GameModePreview v-bind="gameMode"/>
