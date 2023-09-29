@@ -1,6 +1,11 @@
 import { getUrl } from "../services";
 export class BingoWebSocket {
   constructor() {
+    if (BingoWebSocket._instance) {
+      return BingoWebSocket._instance;
+    }
+    BingoWebSocket._instance = this;
+
     // We slice away the https
     this.socket = new WebSocket(`ws://${getUrl("bingo/ws").slice(7)}`);
     this.setupWebSocket();
@@ -28,6 +33,30 @@ export class BingoWebSocket {
         })
       )
     );
+  }
+
+  gainPoints(roomId) {
+    this.waitForOpenSocket().then(() =>
+      this.socket.send(
+        JSON.stringify({
+          type: "points_gain",
+          room_id: roomId,
+        })
+      )
+    );
+  }
+
+  onPlayerGainPoints(callback) {
+    this.socket.addEventListener("message", (event) => {
+      try {
+        const message = JSON.parse(event.data);
+        if (message.type === "points_gain") {
+          callback(message);
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    });
   }
 
   onPlayerJoin(callback) {
@@ -64,6 +93,11 @@ export class BingoWebSocket {
 }
 export class RoomWebSocket {
   constructor() {
+    if (RoomWebSocket._instance) {
+      return RoomWebSocket._instance;
+    }
+    RoomWebSocket._instance = this;
+
     // We slice away the https
     this.socket = new WebSocket(`ws://${getUrl("room/ws").slice(7)}`);
     this.setupWebSocket();
