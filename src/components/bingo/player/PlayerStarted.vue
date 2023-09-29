@@ -1,6 +1,7 @@
 <template>
-  <div class="w-full">
-    <div class="absolute w-full z-10 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-2">
+  <div class="w-full min-h-screen">
+    <div class="absolute w-full h-screen z-10 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-2">
+      <NavBar backLink="/bingo" text="Social Bingo"/>
       <div class="p-4">
         <h1 class="w-full max-w-3xl mx-auto text-light text-3xl font-bold mb-2">How to play</h1>
         <p class="w-full max-w-3xl mx-auto text-light">Each tile in the bingo board contains the description of a particular player. Your goal is to go around and figure out who that player is! Note that sometimes, there are descriptions that can apply to several players. However, based on what your responses were for the form, there is only one perfect answer!</p>
@@ -29,10 +30,11 @@ import OrangeButton from "@/components/buttons/OrangeButton";
 import { BingoWebSocket } from '@/services/websockets';
 import { getUrl } from "@/services";
 import axios from 'axios';
+import NavBar from "@/components/NavBar.vue";
 
 export default {
   name: "PlayerStarted",
-  components: { BingoBoard, OrangeButton },
+  components: { BingoBoard, OrangeButton, NavBar },
   data() {
     return {
       attempts: 5,

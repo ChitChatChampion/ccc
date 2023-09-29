@@ -1,6 +1,7 @@
 <template>
-  <div class="w-full">
-    <div class="absolute w-full z-10 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-2">
+  <div class="w-full min-h-screen">
+    <div class="absolute w-full h-screen z-10 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-2">
+      <NavBar backLink="/bingo" text="Social Bingo"/>
       <PlayerForm/>
     </div>
   </div> 
@@ -11,10 +12,11 @@
 
 <script>
 import PlayerForm from "./PlayerForm.vue";
+import NavBar from "@/components/NavBar.vue";
 
 export default {
   name: "PlayerNotSubmitted",
-  components: { PlayerForm }
+  components: { PlayerForm, NavBar }
 }
 </script>
 

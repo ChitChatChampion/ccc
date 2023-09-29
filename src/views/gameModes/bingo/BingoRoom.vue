@@ -1,8 +1,8 @@
 <!-- /bingo/:id -->
 
 <template>
+  <div class="fixed h-screen bg-gradient-to-b from-ne-light via-ne to-ne-dark w-full bg-ne -z-1"></div>
   <main class="h-screen bg-gradient-to-b from-ne-light via-ne to-ne-dark p-2">
-    <NavBar backLink="/bingo" text="Social Bingo"/>
     <OwnerStarted v-if="isOwner && hasStarted"/>
     <OwnerNotStarted :ws="bingoWs" v-else-if="isOwner && !hasStarted"/>
     <PlayerStarted v-else-if="!isOwner && hasStarted"/>
@@ -19,7 +19,6 @@ import OwnerStarted from '@/components/bingo/owner/OwnerStarted.vue';
 import OwnerNotStarted from '@/components/bingo/owner/OwnerNotStarted.vue';
 import PlayerStarted from '@/components/bingo/player/PlayerStarted.vue';
 import PlayerNotStarted from '@/components/bingo/player/PlayerNotStarted.vue';
-import NavBar from "@/components/NavBar.vue";
 import { RoomWebSocket, BingoWebSocket } from '@/services/websockets';
 import { useGameStateStore } from '../../../store'; // Import the store
 import { computed } from 'vue';
@@ -112,7 +111,7 @@ export default {
       bingoWs: null
     };
   },
-  components: { OwnerStarted, OwnerNotStarted, PlayerStarted, PlayerNotStarted, NavBar }
+  components: { OwnerStarted, OwnerNotStarted, PlayerStarted, PlayerNotStarted }
 }
 </script>
 
