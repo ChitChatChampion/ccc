@@ -1,7 +1,7 @@
 <template>
   <h1 v-if="questions.length" class="font-bold text-3xl text-ns">Questions</h1>
   <p v-if="questions.length" class="mt-5">See any prompts that you don't like? Feel free to edit them or add your own. Make the best ice-breaker!</p>
-  <ul v-if="questions.length" class="bg-light shadow-md rounded-lg px-8 pt-6 pb-8 mb-4 grid gap-5 mt-5">
+  <ul v-if="questions.length" class="bg-light shadow-md rounded-lg md:px-8 px-2 pt-6 pb-8 mb-4 grid gap-5 mt-5">
     <QuestionPreview
       v-for="(question, index) in questions"
       :key="question.id"
