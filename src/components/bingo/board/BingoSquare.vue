@@ -60,7 +60,7 @@ export default {
       }
 
       if (!this.isPlayer) {
-        this.$swal.fire("Oops...", "As the game host, you are not supposed to submit your answers here! Use another device if you want to play!", "info");
+        this.$swal.fire(this.title, this.description, "question")
         return;
       }
 
