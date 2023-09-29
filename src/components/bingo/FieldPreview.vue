@@ -4,10 +4,10 @@
       Field {{ index + 1 }}
     </label>
     <div class="flex">
-      <input v-model="value"
-        class="shadow appearance-none border rounded-l-xl w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+      <textarea v-model="value"
+        class="resize-none shadow appearance-none border rounded-l-xl w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
         placeholder="e.g. Gender, Hobbies, Favourite Chocolate"
-        @blur="saveField" />
+        @blur="saveField"></textarea>
       <DeleteButton :onClick="deleteField" />
     </div>
     <p class="text-ns" v-if="!this.value && isTouched">Cannot be left blank!</p>
