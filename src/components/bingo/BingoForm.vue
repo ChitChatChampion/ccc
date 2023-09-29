@@ -49,7 +49,7 @@ export default {
             toast: true,
             position: 'bottom',
             icon: 'success',
-            title: 'Question has been saved!',
+            title: 'Field has been added!',
             showConfirmButton: false,
             timer: 1500
           });
@@ -58,8 +58,16 @@ export default {
         .catch(err => {
           console.log(err);
           this.$swal.fire('Oops...', 'Add field failed!', 'error');
-          // this.fields = [...this.fields, { id: data.id, content: '' }];
         });
+    },
+    validate() {
+      for (let field of this.fields) {
+        if (!field.content) {
+          return false;
+        }
+      }
+
+      return true;
     }
   },
   components: { FieldPreview, OrangeButton }
