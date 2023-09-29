@@ -63,15 +63,6 @@ export default {
           console.log(err);
           this.$swal.fire('Oops...', 'Add field failed!', 'error');
         });
-    },
-    validate() {
-      for (let field of this.fields) {
-        if (!field.content) {
-          return false;
-        }
-      }
-
-      return true;
     }
   },
   components: { FieldPreview, OrangeButton }

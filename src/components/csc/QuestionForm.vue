@@ -62,15 +62,6 @@ export default {
           console.log(err);
           this.$swal.fire('Oops...', 'Add question failed!', 'error');
         });
-    },
-    validate() {
-      for (let question of this.questions) {
-        if (!question.content) {
-          return false;
-        }
-      }
-
-      return true;
     }
   },
   components: { QuestionPreview, OrangeButton }
