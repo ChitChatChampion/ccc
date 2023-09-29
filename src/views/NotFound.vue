@@ -5,7 +5,7 @@
   <div class="h-screen">
     <div class="h-screen w-screen grid place-content-center">
       <h1 class="text-light z-10 font-bold text-3xl">404: Not Found</h1>
-      <router-link to="/" class="text-center z-10 text-light underline hover:text-cc">(Go Back)</router-link>
+      <router-link :to="{ path: '/' }" class="text-center z-10 text-light underline hover:text-cc">(Go Back)</router-link>
     </div>
     <div class="background-circle-nf bg-lrt-v-light"></div>
     <div class="background-diamond-nf bg-lrt-v-light"></div>
