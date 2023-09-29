@@ -37,6 +37,9 @@ export default {
   },
   components: { PlayerPreview, OrangeButton },
   methods: {
+    getTotal() {
+      return this.players.length;
+    },
     getPlayers() {
       this.$swal.fire({
         title: "Retrieiving Player Information...",
