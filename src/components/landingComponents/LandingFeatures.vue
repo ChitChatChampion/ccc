@@ -42,7 +42,7 @@
                         Social Bingo
                     </h2>
                     <p class="mb-5 font-light text-gray-500 sm:text-xl dark:text-gray-400">
-                        Social Bingo" turns every social gathering into a hilarious competition.
+                        Social Bingo turns every social gathering into a hilarious competition.
                         Race to complete your bingo card by entering details of the person that matches the
                         description. The twist? There is only one unique answer!
                     </p>
