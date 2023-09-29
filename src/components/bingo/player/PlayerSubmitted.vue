@@ -2,8 +2,10 @@
   <div class="w-full min-h-screen grid place-content-center text-center">
     <div class="absolute w-full h-screen z-10 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-2">
       <NavBar backLink="/bingo" text="Social Bingo"/>
-      <h1 class="text-light font-bold text-3xl mb-4">Waiting for host to start the game...</h1>
-      <p class="text-light">Refresh when the game is ready!</p>
+      <div class="h-full grid place-content-center">
+        <h1 class="text-light font-bold text-3xl mb-4 grid place-content-center">Waiting for host to start the game...</h1>
+        <p class="text-light">Refresh when the game is ready!</p>
+      </div>
     </div>
   </div>
   <div class="background-circle-bingo bg-ne-v-light"></div>
