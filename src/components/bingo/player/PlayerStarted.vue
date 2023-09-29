@@ -1,6 +1,6 @@
 <template>
-  <div class="w-full">
-    <div class="absolute w-full z-10 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-2">
+  <div class="w-full min-h-screen">
+    <div class="absolute w-full h-screen z-10 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-2">
       <NavBar backLink="/bingo" text="Social Bingo"/>
       <div class="p-4">
         <h1 class="w-full max-w-3xl mx-auto text-light text-3xl font-bold mb-2">How to play</h1>
